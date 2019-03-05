@@ -18,7 +18,7 @@ In general go here: https://facebook.github.io/react-native/docs/getting-started
   Value: C:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk
   
 5. Add platform-tools to Path, same location as above + \platform-tools. Remember to add ; before and after.
-6. In the root directory, run:
+6. In the root directory, run: (note: it may fail, if it does re-connect the device)
 
   npm install
 
