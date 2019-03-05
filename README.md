@@ -1,6 +1,6 @@
 # PGF
 
-# How to install and start
+# How to install and start (Windows)
 In general go here: https://facebook.github.io/react-native/docs/getting-started.html
 
 1. Install chocolatey by using cmd.exe as admin.
