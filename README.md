@@ -20,4 +20,6 @@ In general go here: https://facebook.github.io/react-native/docs/getting-started
 5. Add platform-tools to Path, same location as above + \platform-tools. Remember to add ; before and after.
 6. In the root directory, run:
 
+  npm install
+
   npm run android
