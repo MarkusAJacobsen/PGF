@@ -9,7 +9,8 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
-import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
+import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
+import { LoginButton, AccessToken } from 'react-native-fbsdk';
 
 GoogleSignin.configure();
 
@@ -33,6 +34,25 @@ export default class App extends Component<Props> {
     size={GoogleSigninButton.Size.Wide}
     color={GoogleSigninButton.Color.Dark}
     onPress={_signIn} />
+    <LoginButton
+          onLoginFinished={
+            (error, result) => {
+              if (error) {
+                console.log("login has error: " + result.error);
+                console.log(error);
+                console.log(result);
+              } else if (result.isCancelled) {
+                console.log("login is cancelled.");
+              } else {
+                AccessToken.getCurrentAccessToken().then(
+                  (data) => {
+                    console.log(data.accessToken.toString())
+                  }
+                )
+              }
+            }
+          }
+          onLogoutFinished={() => console.log("logout.")}/>
       </View>
     );
   }
@@ -62,8 +82,11 @@ _signIn = async () => {
   try {
     await GoogleSignin.hasPlayServices();
     const userInfo = await GoogleSignin.signIn();
-    this.setState({ userInfo });
+    //this.setState({ userInfo });
+    console.log(userInfo);
   } catch (error) {
+    console.log(error);
+    console.log("google error");
     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
       // user cancelled the login flow
     } else if (error.code === statusCodes.IN_PROGRESS) {
