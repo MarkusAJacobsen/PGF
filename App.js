@@ -44,9 +44,11 @@ export default class App extends Component<Props> {
               } else if (result.isCancelled) {
                 console.log("login is cancelled.");
               } else {
+                console.log(result);
                 AccessToken.getCurrentAccessToken().then(
                   (data) => {
-                    console.log(data.accessToken.toString())
+                    //console.log(data.accessToken.toString())
+                    console.log(data.userID.toString())
                   }
                 )
               }
