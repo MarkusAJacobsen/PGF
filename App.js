@@ -7,77 +7,81 @@
  * @lint-ignore-every XPLATJSCOPYRIGHT1
  */
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
-import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
-import { LoginButton, AccessToken } from 'react-native-fbsdk';
+import React from 'react';
+import {
+  createStackNavigator, 
+  createAppContainer,
+  createBottomTabNavigator,
+} from 'react-navigation';
+import MyPlantsScreen from './screens/MyGarden/MyPlantsScreen';
+import MyGardenHomeScreen from './screens/MyGarden/MyGardenHomeScreen';
+import GrowingHomeScreen from './screens/Growing/GrowingHomeScreen';
+import GrowingCategoryScreen from './screens/Growing/GrowingCategoryScreen';
+import MoreHomeScreen from './screens/More/MoreHomeScreen';
+import GuidesHomeScreen from './screens/Guides/GuidesHomeScreen';
+import NavBarItem from './components/NavBarItem/NavBarItem';
 
-GoogleSignin.configure();
+const MyGardenNavigator = createStackNavigator(
+  {
+    MyGardenHome: { screen: MyGardenHomeScreen },
+    MyPlants: { screen: MyPlantsScreen },
+  },
+);
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+const GrowingNavigator = createStackNavigator(
+  {
+    GrowingHome: { screen: GrowingHomeScreen },
+    GrowingCategory: { screen: GrowingCategoryScreen },
+  },
+);
 
-type Props = {};
-export default class App extends Component<Props> {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Velkommen til din Gartner i Lomma!</Text>
-        <Text style={styles.instructions}>For å starte din reise, har ud kommet på riktig sted.</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        <GoogleSigninButton
-    style={{ width: 192, height: 48 }}
-    size={GoogleSigninButton.Size.Wide}
-    color={GoogleSigninButton.Color.Dark}
-    onPress={_signIn} />
-    <LoginButton
-          onLoginFinished={
-            (error, result) => {
-              if (error) {
-                console.log("login has error: " + result.error);
-                console.log(error);
-                console.log(result);
-              } else if (result.isCancelled) {
-                console.log("login is cancelled.");
-              } else {
-                console.log(result);
-                AccessToken.getCurrentAccessToken().then(
-                  (data) => {
-                    //console.log(data.accessToken.toString())
-                    console.log(data.userID.toString())
-                  }
-                )
-              }
-            }
-          }
-          onLogoutFinished={() => console.log("logout.")}/>
-      </View>
-    );
-  }
+const GuidesNavigator = createStackNavigator(
+  {
+    GuidesHome: { screen: GuidesHomeScreen },
+  },
+);
+
+const MoreNavigator = createStackNavigator(
+  {
+    MoreHome: { screen: MoreHomeScreen },  
+  },
+);
+
+const RouteConfig = {
+  MyGarden: { 
+    screen: MyGardenNavigator, 
+    navigationOptions: {
+      tabBarLabel: 'My garden',
+    },
+  },
+  Growing: { 
+    screen: GrowingNavigator,
+    navigationOptions: {
+      tabBarLabel: 'Growing',
+    },
+  },
+  CustomTab: {
+    screen: GuidesNavigator,
+    navigationOptions: () => ({
+      tabBarLabel: 'Custom123',
+      tabBarButtonComponent: props => (
+        <NavBarItem {...props} />
+      ),
+    }),
+  },
+  Guides: { 
+    screen: GuidesNavigator,
+    navigationOptions: {
+      tabBarLabel: 'Guides',
+    },
+  },
+  More: { 
+    screen: MoreNavigator,
+    navigationOptions: {
+      tabBarLabel: 'Menu',
+    },
+  },
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
 
 // Somewhere in your code
 _signIn = async () => {
@@ -100,3 +104,13 @@ _signIn = async () => {
     }
   }
 };
+
+const BottomNavigatorConfig = {
+  defaultNavigationOptions: ({ navigation }) => ({
+    //tabBarButtonComponent: NavBarItem,
+  }),
+}
+
+const TabNavigator = createBottomTabNavigator(RouteConfig, BottomNavigatorConfig);
+
+export default createAppContainer(TabNavigator);

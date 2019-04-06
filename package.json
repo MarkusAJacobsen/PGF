@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "react": "16.6.3",
-    "react-native": "0.58.6",
     "react-native-fbsdk": "^0.8.0",
-    "react-native-google-signin": "^1.2.1"
+    "react-native-google-signin": "^1.2.1",
+    "react-native": "^0.59.1",
+    "react-native-gesture-handler": "~1.0.14",
+    "react-navigation": "^3.5.1"
   },
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",
