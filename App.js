@@ -12,6 +12,7 @@ import {
   createStackNavigator, 
   createAppContainer,
   createBottomTabNavigator,
+  createSwitchNavigator
 } from 'react-navigation';
 import MyPlantsScreen from './screens/MyGarden/MyPlantsScreen';
 import MyGardenHomeScreen from './screens/MyGarden/MyGardenHomeScreen';
@@ -20,6 +21,7 @@ import GrowingCategoryScreen from './screens/Growing/GrowingCategoryScreen';
 import MoreHomeScreen from './screens/More/MoreHomeScreen';
 import GuidesHomeScreen from './screens/Guides/GuidesHomeScreen';
 import NavBarItem from './components/NavBarItem/NavBarItem';
+import LoginScreen from './screens/Login/LoginScreen';
 
 const MyGardenNavigator = createStackNavigator(
   {
@@ -83,28 +85,6 @@ const RouteConfig = {
   },
 }
 
-// Somewhere in your code
-_signIn = async () => {
-  try {
-    await GoogleSignin.hasPlayServices();
-    const userInfo = await GoogleSignin.signIn();
-    //this.setState({ userInfo });
-    console.log(userInfo);
-  } catch (error) {
-    console.log(error);
-    console.log("google error");
-    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-      // user cancelled the login flow
-    } else if (error.code === statusCodes.IN_PROGRESS) {
-      // operation (f.e. sign in) is in progress already
-    } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-      // play services not available or outdated
-    } else {
-      // some other error happened
-    }
-  }
-};
-
 const BottomNavigatorConfig = {
   defaultNavigationOptions: ({ navigation }) => ({
     //tabBarButtonComponent: NavBarItem,
@@ -112,5 +92,13 @@ const BottomNavigatorConfig = {
 }
 
 const TabNavigator = createBottomTabNavigator(RouteConfig, BottomNavigatorConfig);
+const AuthStack = createStackNavigator({ Login: LoginScreen });
 
-export default createAppContainer(TabNavigator);
+export default createAppContainer(createSwitchNavigator(
+  {
+    Main: TabNavigator,
+    Auth: AuthStack,
+  }, {
+    initialRouteName: "Auth"
+  }
+));

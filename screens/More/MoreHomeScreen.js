@@ -1,11 +1,22 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import { LoginManager } from 'react-native-fbsdk';
 
-export default class MoreHomeScreen extends Component {
+class MoreHomeScreen extends Component {
+  signOut = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth');
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Meny</Text>
+        <Button 
+            title="Log out"
+            onPress={this.signOut}
+        />
       </View>
     );
   }
@@ -29,3 +40,4 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+export default MoreHomeScreen;
