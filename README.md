@@ -24,3 +24,8 @@ In general go here: https://facebook.github.io/react-native/docs/getting-started
   npm install
 
   npm run android
+
+# Extra tools: 
+## Warning: you must set %ANROID_HOME%\platform-tools path first before use this tool.
+Run Android emulator from desktop: 
+Copy bat file from tools\ to desktop, and in bat file change <emulator_name> to your emulator's name for example: Nexus_5_API_Q, that's how you can run emulator from desktop.  
