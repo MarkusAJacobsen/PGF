@@ -5,13 +5,12 @@ import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 import AsyncStorage from '@react-native-community/async-storage';
 import {sendLoginDataToPGC} from "../../network/PGCLogin";
 
-GoogleSignin.configure();
-
 class LoginScreen extends Component {
     signInGoogle = async () => {
         try {
+          GoogleSignin.configure();
           await GoogleSignin.hasPlayServices();
-          const userInfo = await GoogleSignin.signIn();
+          const userInfo = await GoogleSignin.signInSilently();
           
           this.storeDataInAsync(userInfo.user.id, "GG");
         } catch (error) {
@@ -55,7 +54,6 @@ class LoginScreen extends Component {
                 console.log(result);
             });
             this.props.navigation.navigate('Main');
-            console.log("TRIED");
         } catch (error) {
             console.log(error);
         } 
