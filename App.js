@@ -14,6 +14,7 @@ import MoreHomeScreen from './screens/More/MoreHomeScreen';
 import GuidesHomeScreen from './screens/Guides/GuidesHomeScreen';
 import NavBarItem from './components/NavBarItem/NavBarItem';
 import LoginScreen from './screens/Login/LoginScreen';
+import AuthLoadingScreen from './screens/Login/AuthLoadingScreen';
 
 const MyGardenNavigator = createStackNavigator(
   {
@@ -90,7 +91,8 @@ export default createAppContainer(createSwitchNavigator(
   {
     Main: TabNavigator,
     Auth: AuthStack,
+    AuthLoading: AuthLoadingScreen,
   }, {
-    initialRouteName: "Auth"
+    initialRouteName: "AuthLoading"
   }
 ));
