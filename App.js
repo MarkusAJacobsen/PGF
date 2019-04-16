@@ -1,12 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
-
 import React from 'react';
 import {
   createStackNavigator, 
@@ -14,6 +5,7 @@ import {
   createBottomTabNavigator,
   createSwitchNavigator
 } from 'react-navigation';
+import {Platform, StyleSheet, Text, View, Button} from 'react-native';
 import MyPlantsScreen from './screens/MyGarden/MyPlantsScreen';
 import MyGardenHomeScreen from './screens/MyGarden/MyGardenHomeScreen';
 import GrowingHomeScreen from './screens/Growing/GrowingHomeScreen';
