@@ -1,34 +1,57 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import { styles as globalStyles } from '../../styles/global';
 import Header from '../../components/Header/Header';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import TitleBar from '../../components/TitleBar/TitleBar';
+import MyPlantsRow from '../../components/MyGarden/MyPlantsRow';
+import { getMyPlants } from '../../utils/api';
 
 export default class MyGardenHomeScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      myPlants: {},
+    };
+  }
+
+  componentWillMount() {
+    const myPlants = getMyPlants();
+    this.setState({
+      myPlants: myPlants,
+    });
+  }
+
   render() {
+    const plants = getMyPlants();
     return (
-      <View style={styles.container}>
-        <Header />
-        <Text style={styles.welcome}>Velkommen til din Gartner i Lomma!</Text>
-        <Text style={styles.instructions}>For å starte din reise, har du kommet på riktig sted :)</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        <Button
-          title="Mine planter"
-          onPress={() => this.props.navigation.navigate('MyPlants')}
-        />
+      <View style={globalStyles.screenContainer}>
+        <TitleBar heading='My Garden' />
+        <ScrollView>
+          <View style={globalStyles.contentContainer}>
+            <MyPlantsRow name='vegetables' plants={this.state.myPlants.vegetables} />
+            <MyPlantsRow name='herbs' plants={this.state.myPlants.herbs} />
+            <MyPlantsRow name='fruits' plants={this.state.myPlants.fruits} />
+            <MyPlantsRow name='flowers' plants={this.state.myPlants.flowers} />
+            {
+              /*<Button
+                title="Mine planter"
+                onPress={() => this.props.navigation.navigate('MyPlants')}
+              />*/
+            }
+          </View>
+        </ScrollView>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  contentContainer: {
+    flex: 6,
+    justifyContent: 'space-between',
+  },
+  content: {
+    flex: 6,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',

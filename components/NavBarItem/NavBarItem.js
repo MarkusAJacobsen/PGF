@@ -25,7 +25,7 @@ const style = StyleSheet.create({
   menuItem: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'green',
+    backgroundColor: '#71E671',
     height: 80,  
     // width: 100,
     padding: 4,
