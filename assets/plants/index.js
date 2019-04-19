@@ -11,6 +11,9 @@ const images = {
   fruits: {
     apple: require('./fruits/apple.jpg'),
   },
+  flowers: {
+    rose: require('./flowers/rose.jpg'),
+  },
   herbs: {
     dill: require('./herbs/dill.jpg'),
   },

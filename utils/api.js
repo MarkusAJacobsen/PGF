@@ -47,16 +47,6 @@ const testPlants = {
       type: 'fruits',
     }
   ],
-  berries: [
-    {
-      id: 4, 
-      name: 'strawberry',
-      namePlural: 'Strawberries',
-      isEdible: true,
-      image: 'berries/strawberry.jpg',
-      type: 'berries',
-    },
-  ],
   herbs: [
     {
       id: 6,
@@ -66,5 +56,25 @@ const testPlants = {
       image: 'herbs/dill.jpg',
       type: 'herbs',
     }
+  ],
+  flowers: [
+    {
+      id: 10,
+      name: 'rose',
+      namePlural: 'roses',
+      isEdible: false,
+      image: 'flowers/rose.jpg',
+      type: 'flowers',
+    },
+  ],
+  berries: [
+    {
+      id: 4, 
+      name: 'strawberry',
+      namePlural: 'Strawberries',
+      isEdible: true,
+      image: 'berries/strawberry.jpg',
+      type: 'berries',
+    },
   ],
 };

@@ -31,8 +31,8 @@ export default class MyGardenHomeScreen extends Component {
             <MyPlantsRow name='vegetables' plants={this.state.myPlants.vegetables} />
             <MyPlantsRow name='herbs' plants={this.state.myPlants.herbs} />
             <MyPlantsRow name='fruits' plants={this.state.myPlants.fruits} />
-            <MyPlantsRow name='berries' plants={this.state.myPlants.berries} />
-            
+            <MyPlantsRow name='flowers' plants={this.state.myPlants.flowers} />
+
             {
               /*<Button
                 title="Mine planter"

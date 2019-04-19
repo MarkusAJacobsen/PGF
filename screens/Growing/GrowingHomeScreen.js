@@ -1,35 +1,31 @@
-import React, {Component} from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { styles as globalStyles } from '../../styles/global';
+import TitleBar from '../../components/TitleBar/TitleBar';
+import PlantCategoryCard from '../../components/Growing/PlantCategoryCard';
 
 export default class GrowingHomeScreen extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Growing Home Screen</Text>
-        <Button
-          title="Mine planter"
-          onPress={() => this.props.navigation.navigate('MyPlants')}
-        />
+      <View style={globalStyles.screenContainer}>
+        <TitleBar heading='What can I grow?' />
+        <View style={globalStyles.contentContainer}>
+          <View style={styles.cardContainer}>
+            <PlantCategoryCard name='herbs' />
+            <PlantCategoryCard name='vegetables' />
+            <PlantCategoryCard name='flowers' />
+            <PlantCategoryCard name='fruits' />
+          </View>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  cardContainer: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  }
 });
