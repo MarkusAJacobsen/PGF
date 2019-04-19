@@ -14,6 +14,7 @@ import MoreHomeScreen from './screens/More/MoreHomeScreen';
 import GuidesHomeScreen from './screens/Guides/GuidesHomeScreen';
 import NavBarItem from './components/NavBarItem/NavBarItem';
 import LoginScreen from './screens/Login/LoginScreen';
+import WelcomeScreen from './screens/Login/WelcomeScreen';
 import AuthLoadingScreen from './screens/Login/AuthLoadingScreen';
 
 const MyGardenNavigator = createStackNavigator(
@@ -85,7 +86,7 @@ const BottomNavigatorConfig = {
 }
 
 const TabNavigator = createBottomTabNavigator(RouteConfig, BottomNavigatorConfig);
-const AuthStack = createStackNavigator({ Login: LoginScreen });
+const AuthStack = createStackNavigator({ Welcome: WelcomeScreen, Login: LoginScreen });
 
 export default createAppContainer(createSwitchNavigator(
   {
