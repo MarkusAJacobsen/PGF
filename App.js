@@ -47,42 +47,56 @@ const RouteConfig = {
   MyGarden: { 
     screen: MyGardenNavigator, 
     navigationOptions: {
-      tabBarLabel: 'My garden',
+      tabBarButtonComponent: (props) => (
+        <NavBarItem {...props} title='My garden' />
+      ),
     },
   },
   Growing: { 
     screen: GrowingNavigator,
     navigationOptions: {
       tabBarLabel: 'Growing',
-    },
-  },
-  CustomTab: {
-    screen: GuidesNavigator,
-    navigationOptions: () => ({
-      tabBarLabel: 'Custom123',
-      tabBarButtonComponent: props => (
-        <NavBarItem {...props} />
+      tabBarButtonComponent: (props) => (
+        <NavBarItem {...props} title='What can I grow?' />
       ),
-    }),
+    },
   },
   Guides: { 
     screen: GuidesNavigator,
     navigationOptions: {
-      tabBarLabel: 'Guides',
+      tabBarButtonComponent: (props) => (
+        <NavBarItem {...props} title='Growing guides' />
+      ),
     },
   },
   More: { 
     screen: MoreNavigator,
     navigationOptions: {
       tabBarLabel: 'Menu',
+      tabBarButtonComponent: (props) => (
+        <NavBarItem {...props} title='More' />
+      ),
     },
   },
+  /*
+  Example of a standard menu item:
+  MyGarden: { 
+    screen: MyGardenNavigator, 
+    tabBarLabel: 'My Garden',
+  },
+  */
 }
 
 const BottomNavigatorConfig = {
   defaultNavigationOptions: ({ navigation }) => ({
     //tabBarButtonComponent: NavBarItem,
   }),
+  tabBarOptions: {
+    style: {
+      flex: 0.15,
+      justifyContent: 'space-between',
+    },
+  }
 }
 
 const TabNavigator = createBottomTabNavigator(RouteConfig, BottomNavigatorConfig);

@@ -1,36 +1,48 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, View, StyleSheet, Text } from 'react-native';
+import { vars as globalVars } from '../../styles/global';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
-class AddButton extends Component {
-  render() {
-    return(
-      <View>
-        <TouchableOpacity
-          style={style.menuItem}          
-          hitSlop={{
-            top: 20,
-            bottom: 20,
-            left: 20,
-            right: 20,
-          }}
-          onPress={this.handleAddButtonPress}>
-          <Text>Custom</Text>
-        </TouchableOpacity>
+const NavBarItem = ({ onPress, title }) => (
+  <View style={styles.container}>
+    <TouchableOpacity
+      style={styles.button}
+      hitSlop={{
+        top: 20,
+        bottom: 20,
+        left: 20,
+        right: 20,
+      }}
+      onPress={onPress}
+    >
+      <View style={styles.textWrapper}>
+        <Text style={styles.itemText}>{title.toUpperCase()}</Text>
       </View>
-    );
-  }
-}
+    </TouchableOpacity>
+  </View>
+);
 
-const style = StyleSheet.create({
-  menuItem: {
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // backgroundColor: globalVars.lightGreen,
+    height: 86,  
+    width: 100,
+  },
+  button: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#71E671',
-    height: 80,  
-    // width: 100,
-    padding: 4,
-    borderRadius: 2, 
   },
+  textWrapper: {
+    width: 75,
+  },
+  itemText: {
+    color: globalVars.black,
+    fontWeight: 'bold',
+    fontSize: 14,
+    textAlign: 'center',
+  }
 });
 
-export default AddButton;
+export default NavBarItem;
