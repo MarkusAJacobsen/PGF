@@ -6,51 +6,65 @@ const testPlants = {
   vegetables: [
     {
       id: 1,
-      name: 'Cucumber',
+      name: 'cucumber',
       namePlural: 'Cucumbers',
       isEdible: true,
+      image: 'vegetables/cucumber.jpg',
+      type: 'vegetables',
     },
     {
       id: 2,
-      name: 'Tomato',
+      name: 'tomato',
       namePlural: 'Tomatoes',
       isEdible: true,
+      image: 'vegetables/tomato.jpg',
+      type: 'vegetables',
     },
     {
       id: 7,
-      name: 'Avocado',
+      name: 'avocado',
       namePlural: 'Avocados',
       isEdible: true,
+      image: 'vegetables/avocado.jpg',
+      type: 'vegetables',
     },
     {
       id: 8,
-      name: 'Chili',
+      name: 'chili',
       namePlural: 'Chilis',
       isEdible: true,
+      image: 'vegetables/chili.jpg',
+      type: 'vegetables',
     }
   ],
   fruits: [
     {
+      id: 9,
+      name: 'apple',
+      namePlural: 'Apples',
+      isEdible: true,
+      image: 'fruits/apple.jpg',
+      type: 'fruits',
+    }
+  ],
+  berries: [
+    {
       id: 4, 
-      name: 'Strawberry',
+      name: 'strawberry',
       namePlural: 'Strawberries',
       isEdible: true,
+      image: 'berries/strawberry.jpg',
+      type: 'berries',
     },
-  ],
-  flowers: [
-    {
-      id: 5,
-      name: 'Rose',
-      namePlural: 'Roses',
-      isEdible: false,
-    }
   ],
   herbs: [
     {
       id: 6,
-      name: 'Dill',
+      name: 'dill',
       namePlural: 'Dill',
       isEdible: true,
+      image: 'herbs/dill.jpg',
+      type: 'herbs',
     }
   ],
 };

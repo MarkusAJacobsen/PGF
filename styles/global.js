@@ -15,7 +15,6 @@ export const styles = StyleSheet.create({
     },
     contentContainer: {
         flex: 6,
-        justifyContent: 'space-between',
         backgroundColor: vars.ligthYellow,
     },
 });

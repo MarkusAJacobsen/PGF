@@ -26,30 +26,27 @@ export default class MyGardenHomeScreen extends Component {
     return (
       <View style={globalStyles.screenContainer}>
         <TitleBar heading='My Garden' />
-        <ScrollView>
-          <View style={globalStyles.contentContainer}>
+        <View style={globalStyles.contentContainer}>
+          <ScrollView showsVerticalScrollIndicator={false} >
             <MyPlantsRow name='vegetables' plants={this.state.myPlants.vegetables} />
             <MyPlantsRow name='herbs' plants={this.state.myPlants.herbs} />
             <MyPlantsRow name='fruits' plants={this.state.myPlants.fruits} />
-            <MyPlantsRow name='flowers' plants={this.state.myPlants.flowers} />
+            <MyPlantsRow name='berries' plants={this.state.myPlants.berries} />
+            
             {
               /*<Button
                 title="Mine planter"
                 onPress={() => this.props.navigation.navigate('MyPlants')}
               />*/
             }
-          </View>
-        </ScrollView>
+          </ScrollView>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  contentContainer: {
-    flex: 6,
-    justifyContent: 'space-between',
-  },
   content: {
     flex: 6,
     justifyContent: 'center',
