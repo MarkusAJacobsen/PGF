@@ -1,16 +1,24 @@
 import React, { Compontent } from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { uppercaseFirstLetter } from '../../utils/functions';
 import { ScrollView } from 'react-native-gesture-handler';
 import { vars as globalVars } from '../../styles/global';
 import Icons from '../../assets/icons/index';
 
-const PlantCategoryCard = ({ name }) => {
-  const nameFormatted = name.charAt(0).toUpperCase() + name.slice(1);
+const PlantCategoryCard = ({ navigation, name }) => {
+
+  onCardPress = (type) => {
+    navigation.navigate(
+      'GrowingCategory',
+      { plantType: type }
+    );
+  };
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={() => this.onCardPress(name)}>
       <Image source={Icons[name]} />
-      <Text style={styles.plantNameText}>{nameFormatted}</Text>
-    </View>
+      <Text style={styles.plantNameText}>{uppercaseFirstLetter(name)}</Text>
+    </TouchableOpacity>
   );
 };
 

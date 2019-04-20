@@ -1,27 +1,36 @@
 import React, { Compontent } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { vars as globalVars } from '../../styles/global';
 import AddItem from '../../components/Buttons/AddItem';
 import MyPlantsItem from './MyPlantsItem';
 
-const MyPlantsRow = ({ name, plants }) => {
+const MyPlantsRow = ({ navigation, category, plants }) => {
+
+  onAddPress = (type) => {
+    navigation.navigate(
+      'GrowingCategory',
+      { plantType: type }
+    );
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.rowHeading}>
-        <Text style={styles.rowHeadingText}>My {name}</Text>
+        <Text style={styles.rowHeadingText}>My {category}</Text>
       </View>
-      <ScrollView 
-        horizontal 
-        showsHorizontalScrollIndicator={false} 
-        // contentContainerStyle={styles.myPlantsRow}
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+      // contentContainerStyle={styles.myPlantsRow}
       >
         {plants.map((p) => (
           <MyPlantsItem plant={p} key={p.id} />
         ))}
+        <TouchableOpacity onPress={() => this.onAddPress(category)}>
+          <AddItem size='large' bgColor='white' />
+        </TouchableOpacity>
 
-        <AddItem size='large' bgColor='white' />
-        
       </ScrollView>
     </View>
   );

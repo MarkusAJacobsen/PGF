@@ -2,8 +2,9 @@ import React, { Compontent } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { vars as globalVars } from '../../styles/global';
+import Icons from '../../assets/icons/index';
 
-const AddItem = ({ size, bgColor }) => {
+const AddItem = ({ size, bgColor, added }) => {
   let width;
   let height;
   let backgroundColor;
@@ -30,7 +31,7 @@ const AddItem = ({ size, bgColor }) => {
       marginLeft: 23,
       marginRight: 23,
     }}>
-      <Image source={require('../../assets/icons/plus.png')} />
+      <Image source={added ? Icons.checked : Icons.plus} />
     </View>
   );
 };
@@ -38,5 +39,5 @@ const AddItem = ({ size, bgColor }) => {
 export default AddItem;
 
 const styles = StyleSheet.create({
-  
+
 });

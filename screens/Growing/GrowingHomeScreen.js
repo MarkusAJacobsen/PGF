@@ -6,15 +6,16 @@ import PlantCategoryCard from '../../components/Growing/PlantCategoryCard';
 
 export default class GrowingHomeScreen extends Component {
   render() {
+    const { navigation } = this.props;
+    const categories = ['herbs', 'vegetables', 'flowers', 'fruits'];
     return (
       <View style={globalStyles.screenContainer}>
         <TitleBar heading='What can I grow?' />
         <View style={globalStyles.contentContainer}>
           <View style={styles.cardContainer}>
-            <PlantCategoryCard name='herbs' />
-            <PlantCategoryCard name='vegetables' />
-            <PlantCategoryCard name='flowers' />
-            <PlantCategoryCard name='fruits' />
+            {categories.map((c) =>
+              <PlantCategoryCard name={c} navigation={navigation} key={c} />
+            )}
           </View>
         </View>
       </View>

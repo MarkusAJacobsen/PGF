@@ -12,6 +12,7 @@ export default class MyGardenHomeScreen extends Component {
     this.state = {
       myPlants: {},
     };
+    this.categories = ['vegetables', 'herbs', 'fruits', 'flowers'];
   }
 
   componentWillMount() {
@@ -23,22 +24,20 @@ export default class MyGardenHomeScreen extends Component {
 
   render() {
     const plants = getMyPlants();
+    const { navigation } = this.props;
     return (
       <View style={globalStyles.screenContainer}>
         <TitleBar heading='My Garden' />
         <View style={globalStyles.contentContainer}>
-          <ScrollView showsVerticalScrollIndicator={false} >
-            <MyPlantsRow name='vegetables' plants={this.state.myPlants.vegetables} />
-            <MyPlantsRow name='herbs' plants={this.state.myPlants.herbs} />
-            <MyPlantsRow name='fruits' plants={this.state.myPlants.fruits} />
-            <MyPlantsRow name='flowers' plants={this.state.myPlants.flowers} />
-
-            {
-              /*<Button
-                title="Mine planter"
-                onPress={() => this.props.navigation.navigate('MyPlants')}
-              />*/
-            }
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {this.categories.map((c) => (
+              <MyPlantsRow
+                navigation={navigation}
+                category={c}
+                plants={this.state.myPlants[c]}
+                key={c}
+              />
+            ))}
           </ScrollView>
         </View>
       </View>
