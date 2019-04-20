@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { styles as globalStyles } from '../../styles/global';
+import { styles as globalStyles, vars as globalVars } from '../../styles/global';
 import TitleBar from '../../components/TitleBar/TitleBar';
 import PlantCategoryCard from '../../components/Growing/PlantCategoryCard';
 
 export default class GrowingHomeScreen extends Component {
+
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: globalVars.header,
+    },
+    headerTintColor: globalVars.ligthGrey,
+  };
+
   render() {
     const { navigation } = this.props;
     const categories = ['herbs', 'vegetables', 'flowers', 'fruits'];

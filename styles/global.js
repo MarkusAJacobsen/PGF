@@ -9,6 +9,7 @@ export const vars = {
   black: '#000000',
   ligthGrey: '#FCFCFC', // not from the design
   grey: '#E6E6E6',
+  header: '#164450',
 };
 
 export const styles = StyleSheet.create({

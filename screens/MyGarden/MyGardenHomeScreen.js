@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button, ScrollView } from 'react-native';
-import { styles as globalStyles } from '../../styles/global';
+import { styles as globalStyles, vars as globalVars } from '../../styles/global';
 import Header from '../../components/Header/Header';
 import TitleBar from '../../components/TitleBar/TitleBar';
 import MyPlantsRow from '../../components/MyGarden/MyPlantsRow';
@@ -21,6 +21,13 @@ export default class MyGardenHomeScreen extends Component {
       myPlants: myPlants,
     });
   }
+
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: globalVars.header,
+    },
+    headerTintColor: globalVars.ligthGrey,
+  };
 
   render() {
     const plants = getMyPlants();

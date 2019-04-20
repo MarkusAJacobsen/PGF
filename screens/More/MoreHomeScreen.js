@@ -1,9 +1,18 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { LoginManager } from 'react-native-fbsdk';
+import { vars as globalVars } from '../../styles/global';
 
 class MoreHomeScreen extends Component {
+
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: globalVars.header,
+    },
+    headerTintColor: globalVars.ligthGrey,
+  };
+
   signOut = async () => {
     await AsyncStorage.clear();
     this.props.navigation.navigate('Auth');
@@ -13,9 +22,9 @@ class MoreHomeScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Meny</Text>
-        <Button 
-            title="Log out"
-            onPress={this.signOut}
+        <Button
+          title="Log out"
+          onPress={this.signOut}
         />
       </View>
     );

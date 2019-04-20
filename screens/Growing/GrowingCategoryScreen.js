@@ -31,6 +31,13 @@ export default class GrowingCategoryScreen extends Component {
     });
   }
 
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: globalVars.header,
+    },
+    headerTintColor: globalVars.ligthGrey,
+  };
+
   render() {
     const { category, allPlants, myPlants } = this.state;
     return (
