@@ -1,7 +1,16 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button} from 'react-native';
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View, Button } from 'react-native';
+import { vars as globalVars } from '../../styles/global';
 
 export default class GuidesHomeScreen extends Component {
+
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: globalVars.header,
+    },
+    headerTintColor: globalVars.ligthGrey,
+  };
+
   render() {
     return (
       <View style={styles.container}>

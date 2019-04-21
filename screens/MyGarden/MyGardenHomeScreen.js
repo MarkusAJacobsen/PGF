@@ -1,32 +1,60 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View, Button} from 'react-native';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import { styles as globalStyles, vars as globalVars } from '../../styles/global';
+import Header from '../../components/Header/Header';
+import TitleBar from '../../components/TitleBar/TitleBar';
+import MyPlantsRow from '../../components/MyGarden/MyPlantsRow';
+import { getMyPlants } from '../../utils/api';
 
 export default class MyGardenHomeScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      myPlants: {},
+    };
+    this.categories = ['vegetables', 'herbs', 'fruits', 'flowers'];
+  }
+
+  componentWillMount() {
+    const myPlants = getMyPlants();
+    this.setState({
+      myPlants: myPlants,
+    });
+  }
+
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: globalVars.header,
+    },
+    headerTintColor: globalVars.ligthGrey,
+  };
+
   render() {
+    const plants = getMyPlants();
+    const { navigation } = this.props;
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Velkommen til din Gartner i Lomma!</Text>
-        <Text style={styles.instructions}>For å starte din reise, har du kommet på riktig sted :)</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        <Button
-          title="Mine planter"
-          onPress={() => this.props.navigation.navigate('MyPlants')}
-        />
+      <View style={globalStyles.screenContainer}>
+        <TitleBar heading='My Garden' />
+        <View style={globalStyles.contentContainer}>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {this.categories.map((c) => (
+              <MyPlantsRow
+                navigation={navigation}
+                category={c}
+                plants={this.state.myPlants[c]}
+                key={c}
+              />
+            ))}
+          </ScrollView>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  content: {
+    flex: 6,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',

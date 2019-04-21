@@ -1,40 +1,40 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
-
-import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { styles as globalStyles, vars as globalVars } from '../../styles/global';
+import TitleBar from '../../components/TitleBar/TitleBar';
+import PlantCategoryCard from '../../components/Growing/PlantCategoryCard';
 
 export default class GrowingHomeScreen extends Component {
+
+  static navigationOptions = {
+    headerStyle: {
+      backgroundColor: globalVars.header,
+    },
+    headerTintColor: globalVars.ligthGrey,
+  };
+
   render() {
+    const { navigation } = this.props;
+    const categories = ['herbs', 'vegetables', 'flowers', 'fruits'];
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Growing Home Screen</Text>
+      <View style={globalStyles.screenContainer}>
+        <TitleBar heading='What can I grow?' />
+        <View style={globalStyles.contentContainer}>
+          <View style={styles.cardContainer}>
+            {categories.map((c) =>
+              <PlantCategoryCard name={c} navigation={navigation} key={c} />
+            )}
+          </View>
+        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  cardContainer: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  }
 });

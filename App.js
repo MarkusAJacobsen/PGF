@@ -1,12 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- * @lint-ignore-every XPLATJSCOPYRIGHT1
- */
-
 import React from 'react';
 import {
   createStackNavigator, 
@@ -14,6 +5,7 @@ import {
   createBottomTabNavigator,
   createSwitchNavigator
 } from 'react-navigation';
+import {Platform, StyleSheet, Text, View, Button} from 'react-native';
 import MyPlantsScreen from './screens/MyGarden/MyPlantsScreen';
 import MyGardenHomeScreen from './screens/MyGarden/MyGardenHomeScreen';
 import GrowingHomeScreen from './screens/Growing/GrowingHomeScreen';
@@ -22,6 +14,8 @@ import MoreHomeScreen from './screens/More/MoreHomeScreen';
 import GuidesHomeScreen from './screens/Guides/GuidesHomeScreen';
 import NavBarItem from './components/NavBarItem/NavBarItem';
 import LoginScreen from './screens/Login/LoginScreen';
+import WelcomeScreen from './screens/Login/WelcomeScreen';
+import AuthLoadingScreen from './screens/Login/AuthLoadingScreen';
 
 const MyGardenNavigator = createStackNavigator(
   {
@@ -53,52 +47,67 @@ const RouteConfig = {
   MyGarden: { 
     screen: MyGardenNavigator, 
     navigationOptions: {
-      tabBarLabel: 'My garden',
+      tabBarButtonComponent: (props) => (
+        <NavBarItem {...props} title='My garden' />
+      ),
     },
   },
   Growing: { 
     screen: GrowingNavigator,
     navigationOptions: {
       tabBarLabel: 'Growing',
-    },
-  },
-  CustomTab: {
-    screen: GuidesNavigator,
-    navigationOptions: () => ({
-      tabBarLabel: 'Custom123',
-      tabBarButtonComponent: props => (
-        <NavBarItem {...props} />
+      tabBarButtonComponent: (props) => (
+        <NavBarItem {...props} title='What can I grow?' />
       ),
-    }),
+    },
   },
   Guides: { 
     screen: GuidesNavigator,
     navigationOptions: {
-      tabBarLabel: 'Guides',
+      tabBarButtonComponent: (props) => (
+        <NavBarItem {...props} title='Growing guides' />
+      ),
     },
   },
   More: { 
     screen: MoreNavigator,
     navigationOptions: {
       tabBarLabel: 'Menu',
+      tabBarButtonComponent: (props) => (
+        <NavBarItem {...props} title='More' />
+      ),
     },
   },
+  /*
+  Example of a standard menu item:
+  MyGarden: { 
+    screen: MyGardenNavigator, 
+    tabBarLabel: 'My Garden',
+  },
+  */
 }
 
 const BottomNavigatorConfig = {
   defaultNavigationOptions: ({ navigation }) => ({
     //tabBarButtonComponent: NavBarItem,
   }),
+  tabBarOptions: {
+    style: {
+      flex: 0.15,
+      justifyContent: 'space-between',
+    },
+  }
 }
 
 const TabNavigator = createBottomTabNavigator(RouteConfig, BottomNavigatorConfig);
-const AuthStack = createStackNavigator({ Login: LoginScreen });
+const AuthStack = createStackNavigator({ Welcome: WelcomeScreen, Login: LoginScreen });
 
 export default createAppContainer(createSwitchNavigator(
   {
     Main: TabNavigator,
     Auth: AuthStack,
+    AuthLoading: AuthLoadingScreen,
   }, {
-    initialRouteName: "Auth"
+    initialRouteName: "AuthLoading"
   }
 ));

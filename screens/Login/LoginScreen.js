@@ -81,13 +81,13 @@ class LoginScreen extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Velkommen til din Gartner i Lomma!</Text>
-        <Text style={styles.instructions}>For å starte din reise, har du kommet på riktig sted.</Text>
         <GoogleSigninButton
-    style={{ width: 192, height: 60 }}
-    size={GoogleSigninButton.Size.Wide}
-    color={GoogleSigninButton.Color.Dark}
-    onPress={this.signInGoogle} />
-    <LoginButton
+          style={{ width: 192, height: 60 }}
+          size={GoogleSigninButton.Size.Wide}
+          color={GoogleSigninButton.Color.Dark}
+          onPress={this.signInGoogle} 
+        />
+        <LoginButton
           onLoginFinished={this.signInFacebook}
           onLogoutFinished={() => console.log("logout.")}/>
       </View>
