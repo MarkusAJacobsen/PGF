@@ -7,6 +7,8 @@ import MyPlantsRow from "./MyGarden/MyPlantsRow";
 import NavBarItem from "./NavBarItem/NavBarItem";
 import TitleBar from "./TitleBar/TitleBar";
 import Search from "./Search/Search";
+// UI
+import CustomTabBarBottom from "./ui/CustomTabBarBottom";
 
 export {
   AddItem,
@@ -17,5 +19,7 @@ export {
   MyPlantsRow,
   NavBarItem,
   TitleBar,
-  Search
+  Search,
+  // UI
+  CustomTabBarBottom
 };

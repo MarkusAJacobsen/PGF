@@ -13,6 +13,7 @@ import {
 } from "../../styles/global";
 import { Header, TitleBar, MyPlantsRow } from "@up-components";
 import { getMyPlants } from "../../utils/api";
+import Tabs from "react-native-tabs";
 
 export default class MyGardenHomeScreen extends Component {
   constructor(props) {
@@ -55,6 +56,26 @@ export default class MyGardenHomeScreen extends Component {
             ))}
           </ScrollView>
         </View>
+        {/* Test */}
+        {/* <Tabs
+          selected={this.state.page}
+          style={{ backgroundColor: "white" }}
+          selectedStyle={{ color: "red" }}
+          onSelect={el => this.setState({ page: el.props.name })}
+        >
+          <Text name="first">First</Text>
+          <Text
+            name="second"
+            selectedIconStyle={{ borderTopWidth: 2, borderTopColor: "red" }}
+          >
+            Second
+          </Text>
+          <Text name="third">Third</Text>
+          <Text name="fourth" selectedStyle={{ color: "green" }}>
+            Fourth
+          </Text>
+          <Text name="fifth">Fifth</Text>
+        </Tabs> */}
       </View>
     );
   }

@@ -1,83 +1,75 @@
-import React from 'react';
+import React from "react";
 import {
-  createStackNavigator, 
+  createStackNavigator,
   createAppContainer,
   createBottomTabNavigator,
   createSwitchNavigator
-} from 'react-navigation';
-import {Platform, StyleSheet, Text, View, Button} from 'react-native';
-import MyPlantsScreen from './screens/MyGarden/MyPlantsScreen';
-import MyGardenHomeScreen from './screens/MyGarden/MyGardenHomeScreen';
-import GrowingHomeScreen from './screens/Growing/GrowingHomeScreen';
-import GrowingCategoryScreen from './screens/Growing/GrowingCategoryScreen';
-import MoreHomeScreen from './screens/More/MoreHomeScreen';
-import GuidesHomeScreen from './screens/Guides/GuidesHomeScreen';
-import NavBarItem from './components/NavBarItem/NavBarItem';
-import LoginScreen from './screens/Login/LoginScreen';
-import WelcomeScreen from './screens/Login/WelcomeScreen';
-import AuthLoadingScreen from './screens/Login/AuthLoadingScreen';
+} from "react-navigation";
+import { vars as globalVars } from "./styles/global";
+import { Platform, StyleSheet, Text, View, Button } from "react-native";
+import MyPlantsScreen from "./screens/MyGarden/MyPlantsScreen";
+import MyGardenHomeScreen from "./screens/MyGarden/MyGardenHomeScreen";
+import GrowingHomeScreen from "./screens/Growing/GrowingHomeScreen";
+import GrowingCategoryScreen from "./screens/Growing/GrowingCategoryScreen";
+import MoreHomeScreen from "./screens/More/MoreHomeScreen";
+import GuidesHomeScreen from "./screens/Guides/GuidesHomeScreen";
+import NavBarItem from "./components/NavBarItem/NavBarItem";
+import LoginScreen from "./screens/Login/LoginScreen";
+import WelcomeScreen from "./screens/Login/WelcomeScreen";
+import AuthLoadingScreen from "./screens/Login/AuthLoadingScreen";
 
-const MyGardenNavigator = createStackNavigator(
-  {
-    MyGardenHome: { screen: MyGardenHomeScreen },
-    MyPlants: { screen: MyPlantsScreen },
-  },
-);
+const MyGardenNavigator = createStackNavigator({
+  MyGardenHome: { screen: MyGardenHomeScreen },
+  MyPlants: { screen: MyPlantsScreen }
+});
 
-const GrowingNavigator = createStackNavigator(
-  {
-    GrowingHome: { screen: GrowingHomeScreen },
-    GrowingCategory: { screen: GrowingCategoryScreen },
-  },
-);
+const GrowingNavigator = createStackNavigator({
+  GrowingHome: { screen: GrowingHomeScreen },
+  GrowingCategory: { screen: GrowingCategoryScreen }
+});
 
-const GuidesNavigator = createStackNavigator(
-  {
-    GuidesHome: { screen: GuidesHomeScreen },
-  },
-);
+const GuidesNavigator = createStackNavigator({
+  GuidesHome: { screen: GuidesHomeScreen }
+});
 
-const MoreNavigator = createStackNavigator(
-  {
-    MoreHome: { screen: MoreHomeScreen },  
-  },
-);
+const MoreNavigator = createStackNavigator({
+  MoreHome: { screen: MoreHomeScreen }
+});
 
 const RouteConfig = {
-  MyGarden: { 
-    screen: MyGardenNavigator, 
+  // TODO: In progress with isActive checking....
+  MyGarden: {
+    screen: MyGardenNavigator,
     navigationOptions: {
-      tabBarButtonComponent: (props) => (
-        <NavBarItem {...props} title='My garden' />
-      ),
-    },
+      tabBarButtonComponent: props => (
+        <NavBarItem {...props} title="My garden" isActive="true" />
+      )
+    }
   },
-  Growing: { 
+  Growing: {
     screen: GrowingNavigator,
     navigationOptions: {
-      tabBarLabel: 'Growing',
-      tabBarButtonComponent: (props) => (
-        <NavBarItem {...props} title='What can I grow?' />
-      ),
-    },
+      tabBarButtonComponent: props => (
+        <NavBarItem {...props} title="What can I grow?" isActive="false" />
+      )
+    }
   },
-  Guides: { 
+  Guides: {
     screen: GuidesNavigator,
     navigationOptions: {
-      tabBarButtonComponent: (props) => (
-        <NavBarItem {...props} title='Growing guides' />
-      ),
-    },
+      tabBarButtonComponent: props => (
+        <NavBarItem {...props} title="Growing guides" isActive="false" />
+      )
+    }
   },
-  More: { 
+  More: {
     screen: MoreNavigator,
     navigationOptions: {
-      tabBarLabel: 'Menu',
-      tabBarButtonComponent: (props) => (
-        <NavBarItem {...props} title='More' />
-      ),
-    },
-  },
+      tabBarButtonComponent: props => (
+        <NavBarItem {...props} title="More" isActive="false" />
+      )
+    }
+  }
   /*
   Example of a standard menu item:
   MyGarden: { 
@@ -85,29 +77,72 @@ const RouteConfig = {
     tabBarLabel: 'My Garden',
   },
   */
-}
+};
 
 const BottomNavigatorConfig = {
   defaultNavigationOptions: ({ navigation }) => ({
     //tabBarButtonComponent: NavBarItem,
+    // tabBarButtonComponent: <NavBarItem {...props}  title="n/a" />
   }),
+  // navigationOptions: {
+  //     tabBarLabel: "Menu",
+  //     tabBarButtonComponent: props => <NavBarItem {...props} title="Test" />
+  // },
+  // tabBarOptions: {
+  //   style: {
+  //     flex: 0.15,
+  //     justifyContent: "space-between",
+  //     backgroundColor: "#fff",
+  //     height: 10
+  //   }
+  // },
+  initialRouteName: "MyGarden",
   tabBarOptions: {
+    activeTintColor: "#000000",
+    inactiveTintColor: "#000000",
+    activeBackgroundColor: globalVars.lightGreen,
+    inactiveBackgroundColor: globalVars.white,
     style: {
-      flex: 0.15,
-      justifyContent: 'space-between',
+      height: 87
+      // paddingVertical: 5,
+      // backgroundColor: "transparent"
     },
+    labelStyle: {
+      fontSize: 12,
+      lineHeight: 20
+    }
   }
-}
+};
 
-const TabNavigator = createBottomTabNavigator(RouteConfig, BottomNavigatorConfig);
-const AuthStack = createStackNavigator({ Welcome: WelcomeScreen, Login: LoginScreen });
+const TabNavigator = createBottomTabNavigator(
+  RouteConfig,
+  BottomNavigatorConfig
+);
 
-export default createAppContainer(createSwitchNavigator(
-  {
-    Main: TabNavigator,
-    Auth: AuthStack,
-    AuthLoading: AuthLoadingScreen,
-  }, {
-    initialRouteName: "AuthLoading"
-  }
-));
+TabNavigator.navigationOptions = ({ navigation }) => {
+  return {
+    tabBarLabel: ({ focused, tintColor }) => {
+      return {
+        tabBarLabel: "Menu"
+        // title: "Test123"
+      };
+    }
+  };
+};
+const AuthStack = createStackNavigator({
+  Welcome: WelcomeScreen,
+  Login: LoginScreen
+});
+
+export default createAppContainer(
+  createSwitchNavigator(
+    {
+      Main: TabNavigator,
+      Auth: AuthStack,
+      AuthLoading: AuthLoadingScreen
+    },
+    {
+      initialRouteName: "AuthLoading"
+    }
+  )
+);
