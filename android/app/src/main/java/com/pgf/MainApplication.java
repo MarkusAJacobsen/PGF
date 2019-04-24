@@ -2,19 +2,33 @@ package com.pgf;
 
 import android.app.Application;
 
+import com.facebook.CallbackManager;
 import com.facebook.react.ReactApplication;
+<<<<<<< HEAD
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
+=======
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+>>>>>>> 9bff7e062534cc157fb904284b9054257d7992c1
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
 import java.util.List;
 
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
+
 public class MainApplication extends Application implements ReactApplication {
+
+  private static CallbackManager mCallbackManager = CallbackManager.Factory.create();
+
+  protected static CallbackManager getCallbackManager() {
+    return mCallbackManager;
+  }
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
@@ -26,8 +40,14 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+<<<<<<< HEAD
             new VectorIconsPackage(),
             new LinearGradientPackage(),
+=======
+            new AsyncStoragePackage(),
+            new FBSDKPackage(mCallbackManager),
+            new RNGoogleSigninPackage(),
+>>>>>>> 9bff7e062534cc157fb904284b9054257d7992c1
             new RNGestureHandlerPackage()
       );
     }

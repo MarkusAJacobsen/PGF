@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PGF</string>
+    <string name="facebook_app_id">2012648618784028</string>
+    <string name="fb_login_protocol_scheme">fb2012648618784028</string>
 </resources>
