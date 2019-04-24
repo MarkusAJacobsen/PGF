@@ -22,23 +22,17 @@
     ]
   },
   "dependencies": {
-<<<<<<< HEAD
     "@expo/vector-icons": "^10.0.1",
     "@unimodules/core": "^1.0.0",
     "expo-asset": "^4.0.0",
     "expo-constants": "^4.0.0",
     "expo-font": "^4.0.0",
     "flow": "^0.2.3",
-    "react": "16.6.3",
-    "react-native": "0.58.6",
     "react-native-elements": "^1.1.0",
-    "react-native-gesture-handler": "^1.1.0",
     "react-native-linear-gradient": "^2.5.4",
     "react-native-paper": "^2.15.2",
     "react-native-vector-icons": "^6.4.2",
-    "react-navigation": "^2.18.2",
-    "react-navigation-material-bottom-tabs": "^1.0.0-alpha.6"
-=======
+    "react-navigation-material-bottom-tabs": "^1.0.0-alpha.6",
     "@react-native-community/async-storage": "^1.2.4",
     "react": "16.6.3",
     "react-native": "^0.59.1",
@@ -46,7 +40,6 @@
     "react-native-gesture-handler": "~1.0.14",
     "react-native-google-signin": "^1.2.2",
     "react-navigation": "^3.5.1"
->>>>>>> 9bff7e062534cc157fb904284b9054257d7992c1
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.33",
