@@ -4,23 +4,19 @@ import android.app.Application;
 
 import com.facebook.CallbackManager;
 import com.facebook.react.ReactApplication;
-<<<<<<< HEAD
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
-=======
-import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
->>>>>>> 9bff7e062534cc157fb904284b9054257d7992c1
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
-import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
 import java.util.List;
-
-import co.apptailor.googlesignin.RNGoogleSigninPackage;
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -40,10 +36,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new AsyncStoragePackage(),
-            new FBSDKPackage(mCallbackManager),
             new RNGoogleSigninPackage(),
-            new RNGestureHandlerPackage()
+            new RNGestureHandlerPackage(),
+            new FBSDKPackage(mCallbackManager),
+            new AsyncStoragePackage(),
+            new VectorIconsPackage(),
+            new LinearGradientPackage()
       );
     }
 
