@@ -3,29 +3,29 @@ import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
 import { vars as globalVars } from "../../styles/global";
 import { BorderlessButton } from "react-native-gesture-handler";
 
-const NavBarItem = ({ onPress, title }) => (
-  <View style={styles.container}>
-    <TouchableOpacity
-      style={styles.button}
-      hitSlop={{
-        // top: 20,
-        // bottom: 20,
-        left: 20,
-        right: 20
-      }}
-      onPress={onPress}
-    >
-      <View style={styles.textWrapper}>
-        <Text style={styles.itemText}>{title.toUpperCase()}</Text>
-      </View>
-    </TouchableOpacity>
-  </View>
-);
+const NavBarItem = (props) => {  
+  return (
+    <View
+      style={[styles.container, props.style]} >
+      <TouchableOpacity
+        style={styles.button}
+        hitSlop={{ 
+          left: 20,
+          right: 20
+        }}
+        onPress={props.onPress}
+      >
+        <View style={styles.textWrapper}>
+          <Text style={styles.itemText}>{props.title.toUpperCase()}</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    // backgroundColor: isActive ? globalVars.lightGreen : globalVars.white,
+    flex: 1, 
     height: 87,
     width: 100
   },

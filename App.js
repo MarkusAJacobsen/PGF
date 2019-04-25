@@ -41,16 +41,18 @@ const RouteConfig = {
   MyGarden: {
     screen: MyGardenNavigator,
     navigationOptions: {
-      tabBarButtonComponent: props => (
-        <NavBarItem {...props} title="My garden" isActive="true" />
-      )
+      tabBarButtonComponent: props => { 
+        return (
+          <NavBarItem {...props} title="My garden" />
+        )
+      }
     }
   },
   Growing: {
     screen: GrowingNavigator,
     navigationOptions: {
       tabBarButtonComponent: props => (
-        <NavBarItem {...props} title="What can I grow?" isActive="false" />
+        <NavBarItem {...props} title="What can I grow?" />
       )
     }
   },
@@ -58,7 +60,7 @@ const RouteConfig = {
     screen: GuidesNavigator,
     navigationOptions: {
       tabBarButtonComponent: props => (
-        <NavBarItem {...props} title="Growing guides" isActive="false" />
+        <NavBarItem {...props} title="Growing guides" />
       )
     }
   },
@@ -66,7 +68,7 @@ const RouteConfig = {
     screen: MoreNavigator,
     navigationOptions: {
       tabBarButtonComponent: props => (
-        <NavBarItem {...props} title="More" isActive="false" />
+        <NavBarItem {...props} title="More" />
       )
     }
   }
