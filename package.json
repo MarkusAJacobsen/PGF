@@ -24,6 +24,8 @@
   "dependencies": {
     "@expo/vector-icons": "^10.0.1",
     "@react-native-community/async-storage": "^1.2.4",
+    "@react-native-community/slider": "github:react-native-community/react-native-slider",
+    "@react-native-community/viewpager": "github:react-native-community/react-native-viewpager",
     "@unimodules/core": "^1.0.0",
     "expo-asset": "^4.0.0",
     "expo-constants": "^4.0.0",

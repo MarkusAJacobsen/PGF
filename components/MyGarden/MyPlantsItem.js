@@ -1,7 +1,7 @@
 import React, { Compontent } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { vars as globalVars } from '../../styles/global';
+import { vars as globalVars } from '@utils/global';
 import Images from '../../assets/plants/index';
 
 const MyPlantsItem = ({ plant }) => {
@@ -20,10 +20,10 @@ const styles = StyleSheet.create({
     height: 90,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 23,
-    marginRight: 23,
+    marginLeft: 10,
+    marginRight: 10,
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    // flexWrap: 'wrap',
   },
   image: {
     flex: 1,

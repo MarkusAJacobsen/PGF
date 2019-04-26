@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
-import { styles as globalStyles, vars as globalVars } from '../../styles/global';
-import { uppercaseFirstLetter } from '../../utils/functions';
-import { getAllPlants, getMyPlants } from '../../utils/api';
-import TitleBar from '../../components/TitleBar/TitleBar';
-import AddItem from '../../components/Buttons/AddItem';
+import { styles as globalStyles, vars as globalVars } from '@utils/global';
+import { uppercaseFirstLetter, searchStringInArray, comparedPlants } from '@utils/functions';
+import { getAllPlants, getMyPlants } from '@utils/api';
+import { TitleBar, AddItem } from "@components";
+
 import Images from '../../assets/plants/index';
 
 export default class GrowingCategoryScreen extends Component {
@@ -17,6 +17,8 @@ export default class GrowingCategoryScreen extends Component {
       myPlants: [],
       allPlants: [],
     };
+
+    this.handleResult = this.handleResult.bind(this);
   }
 
   componentWillMount() {
@@ -28,6 +30,7 @@ export default class GrowingCategoryScreen extends Component {
       category: category,
       myPlants: myPlants,
       allPlants: allPlants,
+      "search": "" 
     });
   }
 
@@ -38,16 +41,38 @@ export default class GrowingCategoryScreen extends Component {
     headerTintColor: globalVars.ligthGrey,
   };
 
+  handleResult(search){
+    if(search.length > 0) this.setState({
+      "search": search
+    });   
+  }
+ 
   render() {
-    const { category, allPlants, myPlants } = this.state;
+    const { category, allPlants, myPlants, search } = this.state;
+    let list = [];   
+    let plants = comparedPlants(myPlants, allPlants);
+    let isVisibleSearch = true;
+
+    list = (search.length > 0) ? searchStringInArray(search, plants) : plants;
+
+    if(list.length > 0){ 
+      isVisibleSearch = true;
+    } else { 
+      isVisibleSearch = false;
+    }
+    
     return (
       <View style={globalStyles.screenContainer}>
-        <TitleBar heading={uppercaseFirstLetter(category)} />
+        <TitleBar heading={uppercaseFirstLetter(category)} handleResult={this.handleResult} isVisibleSearch={isVisibleSearch}  />
+        
         <View style={globalStyles.contentContainer}>
+        <Text style={styles.topLabel}>{(list.length > 0) ? ("All "+category+" in your zone").toUpperCase() : "" }</Text>
           <ScrollView showsVerticalScrollIndicator={false} >
-            {allPlants.map((plant) => {
+            {/* {allPlants.map((plant) => { */}
+            {(list.length > 0) ? list.map((plant) => {
               // Does this plant already exist in myPlants?
-              const added = myPlants.some(p => p.id === plant.id);
+              {/* const added = myPlants.some(p => p.id === plant.id); */}
+              const added = false;
               return (
                 <View style={styles.row} key={plant.id}>
 
@@ -66,7 +91,9 @@ export default class GrowingCategoryScreen extends Component {
 
                 </View>
               )
-            })}
+            }) : 
+            <Text style={styles.noresults}>Unfortunately, there are no {category} registered.</Text>
+            }
           </ScrollView>
         </View>
       </View>
@@ -116,5 +143,19 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     resizeMode: 'contain'
+  },
+  noresults: {
+    fontSize: 20,
+    textAlign: 'center',
+    marginTop: 100,
+  },
+  topLabel: {
+    color: globalVars.searchText,
+    backgroundColor: globalVars.ligthYellow,
+    paddingLeft: 22,
+    paddingTop: 8,
+    paddingBottom: 8,
+    fontSize: 14,
+    fontFamily: globalVars.bold
   }
 });

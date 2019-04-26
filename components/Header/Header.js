@@ -6,8 +6,8 @@ const heading = 'My Garden';
 class Header extends Component {
   render() {
     return(
-        <View style={styles.container}>          
-          <Text style={styles.heading}>{heading}</Text>  
+      <View style={styles.container}>          
+          <Text style={styles.heading}>{heading}</Text>   
       </View>
     );
   }
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#71E671',
-    height: 10,
+    height: 20,
   },
   textStyle: {
     fontSize: 20,

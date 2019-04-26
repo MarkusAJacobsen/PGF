@@ -7,35 +7,12 @@ export const getAllPlants = () => {
 }
 
 const myPlants = {
-  vegetables: [
-    {
-      id: 1,
-      name: 'cucumber',
-      namePlural: 'Cucumbers',
-      isEdible: true,
-      image: 'vegetables/cucumber.jpg',
-      type: 'vegetables',
-    },
-    {
-      id: 7,
-      name: 'avocado',
-      namePlural: 'Avocados',
-      isEdible: true,
-      image: 'vegetables/avocado.jpg',
-      type: 'vegetables',
-    },
-    {
-      id: 8,
-      name: 'chili',
-      namePlural: 'Chilis',
-      isEdible: true,
-      image: 'vegetables/chili.jpg',
-      type: 'vegetables',
-    }
+   vegetables: [
+     
   ],
   fruits: [
     {
-      id: 9,
+      id: 5,
       name: 'apple',
       namePlural: 'Apples',
       isEdible: true,
@@ -53,8 +30,19 @@ const myPlants = {
       type: 'herbs',
     }
   ],
-  flowers: [],
-  berries: [],
+  flowers: [
+    
+  ],
+  berries: [
+    {
+      id: 8,
+      name: 'strawberry',
+      namePlural: 'Strawberries',
+      isEdible: true,
+      image: 'berries/strawberry.jpg',
+      type: 'berries',
+    },
+  ],
 };
 
 const allPlants = {
@@ -76,7 +64,7 @@ const allPlants = {
       type: 'vegetables',
     },
     {
-      id: 7,
+      id: 3,
       name: 'avocado',
       namePlural: 'Avocados',
       isEdible: true,
@@ -84,7 +72,7 @@ const allPlants = {
       type: 'vegetables',
     },
     {
-      id: 8,
+      id: 4,
       name: 'chili',
       namePlural: 'Chilis',
       isEdible: true,
@@ -94,7 +82,7 @@ const allPlants = {
   ],
   fruits: [
     {
-      id: 9,
+      id: 5,
       name: 'apple',
       namePlural: 'Apples',
       isEdible: true,
@@ -114,7 +102,7 @@ const allPlants = {
   ],
   flowers: [
     {
-      id: 10,
+      id: 7,
       name: 'rose',
       namePlural: 'roses',
       isEdible: false,
@@ -124,7 +112,7 @@ const allPlants = {
   ],
   berries: [
     {
-      id: 4,
+      id: 8,
       name: 'strawberry',
       namePlural: 'Strawberries',
       isEdible: true,

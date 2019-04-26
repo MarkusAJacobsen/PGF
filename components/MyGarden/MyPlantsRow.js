@@ -1,7 +1,7 @@
 import React, { Compontent } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { vars as globalVars } from '../../styles/global';
+import { vars as globalVars } from '@utils/global';
 import AddItem from '../../components/Buttons/AddItem';
 import MyPlantsItem from './MyPlantsItem';
 
@@ -17,19 +17,20 @@ const MyPlantsRow = ({ navigation, category, plants }) => {
   return (
     <View style={styles.container}>
       <View style={styles.rowHeading}>
-        <Text style={styles.rowHeadingText}>My {category}</Text>
+        <Text style={styles.rowHeadingText}>MY {category.toUpperCase()}: <Text style={{color: globalVars.orange, fontFamily: globalVars.normal}}>What do you want to grow? (add)</Text></Text>
       </View>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
-      // contentContainerStyle={styles.myPlantsRow}
+        contentContainerStyle={styles.myPlantsRow}
       >
-        {plants.map((p) => (
-          <MyPlantsItem plant={p} key={p.id} />
-        ))}
         <TouchableOpacity onPress={() => this.onAddPress(category)}>
           <AddItem size='large' bgColor='white' />
         </TouchableOpacity>
+        {plants.map((p) => (
+          <MyPlantsItem plant={p} key={p.id} />
+        ))}
+      
 
       </ScrollView>
     </View>
@@ -53,11 +54,14 @@ const styles = StyleSheet.create({
     color: '#164450',
     fontSize: 14,
     fontWeight: 'bold',
+    fontFamily: globalVars.normal,
   },
   myPlantsRow: {
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    // flex: 1,
+    // flexDirection: 'row',
+    // justifyContent: 'space-around', 
+        // flexWrap: 'wrap',
+
   },
   myPlantsItem: {
     height: 90,

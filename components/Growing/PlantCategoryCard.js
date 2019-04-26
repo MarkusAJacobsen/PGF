@@ -2,7 +2,7 @@ import React, { Compontent } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { uppercaseFirstLetter } from '../../utils/functions';
 import { ScrollView } from 'react-native-gesture-handler';
-import { vars as globalVars } from '../../styles/global';
+import { vars as globalVars } from '@utils/global';
 import Icons from '../../assets/icons/index';
 
 const PlantCategoryCard = ({ navigation, name }) => {
@@ -40,5 +40,6 @@ const styles = StyleSheet.create({
   plantNameText: {
     fontSize: 24,
     color: globalVars.black,
+    fontFamily: globalVars.regular
   }
 });

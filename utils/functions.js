@@ -6,3 +6,25 @@ export const uppercaseFirstLetter = (word) => {
   }
   return '';
 };
+
+export const searchStringInArray = (str, strArray) => { 
+    let results = [];
+    for (var j=0; j<strArray.length; j++) { 
+         if (strArray[j].name && (strArray[j].name.toLowerCase()).match(str.toLowerCase())) results.push(strArray[j]);
+    }
+
+    return results;
+}  
+
+export const comparedPlants = (arr1, arr2) => { // myPlants, allPlants
+    let plants = [];  
+
+    arr2.map((plant) => { // allPlans 
+          // Does this plant already exist in myPlants?
+          if(!arr1.some(p => (p.name.toLowerCase() === plant.name.toLowerCase()) ) ) {
+            plants.push(plant);
+          }
+    }); 
+
+    return plants;
+}

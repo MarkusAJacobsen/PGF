@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
-import { vars as globalVars } from '../../styles/global';
+import { vars as globalVars } from '@utils/global';
 
 export default class GuidesHomeScreen extends Component {
 

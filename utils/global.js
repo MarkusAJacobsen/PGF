@@ -11,9 +11,11 @@ export const vars = {
   ligthGrey: "#FCFCFC", // not from the design
   grey: "#E6E6E6",
   header: "#164450",
+  searchText: "#164450",
   orange: "#FF6B00",
   // fontFamily Titillium Web font types
   regular: "TitilliumWeb-Regular",
+  normal: "TitilliumWeb-Regular",
   bold: "TitilliumWeb-Bold",
   semiBold: "TitilliumWeb-SemiBold"
 };

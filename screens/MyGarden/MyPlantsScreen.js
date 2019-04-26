@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { styles as globalStyles, vars as globalVars } from '../../styles/global';
+import { styles as globalStyles, vars as globalVars } from '@utils/global';
 
 export default class MyPlantsScreen extends Component {
   render() {

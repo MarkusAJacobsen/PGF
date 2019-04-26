@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { LoginManager } from 'react-native-fbsdk';
-import { vars as globalVars } from '../../styles/global';
+import { vars as globalVars } from '@utils/global';
 
 class MoreHomeScreen extends Component {
 

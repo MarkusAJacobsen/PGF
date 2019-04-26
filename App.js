@@ -5,7 +5,7 @@ import {
   createBottomTabNavigator,
   createSwitchNavigator
 } from "react-navigation";
-import { vars as globalVars } from "./styles/global";
+import { vars as globalVars } from "@utils/global";
 import { Platform, StyleSheet, Text, View, Button } from "react-native";
 import MyPlantsScreen from "./screens/MyGarden/MyPlantsScreen";
 import MyGardenHomeScreen from "./screens/MyGarden/MyGardenHomeScreen";
@@ -17,6 +17,8 @@ import NavBarItem from "./components/NavBarItem/NavBarItem";
 import LoginScreen from "./screens/Login/LoginScreen";
 import WelcomeScreen from "./screens/Login/WelcomeScreen";
 import AuthLoadingScreen from "./screens/Login/AuthLoadingScreen";
+
+
 
 const MyGardenNavigator = createStackNavigator({
   MyGardenHome: { screen: MyGardenHomeScreen },
@@ -52,7 +54,7 @@ const RouteConfig = {
     screen: GrowingNavigator,
     navigationOptions: {
       tabBarButtonComponent: props => (
-        <NavBarItem {...props} title="What can I grow?" />
+        <NavBarItem {...props} title="What can I grow" />
       )
     }
   },
@@ -68,7 +70,7 @@ const RouteConfig = {
     screen: MoreNavigator,
     navigationOptions: {
       tabBarButtonComponent: props => (
-        <NavBarItem {...props} title="More" />
+        <NavBarItem {...props} icon="bars" />
       )
     }
   }
@@ -119,18 +121,8 @@ const BottomNavigatorConfig = {
 const TabNavigator = createBottomTabNavigator(
   RouteConfig,
   BottomNavigatorConfig
-);
+); 
 
-TabNavigator.navigationOptions = ({ navigation }) => {
-  return {
-    tabBarLabel: ({ focused, tintColor }) => {
-      return {
-        tabBarLabel: "Menu"
-        // title: "Test123"
-      };
-    }
-  };
-};
 const AuthStack = createStackNavigator({
   Welcome: WelcomeScreen,
   Login: LoginScreen

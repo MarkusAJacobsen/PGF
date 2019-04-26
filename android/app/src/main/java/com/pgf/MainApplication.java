@@ -4,12 +4,14 @@ import android.app.Application;
 
 import com.facebook.CallbackManager;
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
+import com.reactnativecommunity.viewpager.RNCViewPagerPackage;
+import com.reactnativecommunity.slider.ReactSliderPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -36,12 +38,14 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new VectorIconsPackage(),
+            new LinearGradientPackage(),
             new RNGoogleSigninPackage(),
             new RNGestureHandlerPackage(),
             new FBSDKPackage(mCallbackManager),
-            new AsyncStoragePackage(),
-            new VectorIconsPackage(),
-            new LinearGradientPackage()
+            new RNCViewPagerPackage(),
+            new ReactSliderPackage(),
+            new AsyncStoragePackage()
       );
     }
 

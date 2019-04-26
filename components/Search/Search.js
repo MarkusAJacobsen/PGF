@@ -1,82 +1,80 @@
-import React from "react";
-import type { Element as ReactElement } from "react";
-import {
-  StyleSheet,
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity
-} from "react-native";
-import { Icon } from "@up-components";
+import React, { Component } from "react";
+import { Platform, StyleSheet, Text, View, Button, TextInput, TouchableOpacity, Keyboard  } from "react-native";
+import { vars as globalVars } from "@utils/global"; 
+import { Icon, SearchInput } from "@components";  
 
-const Search = (props: any) => {
-  state = {
-    search: ""
-  };
+class Search extends Component {  
 
-  updateSearch = search => {
-    this.setState({ search });
-  };
+  constructor(props) {
+    super(props);  
 
-  const { search } = this.state;
+    this.searchVal = this.searchVal.bind(this);
+    this.submitSearch = this.submitSearch.bind(this);
+  
+    this.state = {
+       search: "",
+       style: ""
+    }
+  }  
+  
+  searchVal(e){    
+    if(e && e.nativeEvent) this.setState({ "search": e.nativeEvent.text }); 
+  }
 
-  return (
-    <View style={styles.searchSection}>
-      {/* <Icon style={styles.searchIcon} name="ios-search" size={20} color="#000"/> */}
-
-      {/* <Icon 
-            name="line"
-            size={50}
-            color="black"
-            style={styles.searchIconLine}
-            /> */}
-      <TextInput
-        style={props.style}
-        placeholder="Search ..."
-        // onChangeText={(searchString) => {this.setState({searchString})}}
-        underlineColorAndroid="transparent"
-      />
-      <TouchableOpacity
-        onPress={() => {}}
-        // color="#841584"
-        // accessibilityLabel="Learn more about this purple button"
-      >
-        <Icon
-          name="rightarrow"
-          size={20}
-          color="black"
-          style={styles.searchIcon}
+  submitSearch(e){
+    if(this.props.getResult && this.state.search.length > 0) this.props.getResult(this.state.search);
+    this.setState({ "search": "" });  
+    Keyboard.dismiss(); 
+  }
+  
+  render() {
+    return (
+      <View style={ styles.searchSection }>  
+        <SearchInput 
+          style={ styles.input }
+          text={ this.state.search }
+          value={ this.state.search }
+          placeholder={ "Search ...".toUpperCase()} 
+          autoFocus={ false }
+          placeholderTextColor={ globalVars.searchText }
+          onChange={ this.searchVal }
+          onSubmitEditing={ this.submitSearch }
+          // placeholderStyle={{ paddingLeft: 50 }}
         />
-      </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={ this.submitSearch } 
+        >
+          <Icon
+            name="rightarrow"
+            size={20}
+            color="black"
+            style={styles.searchIcon}
+          />
+        </TouchableOpacity>
     </View>
-  );
-};
+    );
+  }
+}
+
+export default Search;
 
 const styles = StyleSheet.create({
   searchSection: {
-    // flex: 1,
-    // flexDirection: 'row',
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: "#fff"
-    // padding: 20,
+    flexDirection: 'row', 
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: "#fff" 
   },
-  searchIcon: {
-    // paddingRight: 40,
-    alignContent: "flex-start"
+  searchIcon: { 
   },
-  searchIconLine: {
-    paddingLeft: 40
+  searchIconLine: { 
   },
-  input: {
-    flex: 1,
-    paddingTop: 10,
-    paddingRight: 10,
-    paddingBottom: 10,
-    paddingLeft: 0,
+  input: { 
+    width: 300,
+    height: 60,
+    fontFamily: globalVars.bold,
     backgroundColor: "#fff",
-    color: "#424242"
+    color: globalVars.black
   }
 });
-
-export default Search;

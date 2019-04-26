@@ -10,9 +10,9 @@ import {
 import {
   styles as globalStyles,
   vars as globalVars
-} from "../../styles/global";
-import { Header, TitleBar, MyPlantsRow } from "@up-components";
-import { getMyPlants } from "../../utils/api";
+} from "@utils/global";
+import { Header, TitleBar, MyPlantsRow } from "@components";
+import { getMyPlants } from "@utils/api";
 import Tabs from "react-native-tabs";
 
 export default class MyGardenHomeScreen extends Component {
