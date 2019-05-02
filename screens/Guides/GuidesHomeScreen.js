@@ -4,12 +4,12 @@ import { vars as globalVars } from '@utils/global';
 
 export default class GuidesHomeScreen extends Component {
 
-  static navigationOptions = {
-    headerStyle: {
-      backgroundColor: globalVars.header,
-    },
-    headerTintColor: globalVars.ligthGrey,
-  };
+  // static navigationOptions = {
+  //   headerStyle: {
+  //     backgroundColor: globalVars.header,
+  //   },
+  //   headerTintColor: globalVars.ligthGrey,
+  // };
 
   render() {
     return (

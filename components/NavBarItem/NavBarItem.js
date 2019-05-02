@@ -3,14 +3,14 @@ import { TouchableOpacity, View, StyleSheet, Text } from "react-native";
 import { vars as globalVars } from "@utils/global";
 import { BorderlessButton } from "react-native-gesture-handler";
 // Icons set
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const NavBarItem = (props) => {  
 
   let displayLabel;
 
   if(props.icon){
-    displayLabel = <Icon name={props.icon} style={styles.itemIcon} />;
+    displayLabel = <FontAwesome5 name={props.icon} style={styles.itemIcon} />;
   } else if(props.title) {
     displayLabel =  <Text style={styles.itemText}>{props.title.toUpperCase()}</Text>
   } else {

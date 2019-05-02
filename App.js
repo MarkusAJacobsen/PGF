@@ -6,40 +6,68 @@ import {
   createSwitchNavigator
 } from "react-navigation";
 import { vars as globalVars } from "@utils/global";
-import { Platform, StyleSheet, Text, View, Button } from "react-native";
-import MyPlantsScreen from "./screens/MyGarden/MyPlantsScreen";
-import MyGardenHomeScreen from "./screens/MyGarden/MyGardenHomeScreen";
-import GrowingHomeScreen from "./screens/Growing/GrowingHomeScreen";
-import GrowingCategoryScreen from "./screens/Growing/GrowingCategoryScreen";
-import MoreHomeScreen from "./screens/More/MoreHomeScreen";
-import GuidesHomeScreen from "./screens/Guides/GuidesHomeScreen";
-import NavBarItem from "./components/NavBarItem/NavBarItem";
-import LoginScreen from "./screens/Login/LoginScreen";
-import WelcomeScreen from "./screens/Login/WelcomeScreen";
-import AuthLoadingScreen from "./screens/Login/AuthLoadingScreen";
+import { Platform, StyleSheet, Text, View, Button } from "react-native"; 
+import {  NavBarItem,
+  // Login
+  WelcomeScreen,
+  LoginScreen,
+  AuthLoadingScreen,  
+  // MyGarden
+  MyPlantsScreen,
+  MyGardenHomeScreen,
+  // Growing
+  GrowingHomeScreen,
+  GrowingCategoryScreen,
+  GrowingItemScreen,
+  // Other
+  GuidesHomeScreen,
+  MoreHomeScreen, } from "@screens";
+  import FontAwesome5  from 'react-native-vector-icons/FontAwesome5';
 
+  import { HeaderBackButton } from 'react-navigation';
+
+// Header config
+const navigationOptions = ({ navigation }) => ({ 
+  headerStyle: {
+  backgroundColor: globalVars.header
+  },
+  headerTintColor: globalVars.ligthGrey,
+  headerLeft:  (navigation.isFirstRouteInParent() !== true) ? (<FontAwesome5 name={'chevron-left'} color="#fff" size={20} onPress={ () => { navigation.goBack(null) } } style={{ marginLeft: 15 }}  />) : (<View></View>),
+  // headerLeft:  (navigation.isFirstRouteInParent() !== true) ? ( <HeaderBackButton onPress={() => navigation.goBack(null)} /> ) : (<View></View>), // original button
+  // TODO: add dynamic nickname
+  title: "MY GARDEN: NICKNAME",
+  headerRight: ( <FontAwesome5 name={'smile-beam'} light onPress={ () => { navigation.goBack(null) } } style={{ marginRight: 15,  fontSize: 25, color: "#fff" }}  /> ),
+  headerTitleStyle: { 
+      color: globalVars.white,
+      textAlign:"center", 
+      fontSize: 15,
+      flex:1,
+      fontFamily: globalVars.normal,
+      fontWeight: "normal"
+  } 
+});
 
 
 const MyGardenNavigator = createStackNavigator({
-  MyGardenHome: { screen: MyGardenHomeScreen },
-  MyPlants: { screen: MyPlantsScreen }
+  MyGardenHome: { screen: MyGardenHomeScreen, navigationOptions },
+  MyPlants: { screen: MyPlantsScreen, navigationOptions }
 });
 
 const GrowingNavigator = createStackNavigator({
-  GrowingHome: { screen: GrowingHomeScreen },
-  GrowingCategory: { screen: GrowingCategoryScreen }
+  GrowingHome: { screen: GrowingHomeScreen, navigationOptions },
+  GrowingCategory: { screen: GrowingCategoryScreen, navigationOptions },
+  GrowingItemScreen: { screen: GrowingItemScreen, navigationOptions }
 });
 
 const GuidesNavigator = createStackNavigator({
-  GuidesHome: { screen: GuidesHomeScreen }
+  GuidesHome: { screen: GuidesHomeScreen, navigationOptions }
 });
 
 const MoreNavigator = createStackNavigator({
-  MoreHome: { screen: MoreHomeScreen }
+  MoreHome: { screen: MoreHomeScreen, navigationOptions }
 });
 
-const RouteConfig = {
-  // TODO: In progress with isActive checking....
+const RouteConfig = { 
   MyGarden: {
     screen: MyGardenNavigator,
     navigationOptions: {
@@ -88,6 +116,7 @@ const BottomNavigatorConfig = {
     //tabBarButtonComponent: NavBarItem,
     // tabBarButtonComponent: <NavBarItem {...props}  title="n/a" />
   }),
+  
   // navigationOptions: {
   //     tabBarLabel: "Menu",
   //     tabBarButtonComponent: props => <NavBarItem {...props} title="Test" />
@@ -107,9 +136,7 @@ const BottomNavigatorConfig = {
     activeBackgroundColor: globalVars.lightGreen,
     inactiveBackgroundColor: globalVars.white,
     style: {
-      height: 87
-      // paddingVertical: 5,
-      // backgroundColor: "transparent"
+      height: 80 
     },
     labelStyle: {
       fontSize: 12,

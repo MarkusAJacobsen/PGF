@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import { styles as globalStyles, vars as globalVars } from '@utils/global';
 import { uppercaseFirstLetter, searchStringInArray, comparedPlants } from '@utils/functions';
 import { getAllPlants, getMyPlants } from '@utils/api';
 import { TitleBar, AddItem } from "@components";
 
-import Images from '../../assets/plants/index';
+import Images from '@assets/plants/index';
 
 export default class GrowingCategoryScreen extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ export default class GrowingCategoryScreen extends Component {
       allPlants: [],
     };
 
-    this.handleResult = this.handleResult.bind(this);
+    this.handleResult = this.handleResult.bind(this); 
   }
 
   componentWillMount() {
@@ -34,12 +34,12 @@ export default class GrowingCategoryScreen extends Component {
     });
   }
 
-  static navigationOptions = {
-    headerStyle: {
-      backgroundColor: globalVars.header,
-    },
-    headerTintColor: globalVars.ligthGrey,
-  };
+  // static navigationOptions = {
+  //   headerStyle: {
+  //     backgroundColor: globalVars.header,
+  //   },
+  //   headerTintColor: globalVars.ligthGrey,
+  // };
 
   handleResult(search){
     if(search.length > 0) this.setState({
@@ -60,6 +60,10 @@ export default class GrowingCategoryScreen extends Component {
     } else { 
       isVisibleSearch = false;
     }
+
+    itemDetails = (navigation, args) => {
+      return navigation.navigate('GrowingItemScreen', {screenProps: plant});  
+    }
     
     return (
       <View style={globalStyles.screenContainer}>
@@ -76,19 +80,35 @@ export default class GrowingCategoryScreen extends Component {
               return (
                 <View style={styles.row} key={plant.id}>
 
-                  <View style={styles.rowActionContainer}>
+                <TouchableOpacity  
+                    onPress={() => { 
+                       this.props.navigation.navigate('GrowingItemScreen', {screenProps: plant});  
+                        // console.log(plant);
+                      } 
+                    }
+                    style={styles.rowActionContainer}
+                  >
+                  <View >
                     <AddItem size='small' bgColor='white' added={added} />
                   </View>
+                </TouchableOpacity>
 
-                  <View style={styles.plantContainer}>
+                  {/* TODO: here */}
+                  <TouchableOpacity  
+                    onPress={() => { 
+                      this.props.navigation.navigate('GrowingItemScreen', {screenProps: plant} );  
+                        // console.log(plant);
+                      } 
+                    }
+                   style={styles.plantContainer}
+                  > 
                     <View style={styles.plantTitle}>
                       <Text style={styles.plantTitleText}>{uppercaseFirstLetter(plant.name)}</Text>
                     </View>
                     <View style={styles.imageContainer}>
                       <Image source={Images[category][plant.name]} style={styles.image} />
-                    </View>
-                  </View>
-
+                    </View> 
+                  </TouchableOpacity> 
                 </View>
               )
             }) : 
@@ -114,6 +134,7 @@ const styles = StyleSheet.create({
     backgroundColor: globalVars.white,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingRight: 10
   },
   plantContainer: {
     flex: 6,

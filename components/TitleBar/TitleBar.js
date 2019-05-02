@@ -25,7 +25,7 @@ class TitleBar extends Component {
  
   render() { 
     return (
-      <View style={styles.container, {height: (!this.props.isVisibleSearch) ?  100 : 160} }>
+      <View style={styles.container, {height: (!this.props.isVisibleSearch) ?  83 : 143} }>
         <View style={styles.titleBar}>
           <Text style={styles.text}>{this.props.heading}</Text>
         </View>
@@ -47,17 +47,18 @@ const styles = StyleSheet.create({
       
   },
   titleBar: {  
-    height: 100,
+    height: 83,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: globalVars.green 
   },
   searchBar: {  
-    height: 60, 
+    height: 60,  
     backgroundColor: globalVars.white 
   },  
   text: {
     fontSize: 32,
+    marginTop: 20,
     textAlign: "center",
     color: globalVars.ligthGrey,
     fontFamily: globalVars.regular 

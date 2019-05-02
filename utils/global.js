@@ -27,5 +27,14 @@ export const styles = StyleSheet.create({
   contentContainer: {
     flex: 6,
     backgroundColor: vars.ligthYellow
+  },
+  topLabel: {
+    color: vars.searchText,
+    backgroundColor: vars.ligthYellow,
+    paddingLeft: 22,
+    paddingTop: 8,
+    paddingBottom: 8,
+    fontSize: 14,
+    fontFamily: vars.bold
   }
 });

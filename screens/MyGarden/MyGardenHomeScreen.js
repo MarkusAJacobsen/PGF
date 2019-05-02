@@ -31,12 +31,12 @@ export default class MyGardenHomeScreen extends Component {
     });
   }
 
-  static navigationOptions = {
-    headerStyle: {
-      backgroundColor: globalVars.header
-    },
-    headerTintColor: globalVars.ligthGrey
-  };
+  // static navigationOptions = {
+  //   headerStyle: {
+  //     backgroundColor: globalVars.header
+  //   },
+  //   headerTintColor: globalVars.ligthGrey
+  // };
 
   render() {
     const plants = getMyPlants();
@@ -55,27 +55,7 @@ export default class MyGardenHomeScreen extends Component {
               />
             ))}
           </ScrollView>
-        </View>
-        {/* Test */}
-        {/* <Tabs
-          selected={this.state.page}
-          style={{ backgroundColor: "white" }}
-          selectedStyle={{ color: "red" }}
-          onSelect={el => this.setState({ page: el.props.name })}
-        >
-          <Text name="first">First</Text>
-          <Text
-            name="second"
-            selectedIconStyle={{ borderTopWidth: 2, borderTopColor: "red" }}
-          >
-            Second
-          </Text>
-          <Text name="third">Third</Text>
-          <Text name="fourth" selectedStyle={{ color: "green" }}>
-            Fourth
-          </Text>
-          <Text name="fifth">Fifth</Text>
-        </Tabs> */}
+        </View> 
       </View>
     );
   }

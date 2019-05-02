@@ -4,7 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { vars as globalVars } from '@utils/global';
 // import Icons from '../../assets/icons/index';
 // Icons set
-import Icon from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const AddItem = ({ size, bgColor, added }) => {
   let width;
@@ -34,7 +34,7 @@ const AddItem = ({ size, bgColor, added }) => {
       marginRight: 10,
     }}>
       {/* <Image source={added ? Icons.checked : Icons.plus} width={29} height={29} /> */}
-     <Icon name={added ? `check` : `plus`} size={29} color="#000" />
+     <FontAwesome5 name={added ? `check` : `plus`} size={29} color="#000" />
     </View>
   );
 };

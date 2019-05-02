@@ -5,12 +5,12 @@ import { TitleBar, PlantCategoryCard } from '@components';
 
 export default class GrowingHomeScreen extends Component {
 
-  static navigationOptions = {
-    headerStyle: {
-      backgroundColor: globalVars.header,
-    },
-    headerTintColor: globalVars.ligthGrey,
-  };
+  // static navigationOptions = {
+  //   headerStyle: {
+  //     backgroundColor: globalVars.header,
+  //   },
+  //   headerTintColor: globalVars.ligthGrey,
+  // };
 
   render() {
     const { navigation } = this.props;
