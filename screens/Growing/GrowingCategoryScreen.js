@@ -62,7 +62,7 @@ export default class GrowingCategoryScreen extends Component {
     }
 
     itemDetails = (navigation, args) => {
-      return navigation.navigate('GrowingItemScreen', {screenProps: plant});  
+      return navigation.navigate('GrowingItem', {screenProps: plant});  
     }
     
     return (
@@ -82,7 +82,7 @@ export default class GrowingCategoryScreen extends Component {
 
                 <TouchableOpacity  
                     onPress={() => { 
-                       this.props.navigation.navigate('GrowingItemScreen', {screenProps: plant});  
+                       this.props.navigation.navigate('GrowingItem', {screenProps: plant});  
                         // console.log(plant);
                       } 
                     }
@@ -96,7 +96,7 @@ export default class GrowingCategoryScreen extends Component {
                   {/* TODO: here */}
                   <TouchableOpacity  
                     onPress={() => { 
-                      this.props.navigation.navigate('GrowingItemScreen', {screenProps: plant} );  
+                      this.props.navigation.navigate('GrowingItem', {screenProps: plant} );  
                         // console.log(plant);
                       } 
                     }

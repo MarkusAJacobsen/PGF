@@ -11,8 +11,10 @@ import MyGardenHomeScreen from "./MyGarden/MyGardenHomeScreen";
 import GrowingHomeScreen from "./Growing/GrowingHomeScreen";
 import GrowingCategoryScreen from "./Growing/GrowingCategoryScreen";
 import GrowingItemScreen from "./Growing/GrowingItemScreen";
-// Other
+// Guides
 import GuidesHomeScreen from "./Guides/GuidesHomeScreen";
+import GuidesStepsScreen from "./Guides/GuidesStepsScreen";
+// More
 import MoreHomeScreen from "./More/MoreHomeScreen";
 
 export {
@@ -28,8 +30,10 @@ export {
   GrowingHomeScreen,
   GrowingCategoryScreen,
   GrowingItemScreen,
-  // Other
+  // Guides
   GuidesHomeScreen,
+  GuidesStepsScreen,
+  // More
   MoreHomeScreen,
 };
 

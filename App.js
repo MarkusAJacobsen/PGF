@@ -19,8 +19,10 @@ import {  NavBarItem,
   GrowingHomeScreen,
   GrowingCategoryScreen,
   GrowingItemScreen,
-  // Other
+  // Guides
   GuidesHomeScreen,
+  GuidesStepsScreen,
+  // Other
   MoreHomeScreen, } from "@screens";
   import FontAwesome5  from 'react-native-vector-icons/FontAwesome5';
 
@@ -56,11 +58,12 @@ const MyGardenNavigator = createStackNavigator({
 const GrowingNavigator = createStackNavigator({
   GrowingHome: { screen: GrowingHomeScreen, navigationOptions },
   GrowingCategory: { screen: GrowingCategoryScreen, navigationOptions },
-  GrowingItemScreen: { screen: GrowingItemScreen, navigationOptions }
+  GrowingItem: { screen: GrowingItemScreen, navigationOptions }
 });
 
 const GuidesNavigator = createStackNavigator({
-  GuidesHome: { screen: GuidesHomeScreen, navigationOptions }
+  GuidesHome: { screen: GuidesHomeScreen, navigationOptions },
+  GuidesSteps: { screen: GuidesStepsScreen, navigationOptions }
 });
 
 const MoreNavigator = createStackNavigator({
@@ -110,7 +113,7 @@ const RouteConfig = {
   },
   */
 };
-
+ 
 const BottomNavigatorConfig = {
   defaultNavigationOptions: ({ navigation }) => ({
     //tabBarButtonComponent: NavBarItem,
@@ -142,7 +145,9 @@ const BottomNavigatorConfig = {
       fontSize: 12,
       lineHeight: 20
     }
-  }
+  },
+  resetOnBlur: true, // Reset the state of any nested navigators when switching away from a screen. Defaults to false.
+  lazy: true // Defaults to true. If false, all tabs are rendered immediately. When true, tabs are rendered only when they are made active for the first time. Note: tabs are not re-rendered upon subsequent visits.
 };
 
 const TabNavigator = createBottomTabNavigator(
