@@ -18,10 +18,10 @@ export const searchStringInArray = (str, strArray) => {
 
 export const comparedPlants = (arr1, arr2) => { // myPlants, allPlants
     let plants = [];  
-
+ 
     arr2.map((plant) => { // allPlans 
-          // Does this plant already exist in myPlants?
-          if(!arr1.some(p => (p.name.toLowerCase() === plant.name.toLowerCase()) ) ) {
+          // Does this plant already exist in myPlants and have step/steps? 
+          if(!arr1.some(p => (p.name.toLowerCase() === plant.name.toLowerCase()) ) && Object.keys(plant.steps).length > 0 && plant.steps[0].title != null && plant.steps[0].desc != null) {
             plants.push(plant);
           }
     }); 

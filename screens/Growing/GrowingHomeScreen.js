@@ -4,14 +4,7 @@ import { styles as globalStyles, vars as globalVars } from '@utils/global';
 import { TitleBar, PlantCategoryCard } from '@components';
 
 export default class GrowingHomeScreen extends Component {
-
-  // static navigationOptions = {
-  //   headerStyle: {
-  //     backgroundColor: globalVars.header,
-  //   },
-  //   headerTintColor: globalVars.ligthGrey,
-  // };
-
+ 
   render() {
     const { navigation } = this.props;
     const categories = ['herbs', 'vegetables', 'flowers', 'fruits'];

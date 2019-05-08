@@ -17,22 +17,31 @@ const MyPlantsRow = ({ navigation, category, plants }) => {
   return (
     <View style={styles.container}>
       <View style={styles.rowHeading}>
-        <Text style={styles.rowHeadingText}>MY {category.toUpperCase()}: <Text style={{color: globalVars.orange, fontFamily: globalVars.normal}}>What do you want to grow? (add)</Text></Text>
+        <Text style={styles.rowHeadingText}>MY {category.toUpperCase()}: { (plants.length < 1) ? <Text style={{color: globalVars.orange, fontFamily: globalVars.normal}}>What do you want to grow? (add)</Text> : null }</Text>
       </View>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.myPlantsRow}
       >
-        <TouchableOpacity onPress={() => this.onAddPress(category)}>
-          <AddItem size='large' bgColor='white' />
-        </TouchableOpacity>
+        {
+          ((plants.length < 3)) ? 
+            <TouchableOpacity onPress={() => this.onAddPress(category)}>
+              <AddItem size="large" bgColor='white' />
+            </TouchableOpacity> : <View style={{marginLeft: 13, marginRight: 0}}></View>
+        } 
+
         {plants.map((p) => (
           <MyPlantsItem plant={p} key={p.id} />
-        ))}
-      
-
+        ))}   
       </ScrollView>
+
+        {
+          ((plants.length >= 3)) ?
+          <TouchableOpacity onPress={() => this.onAddPress(category)}>
+            <AddItem size="smallRight" bgColor='white' />
+          </TouchableOpacity> : null
+        }
     </View>
   );
 };

@@ -10,7 +10,7 @@ const AddItem = ({ size, bgColor, added }) => {
   let width;
   let height;
   let backgroundColor;
-  if (size === 'small') {
+  if (size === 'small' || size === 'smallRight') {
     width = 30;
     height = 30;
   } else if (size == 'medium') {
@@ -28,10 +28,11 @@ const AddItem = ({ size, bgColor, added }) => {
       width: width,
       height: height,
       backgroundColor: backgroundColor,
-      justifyContent: 'center',
-      alignItems: 'center',
-      marginLeft: 23,
-      marginRight: 10,
+      justifyContent: "center",
+      alignItems: "center",
+      marginLeft: (size !== "smallRight") ? 23 : "auto",
+      marginRight: (size !== "smallRight") ?  10 : 26,
+      marginTop: (size !== "smallRight") ?  0 : 10,  
     }}>
       {/* <Image source={added ? Icons.checked : Icons.plus} width={29} height={29} /> */}
      <FontAwesome5 name={added ? `check` : `plus`} size={29} color="#000" />

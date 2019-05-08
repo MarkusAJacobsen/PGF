@@ -106,17 +106,7 @@ export default class GuidesStepsScreen extends Component {
           </Text></View>)
           : <View></View>
           }
-        </ScrollView>
-        
-        {/* {plants.map((p) => {
-            return (
-                <View key={p.id} style={styles.listItem}>
-                    <Text key={p.id} style={styles.itemText}>
-                        {p.name}
-                    </Text>
-                </View>
-            );
-        })} */}
+        </ScrollView> 
     </View>
     )
   }

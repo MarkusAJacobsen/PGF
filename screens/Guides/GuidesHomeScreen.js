@@ -7,24 +7,7 @@ export default class GuidesHomeScreen extends Component {
 
   constructor(props) {
     super(props); 
-  }  
-  
-  //  componentWillMount() {
-  //       let args = this.props.navigation.getParam('data', '<data missing>');
-  //       // const myPlants = getMyPlants()[category];
-  //       // const allPlants = getAllPlants()[category]; 
-  //       if(args != null) this.setState({
-  //           data: args 
-  //       }); else this.setState({
-  //           data: {
-  //               category: "",
-  //               namePlural: ""    
-  //           } 
-  //       });
-
-        
-  // } 
- 
+  }   
 
   render() {
     const { navigation } = this.props;

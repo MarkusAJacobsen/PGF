@@ -5,14 +5,7 @@ import { LoginManager } from 'react-native-fbsdk';
 import { vars as globalVars } from '@utils/global';
 
 class MoreHomeScreen extends Component {
-
-  // static navigationOptions = {
-  //   headerStyle: {
-  //     backgroundColor: globalVars.header,
-  //   },
-  //   headerTintColor: globalVars.ligthGrey,
-  // };
-
+ 
   signOut = async () => {
     await AsyncStorage.clear();
     this.props.navigation.navigate('Auth');

@@ -38,7 +38,7 @@ const navigationOptions = ({ navigation }) => ({
   // headerLeft:  (navigation.isFirstRouteInParent() !== true) ? ( <HeaderBackButton onPress={() => navigation.goBack(null)} /> ) : (<View></View>), // original button
   // TODO: add dynamic nickname
   title: "MY GARDEN: NICKNAME",
-  headerRight: ( <FontAwesome5 name={'smile-beam'} light onPress={ () => { navigation.goBack(null) } } style={{ marginRight: 15,  fontSize: 25, color: "#fff" }}  /> ),
+  headerRight: ( <FontAwesome5 name={'smile-beam'} light onPress={ () => {  } } style={{ marginRight: 15,  fontSize: 25, color: "#fff" }}  /> ),
   headerTitleStyle: { 
       color: globalVars.white,
       textAlign:"center", 

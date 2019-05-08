@@ -8,7 +8,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export default class  GrowingItemScreen extends Component { 
 
- 
+    // TODO: refactor style to stylesheet
     constructor(props) {
         super(props);   
     } 

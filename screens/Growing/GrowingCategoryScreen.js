@@ -32,15 +32,8 @@ export default class GrowingCategoryScreen extends Component {
       allPlants: allPlants,
       "search": "" 
     });
-  }
-
-  // static navigationOptions = {
-  //   headerStyle: {
-  //     backgroundColor: globalVars.header,
-  //   },
-  //   headerTintColor: globalVars.ligthGrey,
-  // };
-
+  } 
+  
   handleResult(search){
     if(search.length > 0) this.setState({
       "search": search
@@ -96,8 +89,7 @@ export default class GrowingCategoryScreen extends Component {
                   {/* TODO: here */}
                   <TouchableOpacity  
                     onPress={() => { 
-                      this.props.navigation.navigate('GrowingItem', {screenProps: plant} );  
-                        // console.log(plant);
+                        this.props.navigation.navigate('GrowingItem', {screenProps: plant} );   
                       } 
                     }
                    style={styles.plantContainer}

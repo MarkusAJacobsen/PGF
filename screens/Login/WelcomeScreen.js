@@ -5,7 +5,7 @@ import { vars as globalvars } from '@utils/global';
 const WelcomeScreen = ({ navigation }) => {
   return (
       <ImageBackground style={styles.backgroundImage}
-        source={require('../../assets/welcome-bg.png')}
+        source={require('@assets/welcome-bg.png')}
       >
         <View style={styles.buttonContainer}>
           <View style={[styles.button, styles.createProfileButton]}>

@@ -29,21 +29,14 @@ export default class MyGardenHomeScreen extends Component {
     this.setState({
       myPlants: myPlants
     });
-  }
-
-  // static navigationOptions = {
-  //   headerStyle: {
-  //     backgroundColor: globalVars.header
-  //   },
-  //   headerTintColor: globalVars.ligthGrey
-  // };
-
+  } 
+  
   render() {
     const plants = getMyPlants();
     const { navigation } = this.props;
     return (
       <View style={globalStyles.screenContainer}>
-        <TitleBar heading="My Garden" />
+        <TitleBar heading="My Garden" isVisibleSearch={true} />
         <View style={globalStyles.contentContainer}>
           <ScrollView showsVerticalScrollIndicator={false}>
             {this.categories.map(c => (
