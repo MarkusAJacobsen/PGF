@@ -6,6 +6,7 @@ import { TitleBar } from "@components";
 import Images from '@assets/plants/index';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'; 
 
+// @flow 
 export default class  GrowingItemScreen extends Component { 
 
     // TODO: refactor style to stylesheet

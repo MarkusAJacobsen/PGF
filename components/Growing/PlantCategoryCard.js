@@ -3,8 +3,9 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import { uppercaseFirstLetter } from '../../utils/functions';
 import { ScrollView } from 'react-native-gesture-handler';
 import { vars as globalVars } from '@utils/global';
-import Icons from '../../assets/icons/index';
+import Icons from '@assets/icons/index';
 
+// @flow 
 const PlantCategoryCard = ({ navigation, name }) => {
 
   onCardPress = (type) => {

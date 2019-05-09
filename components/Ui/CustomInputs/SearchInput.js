@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Platform, StyleSheet, Text, View, Button, TextInput, TouchableOpacity } from "react-native";
 import { vars as globalVars } from "@utils/global"; 
 
+// @flow 
 class SearchInput extends Component {
   constructor(props) {
     super(props);

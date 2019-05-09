@@ -1,8 +1,9 @@
 import React from "react";
 import { View } from "react-native";
 import { createIconSetFromIcoMoon } from "react-native-vector-icons";
-
 import IcomoonConfig from "@up-theme/selection.json";
+
+// @flow 
 const Icomoon = createIconSetFromIcoMoon(IcomoonConfig);
 
 const Icon = (props: any) => {

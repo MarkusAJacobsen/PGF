@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { styles as globalStyles, vars as globalVars } from '@utils/global';
 
+// @flow 
 export default class MyPlantsScreen extends Component {
   render() {
     return (

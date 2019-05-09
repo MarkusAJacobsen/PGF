@@ -8,36 +8,42 @@ import {
 import { vars as globalVars } from "@utils/global";
 import { Platform, StyleSheet, Text, View, Button } from "react-native"; 
 import {  NavBarItem,
-  // Login
-  WelcomeScreen,
-  LoginScreen,
-  AuthLoadingScreen,  
-  // MyGarden
-  MyPlantsScreen,
-  MyGardenHomeScreen,
-  // Growing
-  GrowingHomeScreen,
-  GrowingCategoryScreen,
-  GrowingItemScreen,
-  // Guides
-  GuidesHomeScreen,
-  GuidesStepsScreen,
-  // Other
-  MoreHomeScreen, } from "@screens";
-  import FontAwesome5  from 'react-native-vector-icons/FontAwesome5';
+// Login
+WelcomeScreen,
+LoginScreen,
+AuthLoadingScreen,  
+// MyGarden
+MyPlantsScreen,
+MyGardenHomeScreen,
+// Growing
+GrowingHomeScreen,
+GrowingCategoryScreen,
+GrowingItemScreen,
+// Guides
+GuidesHomeScreen,
+GuidesStepsScreen,
+// Other
+MoreHomeScreen, } from "@screens";
+import FontAwesome5  from 'react-native-vector-icons/FontAwesome5';
 
-  import { HeaderBackButton } from 'react-navigation';
+import { HeaderBackButton } from 'react-navigation';
+import { fetchUsername } from "@utils/functions"; // TODO: fix fetchUsername logic, can't get username, only objects/Promise
 
 // Header config
-const navigationOptions = ({ navigation }) => ({ 
+// @flow  
+const navigationOptions = ({ navigation }) => ({  
   headerStyle: {
   backgroundColor: globalVars.header
   },
   headerTintColor: globalVars.ligthGrey,
   headerLeft:  (navigation.isFirstRouteInParent() !== true) ? (<FontAwesome5 name={'chevron-left'} color="#fff" size={20} onPress={ () => { navigation.goBack(null) } } style={{ marginLeft: 15 }}  />) : (<View></View>),
   // headerLeft:  (navigation.isFirstRouteInParent() !== true) ? ( <HeaderBackButton onPress={() => navigation.goBack(null)} /> ) : (<View></View>), // original button
+  
+  // title: `${navigation.state.params.name}'s Profile'`, 
   // TODO: add dynamic nickname
-  title: "MY GARDEN: NICKNAME",
+  // TODO: fix object to string (username)
+  // FAIL: only gets objects/Promise from asyncstorage 
+  title: `MY GARDEN`, 
   headerRight: ( <FontAwesome5 name={'smile-beam'} light onPress={ () => {  } } style={{ marginRight: 15,  fontSize: 25, color: "#fff" }}  /> ),
   headerTitleStyle: { 
       color: globalVars.white,
@@ -48,10 +54,10 @@ const navigationOptions = ({ navigation }) => ({
       fontWeight: "normal"
   } 
 });
-
-
+ 
+ 
 const MyGardenNavigator = createStackNavigator({
-  MyGardenHome: { screen: MyGardenHomeScreen, navigationOptions },
+  MyGardenHome: { screen: MyGardenHomeScreen, navigationOptions, params: { "name": fetchUsername() } },
   MyPlants: { screen: MyPlantsScreen, navigationOptions }
 });
 

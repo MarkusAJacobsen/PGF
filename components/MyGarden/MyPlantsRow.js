@@ -2,9 +2,10 @@ import React, { Compontent } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { vars as globalVars } from '@utils/global';
-import AddItem from '../../components/Buttons/AddItem';
+import { AddItem } from '@components';
 import MyPlantsItem from './MyPlantsItem';
 
+// @flow 
 const MyPlantsRow = ({ navigation, category, plants }) => {
 
   onAddPress = (type) => {

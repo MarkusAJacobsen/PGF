@@ -14,20 +14,26 @@ import {
 import { Header, TitleBar, MyPlantsRow } from "@components";
 import { getMyPlants } from "@utils/api";
 import Tabs from "react-native-tabs";
+import { fetchUsername } from "@utils/functions"; 
 
+// @flow
 export default class MyGardenHomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      myPlants: {}
+      myPlants: {},
+      title: ""
     };
     this.categories = ["vegetables", "herbs", "fruits", "flowers"];
   }
+  
 
   componentWillMount() {
     const myPlants = getMyPlants();
+    
     this.setState({
-      myPlants: myPlants
+      myPlants: myPlants,
+      // title: fetchUsername()
     });
   } 
   

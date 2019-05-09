@@ -3,6 +3,7 @@ import { Platform, StyleSheet, Text, View, Button, TextInput, TouchableOpacity, 
 import { vars as globalVars } from "@utils/global"; 
 import { Icon, SearchInput } from "@components";  
 
+// @flow 
 class Search extends Component {  
 
   constructor(props) {

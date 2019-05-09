@@ -3,6 +3,7 @@ import { Platform, StyleSheet, Text, View, Button } from "react-native";
 import { vars as globalVars } from "@utils/global";
 import { Search } from "@components";
 
+// @flow 
 class TitleBar extends Component {
 
 

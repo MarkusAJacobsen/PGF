@@ -4,6 +4,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { vars as globalVars } from '@utils/global';
 import Images from '../../assets/plants/index';
 
+// @flow 
 const MyPlantsItem = ({ plant }) => {
   return (
     <View style={styles.container}>

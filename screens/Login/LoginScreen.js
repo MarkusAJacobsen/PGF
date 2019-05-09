@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
-import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
+import { LoginButton, AccessToken, LoginManager, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 import AsyncStorage from '@react-native-community/async-storage';
 import {sendLoginDataToPGC} from "../../network/PGCLogin";
 
+// @flow
 class LoginScreen extends Component {
     signInGoogle = async () => {
         try {
@@ -27,8 +28,20 @@ class LoginScreen extends Component {
           }
         }
     };
-      
+    
+    //Create response callback.
+    _responseInfoCallback = (error: ?Object, result: ?Object) => {
+      if (error) {
+        console.log('Error fetching data: ' + error.toString());
+      } else { 
+        const { id, name } = result;
+        AsyncStorage.setItem('@PGF_userid', id.toString());
+        AsyncStorage.setItem('@PGF_username', name.toString());
+      }
+    } 
+
     signInFacebook = (error, result) => {
+            // Create a graph request asking for user information with a callback to handle the response.
           if (error) {
               console.log("login has error: " + result.error);
               console.log(error);
@@ -37,23 +50,35 @@ class LoginScreen extends Component {
               console.log("login is cancelled.");
           } else {
               AccessToken.getCurrentAccessToken().then(
-              (data) => {
-                //console.log(data.accessToken.toString())
-                this.storeDataInAsync(data.userID.toString(), "FB");
-                
-              }
+                (data) => { 
+                  this.storeDataInAsync(data, "FB"); 
+                }
               );
           }
     }
 
-    storeDataInAsync = async (userid, authMethod) => {
+    storeDataInAsync = async (data, authMethod) => {
         try {
-            AsyncStorage.setItem('@PGF_userid', userid);
+
+            let userid = data.userID.toString();
+
+            let infoRequest = new GraphRequest(
+              '/me',
+              null,
+              this._responseInfoCallback,
+            );
+            // Start the graph request.
+            new GraphRequestManager().addRequest(infoRequest).start(); 
+            // set in _responseInfoCallback()
+            // AsyncStorage.setItem('@PGF_userid', userid);
             AsyncStorage.setItem('@PGF_authMethod', authMethod);
-            Promise.all([sendLoginDataToPGC(userid, authMethod)]).then((result) => {
+
+            Promise.all([sendLoginDataToPGC(userid, authMethod)]).then((result) => { 
                 console.log(result);
             });
+
             this.props.navigation.navigate('Main');
+
         } catch (error) {
             console.log(error);
         } 
@@ -62,9 +87,10 @@ class LoginScreen extends Component {
     retrieveData = async () => {
         try {
             const value = await AsyncStorage.getItem('@PGF_userid');
-            const value2 = await AsyncStorage.getItem('@PGF_authMethod');
+            const value2 = await AsyncStorage.getItem('@PGF_authMethod'); 
+            const userName = await AsyncStorage.getItem('@PGF_username');
             if (value !== null) {
-                this.props.navigation.navigate('Main');
+                this.props.navigation.navigate('Main', {name: userName});
             } else {
                 LoginManager.logOut();
             }

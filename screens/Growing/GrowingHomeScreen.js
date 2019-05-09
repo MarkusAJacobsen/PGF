@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import { styles as globalStyles, vars as globalVars } from '@utils/global';
 import { TitleBar, PlantCategoryCard } from '@components';
 
+// @flow 
 export default class GrowingHomeScreen extends Component {
  
   render() {

@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { LoginManager } from 'react-native-fbsdk';
 import { vars as globalVars } from '@utils/global';
 
+// @flow 
 class MoreHomeScreen extends Component {
  
   signOut = async () => {

@@ -4,6 +4,7 @@ import React from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import { ActivityIndicator, StatusBar, StyleSheet, View } from "react-native";
 
+// @flow 
 class AuthLoadingScreen extends React.Component {
   constructor(props) {
     super(props);

@@ -3,6 +3,7 @@ import {Platform, StyleSheet, Text, View, Button} from 'react-native';
 
 const heading = 'My Garden';
 
+// @flow 
 class Header extends Component {
   render() {
     return(

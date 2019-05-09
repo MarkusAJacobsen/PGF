@@ -5,6 +5,7 @@ import { BorderlessButton } from "react-native-gesture-handler";
 // Icons set
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
+// @flow 
 const NavBarItem = (props) => {  
 
   let displayLabel;

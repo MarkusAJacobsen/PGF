@@ -7,6 +7,7 @@ import Images from '@assets/plants/index';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'; 
 
 // TODO: step-by-step
+// @flow 
 export default class GuidesStepsScreen extends Component {
 
   constructor(props) {

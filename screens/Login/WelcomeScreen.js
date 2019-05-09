@@ -2,6 +2,7 @@ import React, { Compontent } from 'react';
 import { StyleSheet, Text, View, ImageBackground, TouchableOpacity } from 'react-native';
 import { vars as globalvars } from '@utils/global';
 
+// @flow 
 const WelcomeScreen = ({ navigation }) => {
   return (
       <ImageBackground style={styles.backgroundImage}

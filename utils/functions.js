@@ -1,5 +1,8 @@
+import AsyncStorage from '@react-native-community/async-storage';
+
 /* Various useful functions */
 
+// @flow
 export const uppercaseFirstLetter = (word) => {
   if (word) {
     return word.charAt(0).toUpperCase() + word.slice(1);
@@ -28,3 +31,26 @@ export const comparedPlants = (arr1, arr2) => { // myPlants, allPlants
 
     return plants;
 }
+  
+export const fetchUsername = async () => {
+  // username = '';
+  // try { 
+    let username = await AsyncStorage.getItem('@PGF_username') || 'N/A'; 
+    return username.toString();
+  // } catch (error) {
+    // console.log('Error fetching High Scores', error); 
+    // username = '';
+  // }
+  // return username;
+}
+
+// async const getUserName() {
+//     try{
+//         let value = await AsyncStorage.getItem('@PGF_username');
+//         return value;
+//     }
+//     catch(e){
+//         console.log('caught error', e);
+//         // Handle exceptions
+//     } 
+// }

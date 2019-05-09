@@ -7,6 +7,7 @@ import { TitleBar, AddItem } from "@components";
 
 import Images from '@assets/plants/index';
 
+// @flow 
 export default class GrowingCategoryScreen extends Component {
   constructor(props) {
     super(props);

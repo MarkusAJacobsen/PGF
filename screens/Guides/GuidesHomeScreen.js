@@ -3,6 +3,11 @@ import { Platform, StyleSheet, Text, View, Button } from 'react-native';
 import { vars as globalVars } from '@utils/global';
 
 // TODO: step-by-step
+/* 
+  1. All garden items
+  2. Click on item and do step-by-step 
+*/
+// @flow 
 export default class GuidesHomeScreen extends Component {
 
   constructor(props) {
