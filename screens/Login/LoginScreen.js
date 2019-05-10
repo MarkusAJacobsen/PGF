@@ -3,7 +3,8 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
 import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
 import AsyncStorage from '@react-native-community/async-storage';
-import {sendLoginDataToPGC} from "../../network/PGCLogin";
+import PGCRequest from "../../network/PGCRequest";
+import {PGCRequestList} from "../../network/PGCRequestList";
 
 class LoginScreen extends Component {
     signInGoogle = async () => {
@@ -50,10 +51,15 @@ class LoginScreen extends Component {
         try {
             AsyncStorage.setItem('@PGF_userid', userid);
             AsyncStorage.setItem('@PGF_authMethod', authMethod);
-            Promise.all([sendLoginDataToPGC(userid, authMethod)]).then((result) => {
+            Promise.all([
+              PGCRequest(PGCRequestList.USER_CREATE, [userid, "Anonymous", authMethod])
+            ]).then((result) => {
+                if (result[0].ok) {
+                  this.props.navigation.navigate('Main');
+                }
                 console.log(result);
             });
-            this.props.navigation.navigate('Main');
+            
         } catch (error) {
             console.log(error);
         } 
