@@ -11,7 +11,7 @@ class LoginScreen extends Component {
         try {
           GoogleSignin.configure();
           await GoogleSignin.hasPlayServices();
-          const userInfo = await GoogleSignin.signInSilently();
+          const userInfo = await GoogleSignin.signIn();
           
           this.storeDataInAsync(userInfo.user.id, "GG");
         } catch (error) {
