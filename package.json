@@ -33,6 +33,7 @@
     "flow": "^0.2.3",
     "react": "16.6.3",
     "react-native": "^0.59.1",
+    "react-native-camera": "^2.7.0",
     "react-native-elements": "^1.1.0",
     "react-native-fbsdk": "^0.8.0",
     "react-native-gesture-handler": "~1.0.14",
