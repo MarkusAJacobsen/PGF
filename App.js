@@ -24,6 +24,7 @@ import {  NavBarItem,
   GuidesStepsScreen,
   // Other
   MoreHomeScreen, } from "@screens";
+  import BarcodeSearchScreen from "./screens/Barcode/BarcodeSearchScreen";
   import FontAwesome5  from 'react-native-vector-icons/FontAwesome5';
 
   import { HeaderBackButton } from 'react-navigation';
@@ -58,7 +59,8 @@ const MyGardenNavigator = createStackNavigator({
 const GrowingNavigator = createStackNavigator({
   GrowingHome: { screen: GrowingHomeScreen, navigationOptions },
   GrowingCategory: { screen: GrowingCategoryScreen, navigationOptions },
-  GrowingItem: { screen: GrowingItemScreen, navigationOptions }
+  GrowingItem: { screen: GrowingItemScreen, navigationOptions },
+  BarcodeSearch: { screen: BarcodeSearchScreen, navigationOptions },
 });
 
 const GuidesNavigator = createStackNavigator({

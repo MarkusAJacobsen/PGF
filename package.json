@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-native start  -- --reset-cache",
-    "android": "adb start-server && react-native run-android -- --reset-cache",
+    "android": "adb start-server && react-native run-android -- --reset-cache || adb -d reverse --no-rebind tcp:5555 tcp:5555",
     "ios": "react-native run-ios",
     "link": "react-native link",
     "unlink": "react-native unlink",
@@ -40,6 +40,7 @@
     "react-native-google-signin": "^1.2.2",
     "react-native-linear-gradient": "^2.5.4",
     "react-native-paper": "^2.15.2",
+    "react-native-platform-touchable": "^1.1.1",
     "react-native-tabs": "^1.0.9",
     "react-native-vector-icons": "^6.4.2",
     "react-navigation": "^3.5.1",

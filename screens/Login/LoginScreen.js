@@ -1,19 +1,25 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
-import { LoginButton, AccessToken, LoginManager } from 'react-native-fbsdk';
+import { LoginButton, AccessToken, LoginManager, GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 import AsyncStorage from '@react-native-community/async-storage';
 import PGCRequest from "../../network/PGCRequest";
 import {PGCRequestList} from "../../network/PGCRequestList";
 
 class LoginScreen extends Component {
+    constructor(props) {
+      super(props);
+      this.storeDataInAsync = this.storeDataInAsync.bind(this);
+    }
+
     signInGoogle = async () => {
         try {
           GoogleSignin.configure();
           await GoogleSignin.hasPlayServices();
           const userInfo = await GoogleSignin.signIn();
+          console.log(userInfo);
           
-          this.storeDataInAsync(userInfo.user.id, "GG");
+          this.storeDataInAsync(userInfo.user.id, userInfo.user.name, "GG");
         } catch (error) {
           console.log(error);
           console.log("google error");
@@ -37,22 +43,31 @@ class LoginScreen extends Component {
           } else if (result.isCancelled) {
               console.log("login is cancelled.");
           } else {
+              const facebookDataCallback = (error: ?Object, result: ?Object) => {
+                if (error) {
+                  console.log('Error fetching data: ' + error.toString());
+                } else {
+                  this.storeDataInAsync(result.id, result.name, "FB");
+                }
+              };
               AccessToken.getCurrentAccessToken().then(
-              (data) => {
-                //console.log(data.accessToken.toString())
-                this.storeDataInAsync(data.userID.toString(), "FB");
-                
-              }
+                (data) => {
+                  //console.log(data.accessToken.toString())
+                  const infoRequest = new GraphRequest('/me', null, facebookDataCallback);
+                  new GraphRequestManager().addRequest(infoRequest).start();
+                }
               );
           }
     }
 
-    storeDataInAsync = async (userid, authMethod) => {
+    //Create response callback. - Pulled directly from react-native-fbsdk guide
+    storeDataInAsync = async (userid, name, authMethod) => {
         try {
             AsyncStorage.setItem('@PGF_userid', userid);
             AsyncStorage.setItem('@PGF_authMethod', authMethod);
+            AsyncStorage.setItem('@PGF_name', name);
             Promise.all([
-              PGCRequest(PGCRequestList.USER_CREATE, [userid, "Anonymous", authMethod])
+              PGCRequest(PGCRequestList.USER_CREATE, [userid, name, authMethod])
             ]).then((result) => {
                 if (result[0].ok) {
                   this.props.navigation.navigate('Main');
