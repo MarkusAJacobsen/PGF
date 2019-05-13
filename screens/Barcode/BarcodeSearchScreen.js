@@ -18,8 +18,10 @@ class BarcodeSearchScreen extends Component {
             // For now open tomato
 
             let data = getAllPlants();
-            //console.log(data.vegetables[1]);
             this.props.navigation.navigate('GrowingItem', {screenProps: data.vegetables[1]} );   
+
+            // Change the stop request after navigate so once the user presses the back button
+            // The user can scan another product
             this.stopRequest = false;
         }
     }
@@ -33,7 +35,6 @@ class BarcodeSearchScreen extends Component {
                         this.camera = ref;
                     }}
                     style={styles.preview}
-                    //aspect={RNCamera.Constants.Aspect.fill}
                     onBarCodeRead={(event) => this.readBarcode(event)}
                     barCodeTypes={[RNCamera.Constants.BarCodeType.ean13]}
                     captureAudio={false}

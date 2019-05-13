@@ -43,10 +43,8 @@ function pgcPost(type, params, address) {
         // At the end, close the curly brace
         preparedParams += "}";
     }
+    
     // Send request
-
-    console.log(preparedParams);
-    console.log(address);
     return fetch(address, {
         method: PGCTypeConsts.POST,
         headers: {
@@ -57,9 +55,11 @@ function pgcPost(type, params, address) {
         .then(response => response);
 }
 
+// Calling PGC with a DELETE request
 function pgcDelete(type, params, address) {
+    // Prepare the address, as the DELETE request inserts its params into address
     const finalAddress = apiParamToAddress(type, params, address);
-    // Connect to server, fetch data, return to caller of ApiRequest the response
+    // Connect to server, fetch data, return to caller of PGCRequest the response
     return fetch(finalAddress, {
         method: PGCTypeConsts.DELETE,
         headers: {
@@ -69,9 +69,11 @@ function pgcDelete(type, params, address) {
         .then(response => response);
 }
 
+// Calling PGC with a GET request
 function pgcGet(type, params, address) {
+    // Prepare the address, as the GET request inserts its params into address
     const finalAddress = apiParamToAddress(type, params, address);
-    // Connect to server, fetch data, return to caller of ApiRequest the response
+    // Connect to server, fetch data, return to caller of PGCRequest the response
     return fetch(finalAddress, {
         method: PGCTypeConsts.GET,
         headers: {
@@ -81,10 +83,17 @@ function pgcGet(type, params, address) {
         .then(response => response);
 }
 
+/**
+ * Entry-point for connecting to the PGC.
+ * @param {PGCRequestList.{}} type path used
+ * @param {[JSON array]} params ARRAY with values to be added as parameters. 
+ * Order in params should match the PGCRequestList object used in type
+ */
 const PGCRequest = (type, params) => {
     let address = PGC_URL;
     if (type.address.length > 1) {
         // Insert params into address
+        // Used in some paths? Maybe make Markus reconsider requiring address manipulation
     } else {
         address += type.address;
     }

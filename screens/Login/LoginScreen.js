@@ -12,13 +12,17 @@ class LoginScreen extends Component {
       this.storeDataInAsync = this.storeDataInAsync.bind(this);
     }
 
+    // Handles login with Google
     signInGoogle = async () => {
         try {
+          // Prepare to sign in
           GoogleSignin.configure();
           await GoogleSignin.hasPlayServices();
+
+          // Try signing in, opens up the prompt for the user to sign in with Google
           const userInfo = await GoogleSignin.signIn();
-          console.log(userInfo);
           
+          // Save the data in AsyncStorage
           this.storeDataInAsync(userInfo.user.id, userInfo.user.name, "GG");
         } catch (error) {
           console.log(error);
@@ -34,8 +38,10 @@ class LoginScreen extends Component {
           }
         }
     };
-      
+
+    // Handles login with Facebook
     signInFacebook = (error, result) => {
+          // Code mainly from react-native-fbsdk, error handling is first there.
           if (error) {
               console.log("login has error: " + result.error);
               console.log(error);
@@ -43,16 +49,21 @@ class LoginScreen extends Component {
           } else if (result.isCancelled) {
               console.log("login is cancelled.");
           } else {
+              // Start of trying to log in code
+              // Create the callback for the Graph API request
               const facebookDataCallback = (error: ?Object, result: ?Object) => {
                 if (error) {
                   console.log('Error fetching data: ' + error.toString());
                 } else {
+                  // Once the name of the user is fetched, store id and name in AsyncStorage
                   this.storeDataInAsync(result.id, result.name, "FB");
                 }
               };
+
+              // Get an access token (this logs the user in)
               AccessToken.getCurrentAccessToken().then(
                 (data) => {
-                  //console.log(data.accessToken.toString())
+                  // Once the access token is acquired, use the Graph API to get the name
                   const infoRequest = new GraphRequest('/me', null, facebookDataCallback);
                   new GraphRequestManager().addRequest(infoRequest).start();
                 }
@@ -63,42 +74,26 @@ class LoginScreen extends Component {
     //Create response callback. - Pulled directly from react-native-fbsdk guide
     storeDataInAsync = async (userid, name, authMethod) => {
         try {
+            // Save the data locally in AsyncStorage
             AsyncStorage.setItem('@PGF_userid', userid);
             AsyncStorage.setItem('@PGF_authMethod', authMethod);
             AsyncStorage.setItem('@PGF_name', name);
+
+            // Save the data in PGC
             Promise.all([
               PGCRequest(PGCRequestList.USER_CREATE, [userid, name, authMethod])
             ]).then((result) => {
+                // If the user was created/exists in PGC, navigate to Main
                 if (result[0].ok) {
                   this.props.navigation.navigate('Main');
                 }
-                console.log(result);
             });
-            
         } catch (error) {
             console.log(error);
         } 
     }
 
-    retrieveData = async () => {
-        try {
-            const value = await AsyncStorage.getItem('@PGF_userid');
-            const value2 = await AsyncStorage.getItem('@PGF_authMethod');
-            if (value !== null) {
-                this.props.navigation.navigate('Main');
-            } else {
-                LoginManager.logOut();
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-
   render() {
-
-    //this.retrieveData();
-
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>Velkommen til din Gartner i Lomma!</Text>
@@ -114,8 +109,6 @@ class LoginScreen extends Component {
       </View>
     );
   }
-
-  
 }
 
 const styles = StyleSheet.create({
