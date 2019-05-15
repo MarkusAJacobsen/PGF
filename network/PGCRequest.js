@@ -9,16 +9,20 @@ function paramToAddress(type, params, address) {
     
     // Go through all params
     for (let i = 0; i < params.length; i += 1) {
-        fullAddress += `?${type.paramList[i]}=${params[i]}`;
+        // If the key is not a SKIP_KEY, add key and value to extra
+        if (type.paramList[i] !== PGCTypeConsts.SKIP_KEY) {
+            fullAddress += `?${type.paramList[i]}=${params[i]}`;
+        } else {
+            // If key is SKIP_KEY, add just value directly to address
+            fullAddress += params[i];
+        }
     }
 
     // Return new address to caller
     return fullAddress;
 }
 
-// Common code for POST requests
-function pgcPost(type, params, address) {
-    // Connect to server, fetch data, return to caller of ApiRequest the response
+function paramToJsonString(type, params) {
     // Process params into proper string for request body
     let preparedParams = null;
     if (params.length > 0) {
@@ -43,10 +47,31 @@ function pgcPost(type, params, address) {
         // At the end, close the curly brace
         preparedParams += "}";
     }
+    return preparedParams;
+}
+
+// Common code for POST requests
+function pgcPost(type, params, address) {
+    let preparedParams = paramToJsonString(type, params);
     
     // Send request
     return fetch(address, {
         method: PGCTypeConsts.POST,
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: preparedParams,
+    })
+        .then(response => response);
+}
+
+// Common code for PUT requests
+function pgcPost(type, params, address) {
+    let preparedParams = paramToJsonString(type, params);
+    
+    // Send request
+    return fetch(address, {
+        method: PGCTypeConsts.PUT,
         headers: {
             "Content-Type": "application/json",
         },
@@ -108,7 +133,7 @@ const PGCRequest = (type, params) => {
         return pgcDelete(type, params, address);
     }
     if (type.type === PGCTypeConsts.PUT) {
-        // Need to implement
+        return pgcPut(type, params, address);
     }
 
     return null;
