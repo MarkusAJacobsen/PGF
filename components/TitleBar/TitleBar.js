@@ -18,7 +18,7 @@ class TitleBar extends Component {
   }   
 
   handleResult(search){
-    if(this.props.handleResult && search.length > 0) this.props.handleResult(search);
+    if(this.props.handleResult) this.props.handleResult(search);
      this.setState({
       "search": search
     }); 

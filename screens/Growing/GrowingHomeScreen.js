@@ -7,12 +7,26 @@ import BarcodeSearchStartButton from '../../components/BarcodeSearchStart/Barcod
 // @flow 
 export default class GrowingHomeScreen extends Component {
 
-  render() {
-    const { navigation } = this.props;
-    const categories = ['herbs', 'vegetables', 'flowers', 'fruits'];
+  constructor(props) {
+    super(props); 
+    this.categories = ['herbs', 'vegetables', 'flowers', 'fruits']; 
+    this.handleResult = this.handleResult.bind(this); 
+  }  
+
+  handleResult(search){  
+    const { navigation } = this.props;  
+
+    if(search.length > 0){
+      navigation.push('GuidesHome', {search: search});
+    }
+  }
+
+  render() { 
+    const { navigation } = this.props;   
+
     return (
       <View style={globalStyles.screenContainer}>
-        <TitleBar heading='What can I grow?' isVisibleSearch={true} /> 
+        <TitleBar heading='What can I grow?' handleResult={this.handleResult} isVisibleSearch={true} /> 
         <BarcodeSearchStartButton
           navigation={navigation}
         />
@@ -20,7 +34,7 @@ export default class GrowingHomeScreen extends Component {
         <ScrollView showsVerticalScrollIndicator={false} >
         <View style={globalStyles.contentContainer}>
           <View style={styles.cardContainer}>
-            {categories.map((c) =>
+            {this.categories.map((c) =>
               <PlantCategoryCard name={c} navigation={navigation} key={c} />
             )}
           </View> 

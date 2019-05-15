@@ -14,6 +14,7 @@ import {
 import { getAllPlants } from "@utils/api"; 
 import PlantsRow from "./PlantsRow";
 import { Header, TitleBar } from "@components";
+import { searchStringInArray, comparedPlants, fetchUsername } from '@utils/functions';
 
 // TODO: step-by-step
 /* 
@@ -24,39 +25,43 @@ import { Header, TitleBar } from "@components";
 export default class GuidesHomeScreen extends Component {
 
   constructor(props) {
-     super(props);
-    this.state = {
-      plants: {},
-      title: ""
-    };
+    super(props);   
     this.categories = ["vegetables", "herbs", "fruits", "flowers"];
-  }   
-
-  componentWillMount() {
-    const allPlants = getAllPlants();
+    this.handleResult = this.handleResult.bind(this);  
     
+    let { navigation } = props; 
+    let paramSearch = navigation.getParam('search', ""); 
+
+    this.state = {
+      plants: getAllPlants(),
+      search: (paramSearch !== null) ? paramSearch : "", 
+    }
+  }    
+
+  componentWillUnmount(){ 
+    this.state = null;
+  }
+
+  handleResult(search){  
     this.setState({
-      plants: allPlants,
-      // title: fetchUsername()
-    });
-  } 
+      search: search,
+    });   
+  }
   
   render() {
-    const { navigation } = this.props;
-    const data = navigation.getParam('data', null);
-
-    if(data != null) console.log(data);
-
+    let { search, plants } = this.state; 
+    let { navigation } = this.props;   
+    
     return (
       <View style={globalStyles.screenContainer}>
-        <TitleBar heading="Guides" isVisibleSearch={true} />
+        <TitleBar heading="Guides" handleResult={this.handleResult} isVisibleSearch={true} />
         <View style={globalStyles.contentContainer}>
           <ScrollView showsVerticalScrollIndicator={false}>
             {this.categories.map(c => (
               <PlantsRow
                 navigation={navigation}
                 category={c}
-                plants={this.state.plants[c]}
+                plants={(search.length > 0) ? searchStringInArray(search, plants[c]) : plants[c] }
                 key={c}
               />
             ))}

@@ -23,7 +23,7 @@ class Search extends Component {
   }
 
   submitSearch(e){
-    if(this.props.getResult && this.state.search.length > 0) this.props.getResult(this.state.search);
+    if(this.props.getResult) this.props.getResult(this.state.search);
     this.setState({ "search": "" });  
     Keyboard.dismiss(); 
   }

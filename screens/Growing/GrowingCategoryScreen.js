@@ -31,7 +31,7 @@ export default class GrowingCategoryScreen extends Component {
       category: category,
       myPlants: myPlants,
       allPlants: allPlants,
-      "search": "" 
+      "search": "", 
     });
   } 
   
