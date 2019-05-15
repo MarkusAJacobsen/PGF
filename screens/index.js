@@ -16,6 +16,8 @@ import GuidesHomeScreen from "./Guides/GuidesHomeScreen";
 import GuidesStepsScreen from "./Guides/GuidesStepsScreen";
 // More
 import MoreHomeScreen from "./More/MoreHomeScreen";
+// Barcode
+import BarcodeSearchScreen from "./Barcode/BarcodeSearchScreen";
 
 export {
   NavBarItem,
@@ -35,6 +37,8 @@ export {
   GuidesStepsScreen,
   // More
   MoreHomeScreen,
+  // Barcode
+  BarcodeSearchScreen,
 };
 
 

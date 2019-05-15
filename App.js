@@ -8,23 +8,25 @@ import {
 import { vars as globalVars } from "@utils/global";
 import { Platform, StyleSheet, Text, View, Button } from "react-native"; 
 import {  NavBarItem,
-// Login
-WelcomeScreen,
-LoginScreen,
-AuthLoadingScreen,  
-// MyGarden
-MyPlantsScreen,
-MyGardenHomeScreen,
-// Growing
-GrowingHomeScreen,
-GrowingCategoryScreen,
-GrowingItemScreen,
-// Guides
-GuidesHomeScreen,
-GuidesStepsScreen,
-// Other
-MoreHomeScreen, } from "@screens";
-import FontAwesome5  from 'react-native-vector-icons/FontAwesome5';
+  // Login
+  WelcomeScreen,
+  LoginScreen,
+  AuthLoadingScreen,  
+  // MyGarden
+  MyPlantsScreen,
+  MyGardenHomeScreen,
+  // Growing
+  GrowingHomeScreen,
+  GrowingCategoryScreen,
+  GrowingItemScreen,
+  // Guides
+  GuidesHomeScreen,
+  GuidesStepsScreen,
+  // Barcode
+  BarcodeSearchScreen,
+  // Other
+  MoreHomeScreen, } from "@screens"; 
+  import FontAwesome5  from 'react-native-vector-icons/FontAwesome5';
 
 import { HeaderBackButton } from 'react-navigation';
 import { fetchUsername } from "@utils/functions"; // TODO: fix fetchUsername logic, can't get username, only objects/Promise
@@ -64,7 +66,8 @@ const MyGardenNavigator = createStackNavigator({
 const GrowingNavigator = createStackNavigator({
   GrowingHome: { screen: GrowingHomeScreen, navigationOptions },
   GrowingCategory: { screen: GrowingCategoryScreen, navigationOptions },
-  GrowingItem: { screen: GrowingItemScreen, navigationOptions }
+  GrowingItem: { screen: GrowingItemScreen, navigationOptions },
+  BarcodeSearch: { screen: BarcodeSearchScreen, navigationOptions },
 });
 
 const GuidesNavigator = createStackNavigator({

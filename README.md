@@ -25,7 +25,30 @@ In general go here: https://facebook.github.io/react-native/docs/getting-started
 
   npm run android
 
+# How to connect to PGC from PGF locally
+
+To connect to PGC locally, you need to first install the Docker toolbox. This will install the Oracle VM VirtualBox Manager and Docker on your machine. 
+
+First open the Docker Quickstart Terminal. Navigate to the folder with PGC, and run the .sh file. Once the images are running, stop the images with ctrl+c or equivalent.
+
+Open VirtualBox, and you should have a VM already set up called "default". Go to "Settings", "Network", "Adapter 1", open advanced and finally "Port Forwarding". In the port forwarding, add a rule for TCP for host IP 127.0.0.1, with both ports set to 5555. You can also add 7474, 7687 and 6113 to connect the other parts of PG* backend for access.
+
+To connect PGF to localhost, you need to run adb reverse tcp:5555 tcp:5555.
+
 # Extra tools: 
 ## Warning: you must set %ANROID_HOME%\platform-tools path first before use this tool.
 Run Android emulator from desktop: 
 Copy bat file from tools\ to desktop, and in bat file change <emulator_name> to your emulator's name for example: Nexus_5_API_Q, that's how you can run emulator from desktop. (Ctrl + M for open menu)
+
+# TODO
+1. Add dynamic nickname.
+  - Try parse to App.js from async, but get only objects/Promise. (fail), left static text.
+2. For test create data in local storage.
+3. Create items list in "Growing Guides".
+4. Create search in "What can I grow? (categorys).
+5. Create search in "My Garden".
+6. Create add/remove function for items.
+7. Refactor style to stylesheet.
+8. Refactor code
+9. Refactor design for tablets/phones.
+10. Fix on iOS.

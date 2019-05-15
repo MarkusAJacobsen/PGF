@@ -2,16 +2,20 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import { styles as globalStyles, vars as globalVars } from '@utils/global';
 import { TitleBar, PlantCategoryCard } from '@components';
+import BarcodeSearchStartButton from '../../components/BarcodeSearchStart/BarcodeSearchStartButton';
 
 // @flow 
 export default class GrowingHomeScreen extends Component {
- 
+
   render() {
     const { navigation } = this.props;
     const categories = ['herbs', 'vegetables', 'flowers', 'fruits'];
     return (
       <View style={globalStyles.screenContainer}>
         <TitleBar heading='What can I grow?' isVisibleSearch={true} /> 
+        <BarcodeSearchStartButton
+          navigation={navigation}
+        />
         <Text style={styles.topLabel}>{"All types in your zone".toUpperCase()}</Text> 
         <ScrollView showsVerticalScrollIndicator={false} >
         <View style={globalStyles.contentContainer}>

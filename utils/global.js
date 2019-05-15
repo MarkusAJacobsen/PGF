@@ -1,4 +1,6 @@
+import React from "react";
 import { StyleSheet } from "react-native";
+import AsyncStorage from '@react-native-community/async-storage';
 
 export const vars = {
   // Colors
@@ -38,3 +40,21 @@ export const styles = StyleSheet.create({
     fontFamily: vars.bold
   }
 });
+
+// Function that extracts user data from AsyncStorage and returns a prepared object with the data
+export const setUpUserData = async (props, state) => {
+  // Set up object and default values
+  let userData = {
+    uid: "",
+    name: "",
+    origin: "",
+    area: "",
+  };
+
+  // Pull data from AsyncStorage
+  userData.uid = await AsyncStorage.getItem('@PGF_userid');
+  userData.name = await AsyncStorage.getItem('@PGF_name');
+  userData.origin = await AsyncStorage.getItem('@PGF_authMethod');
+  userData.area = await AsyncStorage.getItem('@PGF_area');
+  return userData;
+};
