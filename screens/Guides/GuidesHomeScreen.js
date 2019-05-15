@@ -1,6 +1,19 @@
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button } from 'react-native';
-import { vars as globalVars } from '@utils/global';
+import React, { Component } from "react";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  ScrollView
+} from "react-native";
+import {
+  styles as globalStyles,
+  vars as globalVars
+} from "@utils/global";
+import { getAllPlants } from "@utils/api"; 
+import PlantsRow from "./PlantsRow";
+import { Header, TitleBar } from "@components";
 
 // TODO: step-by-step
 /* 
@@ -11,9 +24,23 @@ import { vars as globalVars } from '@utils/global';
 export default class GuidesHomeScreen extends Component {
 
   constructor(props) {
-    super(props); 
+     super(props);
+    this.state = {
+      plants: {},
+      title: ""
+    };
+    this.categories = ["vegetables", "herbs", "fruits", "flowers"];
   }   
 
+  componentWillMount() {
+    const allPlants = getAllPlants();
+    
+    this.setState({
+      plants: allPlants,
+      // title: fetchUsername()
+    });
+  } 
+  
   render() {
     const { navigation } = this.props;
     const data = navigation.getParam('data', null);
@@ -21,8 +48,20 @@ export default class GuidesHomeScreen extends Component {
     if(data != null) console.log(data);
 
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Guides</Text>
+      <View style={globalStyles.screenContainer}>
+        <TitleBar heading="Guides" isVisibleSearch={true} />
+        <View style={globalStyles.contentContainer}>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {this.categories.map(c => (
+              <PlantsRow
+                navigation={navigation}
+                category={c}
+                plants={this.state.plants[c]}
+                key={c}
+              />
+            ))}
+          </ScrollView>
+        </View> 
       </View>
     );
   }

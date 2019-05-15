@@ -2,7 +2,7 @@ import AddItem from "./Buttons/AddItem";
 import PlantCategoryCard from "./Growing/PlantCategoryCard";
 import Header from "./Header/Header";
 import Icon from "./Ui/Icon/Icon";
-import MyPlantsItem from "./MyGarden/MyPlantsItem";
+import PlantsItem from "./PlantsItem";
 import MyPlantsRow from "./MyGarden/MyPlantsRow";
 import NavBarItem from "./NavBarItem/NavBarItem";
 import TitleBar from "./TitleBar/TitleBar";
@@ -16,7 +16,7 @@ export {
   PlantCategoryCard,
   Header,
   Icon,
-  MyPlantsItem,
+  PlantsItem,
   MyPlantsRow,
   NavBarItem,
   TitleBar,

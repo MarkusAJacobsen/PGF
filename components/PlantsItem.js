@@ -2,10 +2,10 @@ import React, { Compontent } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { vars as globalVars } from '@utils/global';
-import Images from '../../assets/plants/index';
+import Images from '@assets/plants';
 
 // @flow 
-const MyPlantsItem = ({ plant }) => {
+const PlantsItem = ({ plant }) => {
   return (
     <View style={styles.container}>
       <Image source={Images[plant.type][plant.name]} style={styles.image} />
@@ -13,7 +13,7 @@ const MyPlantsItem = ({ plant }) => {
   );
 };
 
-export default MyPlantsItem;
+export default PlantsItem;
 
 const styles = StyleSheet.create({
   container: {

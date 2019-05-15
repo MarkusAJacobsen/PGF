@@ -12,8 +12,7 @@ import {
   vars as globalVars
 } from "@utils/global";
 import { Header, TitleBar, MyPlantsRow } from "@components";
-import { getMyPlants } from "@utils/api";
-import Tabs from "react-native-tabs";
+import { getMyPlants } from "@utils/api"; 
 import { fetchUsername } from "@utils/functions"; 
 
 // @flow

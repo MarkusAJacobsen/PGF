@@ -76,9 +76,9 @@ export default class GuidesStepsScreen extends Component {
 
             {/* Left */}
             { (!isFirst) ? 
-            (<TouchableOpacity onPress={() => this.decreaseStep()} style={{flex: .3, backgroundColor: globalVars.lightGreen}} disabled={isFirst}>
+            (<TouchableOpacity onPress={() => this.decreaseStep()} style={{flex: .25, backgroundColor: globalVars.lightGreen}} disabled={isFirst}>
                 <View>
-                    <FontAwesome5 name={"chevron-left"} size={35} color="#000" style={{ paddingTop: 20, paddingLeft: 16 }} />
+                    <FontAwesome5 name={"chevron-left"} size={35} color="#000" style={{ paddingTop: 20, paddingLeft: 15 }} />
                 </View>
             </TouchableOpacity>) : 
             (<View></View>) }
@@ -90,21 +90,25 @@ export default class GuidesStepsScreen extends Component {
 
             {/* Right */}
             {/* TODO: steps process, fix navigation (no arrow back)  */}
-            <TouchableOpacity onPress={() => this.increaseStep()} style={{flex: .3, backgroundColor: globalVars.lightGreen}} disabled={isLast}>
+            <TouchableOpacity onPress={() => this.increaseStep()} style={{flex: (!isFirst) ? .25 : .2, backgroundColor: globalVars.lightGreen}} disabled={isLast}>
                 <View>
-                    <FontAwesome5 name={(isLast) ? "plus": "chevron-right"} size={35} color="#000" style={{ paddingTop: 20, paddingLeft: 16 }} />
+                    <FontAwesome5 name={(isLast) ? "plus": "chevron-right"} size={35} color="#000" style={{ paddingTop: 20, paddingLeft: 15 }} />
                 </View>
             </TouchableOpacity>
         </View> 
         {/* Steps info */}
-        <ScrollView style={{ flex: .5, paddingLeft: 30, paddingRight: 25, backgroundColor: globalVars.white }}>
+        <ScrollView style={{ flex: .5, backgroundColor: globalVars.white  }}>
           {
-            (step != null && step.title != null && step.desc != null) ? (<View><Text style={{ color: globalVars.black, fontFamily: globalVars.semiBold }}>
-              {step.title.toUpperCase()}
-          </Text>
-          <Text style={{ color: globalVars.black, fontFamily: globalVars.semiBold }}>
-              {step.desc}
-          </Text></View>)
+            (step != null && step.title != null && step.desc != null) ? (
+          <View style={{ paddingTop: 10, paddingBottom: 10, paddingRight: 15, paddingLeft: 25, }}>
+            <Text style={{ color: globalVars.black, fontFamily: globalVars.semiBold }}>
+                {step.title.toUpperCase()}
+            </Text>
+            <Text style={{ color: globalVars.black, fontFamily: globalVars.semiBold }}>
+                {step.desc}
+            </Text>
+          </View>
+          )
           : <View></View>
           }
         </ScrollView> 

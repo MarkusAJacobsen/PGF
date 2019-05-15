@@ -5,7 +5,7 @@ import { vars as globalVars } from '@utils/global';
 import { AddItem, PlantsItem } from '@components'; 
 
 // @flow 
-const MyPlantsRow = ({ navigation, category, plants }) => {
+const PlantsRow = ({ navigation, category, plants }) => {
 
   onAddPress = (type) => {
     navigation.navigate(
@@ -17,36 +17,24 @@ const MyPlantsRow = ({ navigation, category, plants }) => {
   return (
     <View style={styles.container}>
       <View style={styles.rowHeading}>
-        <Text style={styles.rowHeadingText}>MY {category.toUpperCase()}: { (plants.length < 1) ? <Text style={{color: globalVars.orange, fontFamily: globalVars.normal}}>What do you want to grow? (add)</Text> : null }</Text>
+        { (plants.length > 0) ? <Text style={styles.rowHeadingText}>{category.toUpperCase()}:</Text> : null }
       </View>
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.myPlantsRow}
-      >
-        {
-          ((plants.length < 3)) ? 
-            <TouchableOpacity onPress={() => this.onAddPress(category)}>
-              <AddItem size="large" bgColor='white' />
-            </TouchableOpacity> : <View style={{marginLeft: 13, marginRight: 0}}></View>
-        } 
-
+      >  
         {plants.map((p) => (
-          <PlantsItem plant={p} key={p.id} />
+          <TouchableOpacity key={p.id} onPress={() => {  navigation.navigate('GuidesSteps', {data: p}); }} >
+            <PlantsItem plant={p} />
+          </TouchableOpacity>
         ))}   
-      </ScrollView>
-
-        {
-          ((plants.length >= 3)) ?
-          <TouchableOpacity onPress={() => this.onAddPress(category)}>
-            <AddItem size="smallRight" bgColor='white' />
-          </TouchableOpacity> : null
-        }
+      </ScrollView> 
     </View>
   );
 };
 
-export default MyPlantsRow;
+export default PlantsRow;
 
 const styles = StyleSheet.create({
   container: {
@@ -70,9 +58,9 @@ const styles = StyleSheet.create({
     // flexDirection: 'row',
     // justifyContent: 'space-around', 
         // flexWrap: 'wrap',
-
+    marginLeft: 12
   },
-  myPlantsItem: {
+  PlantsItem: {
     height: 90,
     width: 90,
     borderWidth: 1,
