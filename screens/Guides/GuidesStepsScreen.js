@@ -5,31 +5,55 @@ import { uppercaseFirstLetter } from '@utils/functions';
 import { TitleBar } from "@components";
 import Images from '@assets/plants/index';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'; 
+import FastImage from 'react-native-fast-image';
+import GestureRecognizer, {swipeDirections} from "react-native-swipe-gestures";
 
 // TODO: step-by-step
 export default class GuidesStepsScreen extends Component {
 
   constructor(props) {
     super(props);
+
+    this.config = {
+      velocityThreshold: 0.3,
+      directionalOffsetThreshold: 80
+    };
+    
+    let data = this.props.navigation.getParam('data', null);
+
     this.state = {
       "curStep": 0,
-      "totalStep": 0
-    } 
+      "totalStep": data.length,
+    }
   }    
 
 
   increaseStep(){
     let { curStep } = this.state;
+
     this.setState({
-      "curStep": ++curStep
+      "curStep": ++curStep,
     });
   }
 
   decreaseStep(){
     let { curStep } = this.state;
     this.setState({
-      "curStep": --curStep
+      "curStep": --curStep,
     });
+  }
+
+  onSwipe(gestureName, gestureState) {
+    const {SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT} = swipeDirections;
+    this.setState({gestureName: gestureName});
+    switch (gestureName) {
+      case SWIPE_LEFT:
+        if (!(this.state.curStep + 1 >= this.state.totalStep)) this.increaseStep();
+        break;
+      case SWIPE_RIGHT:
+        if (!(this.state.curStep <= 0)) this.decreaseStep();
+        break;
+    }
   }
 
   render() { 
@@ -37,76 +61,35 @@ export default class GuidesStepsScreen extends Component {
     let { curStep } = this.state;
 
     let data = navigation.getParam('data', null);
+    let title = navigation.getParam('chapterTitle', null);
 
-    let totalStep = 0;
+    let totalStep = data.length;
     // let curStep = (totalStep > 0) ? 1 : 0;
 
     let step = (data.steps != null) ? data.steps[curStep] : {}; 
-   
-    (data.steps).map(e => {  
-      if(Object.keys(e).length !== 0){
-        ++totalStep;
-      }  
-    });
 
     let isLast = (curStep+1 === totalStep) ? true : false;
     let isFirst = (curStep+1 === 1) ? true : false;
  
     return (
       <View style={styles.container}>
-        <TitleBar heading={"How to grow "+ uppercaseFirstLetter(data.name)}  />
+        <TitleBar heading={title + " (" + (curStep+1) + "/" + totalStep + ")"}  />
         <View style={styles.imageContainer}>
-            <Image source={Images[data.type][data.name]} style={styles.image} /> 
-            {/* TODO: add to user array */}
-            { (!isLast) ? (
-            <TouchableOpacity onPress={() => {   }}
-                style={{ width: 30, height: 30, backgroundColor: "#fff", flex: 1, position: 'absolute', right: 15, bottom: 15,}}
-              > 
-            <View>
-                <FontAwesome5 name={"plus"} size={20} color="#000" style={{ margin: 5 }}  />
-            </View>
-            </TouchableOpacity>
-             ) : (<View></View>)
-            }
-
+            <FastImage source={{uri: data[curStep].images[0]}} style={styles.image} /> 
         </View> 
-        <Text style={globalStyles.topLabel}>{(data.name != null) ? ("How to grow "+data.name+": ").toUpperCase() : "" }</Text> 
-        <View style={{ flexDirection: "row", backgroundColor: globalVars.white, flex: .6}}>
-
-            {/* Left */}
-            { (!isFirst) ? 
-            (<TouchableOpacity onPress={() => this.decreaseStep()} style={{flex: .3, backgroundColor: globalVars.lightGreen}} disabled={isFirst}>
-                <View>
-                    <FontAwesome5 name={"chevron-left"} size={35} color="#000" style={{ paddingTop: 20, paddingLeft: 16 }} />
-                </View>
-            </TouchableOpacity>) : 
-            (<View></View>) }
-            
-            <View style={{flex: 1, flexDirection: "column", paddingTop: 5, paddingLeft: 30, }}>
-                <Text style={{ color: globalVars.black, fontFamily: globalVars.regular, fontSize: 20,  textAlign: (!isFirst) ? "center" : "left", }}>GROWING GUIDE</Text>
-                <Text style={{ color: globalVars.black, fontFamily: globalVars.regular, fontSize: 35,  textAlign: (!isFirst) ? "center" : "left", }}>Step: {curStep+1} / {totalStep} </Text>
-            </View>
-
-            {/* Right */}
-            {/* TODO: steps process, fix navigation (no arrow back)  */}
-            <TouchableOpacity onPress={() => this.increaseStep()} style={{flex: .3, backgroundColor: globalVars.lightGreen}} disabled={isLast}>
-                <View>
-                    <FontAwesome5 name={(isLast) ? "plus": "chevron-right"} size={35} color="#000" style={{ paddingTop: 20, paddingLeft: 16 }} />
-                </View>
-            </TouchableOpacity>
-        </View> 
+        <Text style={globalStyles.topLabel}>{data[curStep].pageTitle}</Text> 
         {/* Steps info */}
+      <GestureRecognizer
+        onSwipe={(direction, state) => this.onSwipe(direction, state)}
+        config={this.config}
+        style={styles.imageContainer}
+      >
         <ScrollView style={{ flex: .5, paddingLeft: 30, paddingRight: 25, backgroundColor: globalVars.white }}>
-          {
-            (step != null && step.title != null && step.desc != null) ? (<View><Text style={{ color: globalVars.black, fontFamily: globalVars.semiBold }}>
-              {step.title.toUpperCase()}
-          </Text>
           <Text style={{ color: globalVars.black, fontFamily: globalVars.semiBold }}>
-              {step.desc}
-          </Text></View>)
-          : <View></View>
-          }
+              {data[curStep].text}
+          </Text>
         </ScrollView> 
+      </GestureRecognizer>
     </View>
     )
   }
@@ -123,14 +106,13 @@ const styles = StyleSheet.create({
       flexDirection: "column",
   },
   imageContainer: { 
-    flex: .8,
+    flex: 1,
     // justifyContent: 'center',
     // alignItems: 'center', 
-    // flexWrap: 'wrap', 
+    //flexWrap: 'wrap', 
   },
   image: {
-    resizeMode: 'cover',
-    width: 360,
-    height: 109,
+    flex: 1,
+    height: 300,
   },
 });

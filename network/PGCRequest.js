@@ -66,7 +66,7 @@ function pgcPost(type, params, address) {
 }
 
 // Common code for PUT requests
-function pgcPost(type, params, address) {
+function pgcPut(type, params, address) {
     let preparedParams = paramToJsonString(type, params);
     
     // Send request

@@ -4,13 +4,37 @@ import { styles as globalStyles, vars as globalVars } from '@utils/global';
 import { uppercaseFirstLetter } from '@utils/functions';
 import { TitleBar } from "@components";
 import Images from '@assets/plants/index';
+import FastImage from "react-native-fast-image";
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'; 
 
 export default class  GrowingItemScreen extends Component { 
 
     // TODO: refactor style to stylesheet
     constructor(props) {
-        super(props);   
+        super(props);
+
+        this.testData = {
+            chapterTitles: ["Preparation"],
+            stages: [
+                {
+                    pageNr: 1,
+                    chapterNr: 1,
+                    pageTitle: "Growing pot",
+                    filter: "small",
+                    images: ["https://i.imgur.com/WpsnGdF.jpg"],
+                    text: "This is a small growing pot.",
+                },
+                {
+                    pageNr: 2,
+                    chapterNr: 1,
+                    pageTitle: "Test 2",
+                    filter: "medium",
+                    images: ["https://i.imgur.com/qNlPZwb.jpg"],
+                    text: "This is a medium growing pot.",
+                }
+            ]
+        }
+        this.tomatoImage = "https://i.imgur.com/qNlPZwb.jpg";
     } 
     
     render() {   
@@ -21,16 +45,8 @@ export default class  GrowingItemScreen extends Component {
          <View style={styles.container}>
             <TitleBar heading={uppercaseFirstLetter(data.name)}  />
             <View style={styles.imageContainer}>
-                <Image source={Images[data.type][data.name]} style={styles.image} /> 
+                <FastImage source={{ uri: this.tomatoImage }} style={styles.image} /> 
                 {/* TODO: add to user array */}
-                <TouchableOpacity onPress={() => {   }}
-                    style={{ width: 30, height: 30, backgroundColor: "#fff", flex: 1, position: 'absolute', right: 15, bottom: 15,}}
-                  >
-                <View>
-                    <FontAwesome5 name={"plus"} size={20} color="#000" style={{ margin: 5 }}  />
-                </View>
-                </TouchableOpacity>
-
             </View> 
             <Text style={globalStyles.topLabel}>{(data.name != null) ? ("How to grow "+data.name+": ").toUpperCase() : "" }</Text> 
             <View style={{flex: 1, flexDirection: "row", backgroundColor: globalVars.white, height: 160,}}>
@@ -39,7 +55,7 @@ export default class  GrowingItemScreen extends Component {
                     <Text style={{ color: globalVars.black, fontFamily: globalVars.regular, fontSize: 35}}>Step-by-step!</Text>
                 </View>
                 {/* TODO: steps process, fix navigation (no arrow back)  */}
-                <TouchableOpacity onPress={() => {  navigation.navigate('GuidesSteps', {data}); }} style={{flex: .3, backgroundColor: globalVars.lightGreen}}>
+                <TouchableOpacity onPress={() => {  navigation.navigate('GuidesSteps', {data: this.testData.stages, chapterTitle: this.testData.chapterTitles}); }} style={{flex: .3, backgroundColor: globalVars.lightGreen}}>
                     <View>
                         <FontAwesome5 name="chevron-right" size={60} color="#000" style={{ paddingTop: 50, paddingLeft: 20 }} />
                     </View>
@@ -70,11 +86,10 @@ const styles = StyleSheet.create({
       flex: 1,
     // justifyContent: 'center',
     // alignItems: 'center', 
-    flexWrap: 'wrap', 
+    //flexWrap: 'wrap', 
   },
   image: {
-    resizeMode: 'cover',
-    width: 360,
+    flex: 1,
     height: 230,
   },
 });

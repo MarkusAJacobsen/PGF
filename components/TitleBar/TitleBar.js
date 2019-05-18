@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
       
   },
   titleBar: {  
-    height: 83,
+    height: 63,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: globalVars.green 
@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
   },  
   text: {
     fontSize: 32,
-    marginTop: 20,
     textAlign: "center",
     color: globalVars.ligthGrey,
     fontFamily: globalVars.regular 
