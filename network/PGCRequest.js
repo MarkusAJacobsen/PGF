@@ -1,7 +1,7 @@
 import { PGCRequestList, PGCTypeConsts } from "./PGCRequestList";
 
-//const PGC_URL = "http://guarded-island-59755.herokuapp.com"; // Heroku deployment
-const PGC_URL = "http://localhost:5555"; // For local testing
+const PGC_URL = "http://guarded-island-59755.herokuapp.com"; // Heroku deployment
+//const PGC_URL = "http://localhost:5555"; // For local testing
 
 // Appends parameters to the address field
 function paramToAddress(type, params, address) {
@@ -54,6 +54,7 @@ function paramToJsonString(type, params) {
 function pgcPost(type, params, address) {
     let preparedParams = paramToJsonString(type, params);
     
+    console.log(address);
     // Send request
     return fetch(address, {
         method: PGCTypeConsts.POST,

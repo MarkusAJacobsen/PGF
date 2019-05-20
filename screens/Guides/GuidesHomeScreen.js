@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View, Button } from 'react-native';
-import { vars as globalVars } from '@utils/global';
+import SelectCategory from "../../components/Growing/SelectCategory";
 
-// TODO: step-by-step
 export default class GuidesHomeScreen extends Component {
 
   constructor(props) {
@@ -11,35 +9,16 @@ export default class GuidesHomeScreen extends Component {
 
   render() {
     const { navigation } = this.props;
-    const data = navigation.getParam('data', null);
-
-    if(data != null) console.log(data);
 
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Guides</Text>
-      </View>
+      <SelectCategory
+        navigation={navigation}
+        title="Guides"
+        subtitle="Available guide categories:"
+        categorySelectNextScreen="GuidesCategory"
+        barcodeSelectNextScreen="GuidesItem"
+      />
     );
   }
 }
 
-
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});

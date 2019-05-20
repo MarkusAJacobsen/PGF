@@ -8,17 +8,23 @@ class BarcodeSearchScreen extends Component {
     constructor(props) {
         super(props);
         this.stopRequest = false;
+
+        let nextScreen = this.props.navigation.getParam('nextScreen', null);
+        this.state = {
+            nextScreen: nextScreen
+        }
+        console.log(nextScreen);
     }
 
     readBarcode = (event) => {
+        console.log("FIRE");
         if (this.stopRequest === false && event.type === "EAN_13") {
             this.stopRequest = true;
 
             // Contact PGC for info which product category this matches
             // For now open tomato
-
             let data = getAllPlants();
-            this.props.navigation.navigate('GrowingItem', {screenProps: data.vegetables[1]} );   
+            this.props.navigation.navigate(this.state.nextScreen, {screenProps: data.vegetables[1]} );   
 
             // Change the stop request after navigate so once the user presses the back button
             // The user can scan another product
@@ -36,7 +42,7 @@ class BarcodeSearchScreen extends Component {
                     }}
                     style={styles.preview}
                     onBarCodeRead={(event) => this.readBarcode(event)}
-                    barCodeTypes={[RNCamera.Constants.BarCodeType.ean13]}
+                    /*barCodeTypes={[RNCamera.Constants.BarCodeType.ean13]}*/
                     captureAudio={false}
                 />
             </View>

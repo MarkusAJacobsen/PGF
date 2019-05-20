@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SelectItem from "../../components/Growing/SelectItem";
 import { uppercaseFirstLetter } from '@utils/functions';
 
-export default class GrowingCategoryScreen extends Component {
+export default class GuidesCategoryScreen extends Component {
 
   constructor(props) {
     super(props); 
@@ -15,9 +15,10 @@ export default class GrowingCategoryScreen extends Component {
       <SelectItem
         navigation={navigation}
         title={uppercaseFirstLetter(category)}
-        subtitle="Plants available in your area:"
-        itemSelectNextScreen="GrowingItem"
+        subtitle="Available guides:"
+        itemSelectNextScreen="GuidesItem"
       />
     );
   }
 }
+

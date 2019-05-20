@@ -25,6 +25,10 @@ import {  NavBarItem,
   // Other
   MoreHomeScreen, } from "@screens";
   import BarcodeSearchScreen from "./screens/Barcode/BarcodeSearchScreen";
+  import GuidesCategoryScreen from "./screens/Guides/GuidesCategoryScreen";
+  import GuidesItemScreen from "./screens/Guides/GuidesItemScreen";
+  import GrowingPreparationStage from "./screens/Growing/GrowingPreparationStage";
+  import GrowingPlantingStage from "./screens/Growing/GrowingPlantingStage";
   import FontAwesome5  from 'react-native-vector-icons/FontAwesome5';
 
   import { HeaderBackButton } from 'react-navigation';
@@ -61,11 +65,16 @@ const GrowingNavigator = createStackNavigator({
   GrowingCategory: { screen: GrowingCategoryScreen, navigationOptions },
   GrowingItem: { screen: GrowingItemScreen, navigationOptions },
   BarcodeSearch: { screen: BarcodeSearchScreen, navigationOptions },
+  GrowingPreparation: { screen: GrowingPreparationStage, navigationOptions },
+  GrowingPlanting: { screen: GrowingPlantingStage, navigationOptions },
 });
 
 const GuidesNavigator = createStackNavigator({
   GuidesHome: { screen: GuidesHomeScreen, navigationOptions },
-  GuidesSteps: { screen: GuidesStepsScreen, navigationOptions }
+  GuidesCategory: { screen: GuidesCategoryScreen, navigationOptions },
+  GuidesItem: { screen: GuidesItemScreen, navigationOptions },
+  GuidesSteps: { screen: GuidesStepsScreen, navigationOptions },
+  BarcodeSearch: { screen: BarcodeSearchScreen, navigationOptions },
 });
 
 const MoreNavigator = createStackNavigator({
@@ -87,7 +96,7 @@ const RouteConfig = {
     screen: GrowingNavigator,
     navigationOptions: {
       tabBarButtonComponent: props => (
-        <NavBarItem {...props} title="What can I grow" />
+        <NavBarItem {...props} title="New project" />
       )
     }
   },
