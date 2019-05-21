@@ -38,6 +38,7 @@
     "react-native-fast-image": "^6.0.0",
     "react-native-fbsdk": "^0.8.0",
     "react-native-gesture-handler": "~1.0.14",
+    "react-native-google-places-autocomplete": "^1.3.9",
     "react-native-google-signin": "^1.2.2",
     "react-native-linear-gradient": "^2.5.4",
     "react-native-material-dropdown": "^0.11.1",

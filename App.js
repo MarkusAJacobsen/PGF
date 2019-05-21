@@ -29,6 +29,7 @@ import {  NavBarItem,
   import GuidesItemScreen from "./screens/Guides/GuidesItemScreen";
   import GrowingPreparationStage from "./screens/Growing/GrowingPreparationStage";
   import GrowingPlantingStage from "./screens/Growing/GrowingPlantingStage";
+  import SelectAreaScreen from "./screens/More/SelectAreaScreen";
   import FontAwesome5  from 'react-native-vector-icons/FontAwesome5';
 
   import { HeaderBackButton } from 'react-navigation';
@@ -78,7 +79,8 @@ const GuidesNavigator = createStackNavigator({
 });
 
 const MoreNavigator = createStackNavigator({
-  MoreHome: { screen: MoreHomeScreen, navigationOptions }
+  MoreHome: { screen: MoreHomeScreen, navigationOptions },
+  SelectArea: { screen: SelectAreaScreen, navigationOptions },
 });
 
 const RouteConfig = { 

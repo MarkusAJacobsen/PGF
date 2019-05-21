@@ -78,6 +78,7 @@ class LoginScreen extends Component {
             AsyncStorage.setItem('@PGF_userid', userid);
             AsyncStorage.setItem('@PGF_authMethod', authMethod);
             AsyncStorage.setItem('@PGF_name', name);
+            AsyncStorage.setItem('@PGF_area', "Gjøvik, Norway");
 
             // Save the data in PGC
             Promise.all([
