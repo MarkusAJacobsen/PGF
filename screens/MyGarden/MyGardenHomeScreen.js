@@ -22,6 +22,50 @@ export default class MyGardenHomeScreen extends Component {
       myPlants: {}
     };
     this.categories = ["vegetables", "herbs", "fruits", "flowers"];
+    this.testData = [
+      {
+        id: 1,
+        name: "Test",
+        climate: "Indoor",
+        status: 1,
+        image: "https://i.imgur.com/WpsnGdF.jpg",        
+      },
+      {
+        id: 2,
+        name: "Test",
+        climate: "Indoor",
+        status: 1,
+        image: "https://i.imgur.com/WpsnGdF.jpg",        
+      },
+      {
+        id: 3,
+        name: "Test",
+        climate: "Indoor",
+        status: 1,
+        image: "https://i.imgur.com/WpsnGdF.jpg",        
+      },
+      {
+        id: 4,
+        name: "Test",
+        climate: "Indoor",
+        status: 1,
+        image: "https://i.imgur.com/WpsnGdF.jpg",        
+      },
+      {
+        id: 5,
+        name: "Test",
+        climate: "Indoor",
+        status: 1,
+        image: "https://i.imgur.com/WpsnGdF.jpg",        
+      },
+      {
+        id: 6,
+        name: "Test",
+        climate: "Indoor",
+        status: 1,
+        image: "https://i.imgur.com/WpsnGdF.jpg",        
+      },
+    ]
   }
 
   componentWillMount() {
@@ -29,21 +73,28 @@ export default class MyGardenHomeScreen extends Component {
     this.setState({
       myPlants: myPlants
     });
-  } 
+  }
+
+  // https://stackoverflow.com/questions/8495687/split-array-into-chunks
+  array_chunks = (array, chunk_size) => {
+    return Array(Math.ceil(array.length / chunk_size)).fill().map((_, index) => index * chunk_size).map(begin => array.slice(begin, begin + chunk_size))
+  };
   
   render() {
     const plants = getMyPlants();
     const { navigation } = this.props;
+
+    const projectList = this.array_chunks(this.testData, 4);
+    console.log(this.array_chunks(this.testData, 4));
     return (
       <View style={globalStyles.screenContainer}>
-        <TitleBar heading="My Garden" isVisibleSearch={true} />
+        <TitleBar heading="My Garden" isVisibleSearch={false} />
         <View style={globalStyles.contentContainer}>
           <ScrollView showsVerticalScrollIndicator={false}>
-            {this.categories.map(c => (
+            {projectList.map(c => (
               <MyPlantsRow
                 navigation={navigation}
-                category={c}
-                plants={this.state.myPlants[c]}
+                projects={c}
                 key={c}
               />
             ))}
