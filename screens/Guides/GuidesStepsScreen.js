@@ -15,6 +15,7 @@ export default class GrowingPreparationStage extends Component {
     const { navigation } = this.props;
     let chapter = navigation.getParam('chapter', 1);
     let testData = navigation.getParam('data');
+    let lastPage = navigation.getParam('lastPage', null);
 
     return (
       <GuidePage
@@ -22,7 +23,7 @@ export default class GrowingPreparationStage extends Component {
         filterPages={null}
         chapter={chapter}
         data={testData}
-        lastPageAction={null}
+        lastPageAction={lastPage}
       />
     );
   }

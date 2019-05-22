@@ -5,6 +5,7 @@ import { TitleBar } from "@components";
 import Touchable from "react-native-platform-touchable";
 import ImagePicker from "react-native-image-picker";
 import FastImage from "react-native-fast-image";
+import { NavigationActions, StackActions } from 'react-navigation';
 
 class MoreHomeScreen extends Component {
   constructor(props) {
@@ -105,7 +106,7 @@ class MoreHomeScreen extends Component {
                 <View style={styles.row} key={title}>
                   <Touchable  
                     onPress={() => { 
-                        this.props.navigation.navigate("GuidesSteps", {data: this.testData, chapter: (this.testData.chapterTitles.findIndex(x => x == title)+1) } );   
+                        this.props.navigation.navigate("ProjectGuide", {data: this.testData, chapter: (this.testData.chapterTitles.findIndex(x => x == title)+1)} );   
                       } 
                     }
                     onLongPress={null}
@@ -153,6 +154,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     marginTop: 100,
+  },
+  deleteProjectButton: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: globalVars.orange,
   },
   plantContainer: {
     flex: 1,

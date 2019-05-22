@@ -31,6 +31,7 @@ import {  NavBarItem,
   import GrowingPlantingStage from "./screens/Growing/GrowingPlantingStage";
   import SelectAreaScreen from "./screens/More/SelectAreaScreen";
   import ProjectScreen from "./screens/MyGarden/ProjectScreen";
+  import ProjectGuideScreen from "./screens/MyGarden/ProjectGuideScreen";
   import FontAwesome5  from 'react-native-vector-icons/FontAwesome5';
 
   import { HeaderBackButton } from 'react-navigation';
@@ -61,7 +62,7 @@ const MyGardenNavigator = createStackNavigator({
   MyGardenHome: { screen: MyGardenHomeScreen, navigationOptions },
   MyPlants: { screen: MyPlantsScreen, navigationOptions },
   ProjectScreen: { screen: ProjectScreen, navigationOptions },
-  GuidesSteps: { screen: GuidesStepsScreen, navigationOptions },
+  ProjectGuide: { screen: ProjectGuideScreen, navigationOptions },
 });
 
 const GrowingNavigator = createStackNavigator({

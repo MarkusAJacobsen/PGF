@@ -23,7 +23,7 @@ class LoginScreen extends Component {
           const userInfo = await GoogleSignin.signIn();
           
           // Save the data in AsyncStorage
-          this.storeDataInAsync(userInfo.user.id, userInfo.user.name, "GG");
+          this.storeDataInAsync(userInfo.user.id, userInfo.user.name, "GG", this.props.navigation);
         } catch (error) {
           console.log(error);
           console.log("google error");
@@ -56,7 +56,7 @@ class LoginScreen extends Component {
                   console.log('Error fetching data: ' + error.toString());
                 } else {
                   // Once the name of the user is fetched, store id and name in AsyncStorage
-                  this.storeDataInAsync(result.id, result.name, "FB");
+                  this.storeDataInAsync(result.id, result.name, "FB", this.props.navigation);
                 }
               };
 
@@ -72,7 +72,7 @@ class LoginScreen extends Component {
     }
 
     //Create response callback. - Pulled directly from react-native-fbsdk guide
-    storeDataInAsync = async (userid, name, authMethod) => {
+    storeDataInAsync = async (userid, name, authMethod, navigation) => {
         try {
             // Save the data locally in AsyncStorage
             AsyncStorage.setItem('@PGF_userid', userid);
@@ -86,7 +86,7 @@ class LoginScreen extends Component {
             ]).then((result) => {
                 // If the user was created/exists in PGC, navigate to Main
                 if (result[0].ok) {
-                  this.props.navigation.navigate('Main');
+                  navigation.navigate('Main');
                 }
             });
         } catch (error) {
