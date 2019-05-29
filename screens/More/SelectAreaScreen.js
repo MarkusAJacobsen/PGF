@@ -33,12 +33,14 @@ class SelectAreaScreen extends Component {
 
   setNewArea = async (data, details = null) => {
       AsyncStorage.setItem('@PGF_area', data.description);
+      console.log(data);
+      console.log(details);
       Promise.all([
         PGCRequest(PGCRequestList.USER_UPDATE, [this.state.userData.uid, this.state.userData.name, this.state.userData.origin, data.description])
       ]).then((result) => {
           console.log(result);
           // Once the request goes through, go to main page
-          this.props.navigation.navigate('Main');
+          this.props.navigation.navigate('AuthLoading');
       });
   } 
 
@@ -70,7 +72,7 @@ class SelectAreaScreen extends Component {
         currentLocation={false}
         query={{
             // available options: https://developers.google.com/places/web-service/autocomplete
-            key: 'AIzaSyD_Mgy-XXCOD_1lAUyRT50ntYjXHQCLHmI',
+            key: 'AIzaSyCfSRtKIrBn2V376NUPXc9IPshkdh8Nq30',
             language: 'en', // language of the results
             types: '(cities)' // default: 'geocode'
           }}
