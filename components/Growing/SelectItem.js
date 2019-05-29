@@ -4,6 +4,9 @@ import { styles as globalStyles, vars as globalVars } from '@utils/global';
 import { uppercaseFirstLetter, searchStringInArray, comparedPlants } from '@utils/functions';
 import { getAllPlants, getMyPlants } from '@utils/api';
 import { TitleBar, AddItem } from "@components";
+import PGCRequest from "../../network/PGCRequest";
+import {PGCRequestList} from "../../network/PGCRequestList";
+import FastImage from "react-native-fast-image";
 
 import Images from '@assets/plants/index';
 
@@ -11,42 +14,43 @@ export default class SelectItem extends Component {
   constructor(props) {
     super(props);
 
+    this.getPlantsFromPGC();
     this.state = {
-      // plantType: uppercaseFirstLetter(this.props.navigation.state.params.plantType),
-      plantCategory: '',
-      myPlants: [],
+      category: this.props.navigation.getParam('plantType', '<category missing>'),
+      displayedPlants: [],
       allPlants: [],
+      search: "",
     };
 
     this.handleResult = this.handleResult.bind(this); 
   }
-
-  componentWillMount() {
-    const category = this.props.navigation.getParam('plantType', '<category missing>')
-    const myPlants = getMyPlants()[category];
-    const allPlants = getAllPlants()[category];
-
-    this.setState({
-      category: category,
-      myPlants: myPlants,
-      allPlants: allPlants,
-      "search": "" 
-    });
-  } 
   
   handleResult(search){
     if(search.length > 0) this.setState({
       "search": search
     });   
   }
+
+  getPlantsFromPGC() {
+    Promise.all([
+      PGCRequest(PGCRequestList.PLANT_GET_ALL, [])
+    ]).then((result) => {
+        const category = this.state.category;
+        console.log(result);
+        const filteredResult = result[0].filter(plant => plant.category == category);
+        this.setState({
+          allPlants: result[0],
+          displayedPlants: filteredResult,
+        });
+    });
+  }
  
   render() {
-    const { category, allPlants, myPlants, search } = this.state;
-    let list = [];   
-    let plants = comparedPlants(myPlants, allPlants);
+    const { category, allPlants, displayedPlants, search } = this.state;
+    const categories = ['herbs', 'vegetables', 'flowers', 'fruits'];
     let isVisibleSearch = true;
 
-    list = (search.length > 0) ? searchStringInArray(search, plants) : plants;
+    let list = (search.length > 0) ? searchStringInArray(search, displayedPlants) : displayedPlants;
 
     if(list.length > 0){ 
       isVisibleSearch = true;
@@ -76,7 +80,7 @@ export default class SelectItem extends Component {
                       <Text style={styles.plantTitleText}>{uppercaseFirstLetter(plant.name)}</Text>
                     </View>
                     <View style={styles.imageContainer}>
-                      <Image source={Images[category][plant.name]} style={styles.image} />
+                      <FastImage source={{ uri: plant.image }} style={styles.image} resizeMode={FastImage.resizeMode.contain} />
                     </View> 
                   </TouchableOpacity> 
                 </View>
@@ -120,7 +124,7 @@ const styles = StyleSheet.create({
     color: globalVars.black,
     fontSize: 24,
   },
-  imageContainer: {
+  imageContainerdd: {
     flex: 1,
     width: 60,
     height: 60,
@@ -128,11 +132,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
     flexWrap: 'wrap',
+  },
+  imageContainer: {
+    width: 60,
+    height: 60,
     marginRight: 20,
+    backgroundColor: globalVars.white,
   },
   image: {
     flex: 1,
-    resizeMode: 'contain'
   },
   noresults: {
     fontSize: 20,

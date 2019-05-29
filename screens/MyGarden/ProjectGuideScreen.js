@@ -4,6 +4,8 @@ import { prepareGuidePages } from "../../utils/global";
 import Touchable from "react-native-platform-touchable";
 import { View, Text, StyleSheet, Image, ScrollView, Button, TouchableOpacity } from 'react-native';
 import { styles as globalStyles, vars as globalVars } from '@utils/global';
+import PGCRequest from "../../network/PGCRequest";
+import {PGCRequestList} from "../../network/PGCRequestList";
 
 export default class ProjectGuideScreen extends Component {
 
@@ -12,9 +14,14 @@ export default class ProjectGuideScreen extends Component {
   }
 
   deleteProject = () => {
-    console.log(this.props);
-    console.log("Project deleted.");
-    this.props.navigation.navigate("AuthLoading");   
+    let projectID = this.props.navigation.getParam('projectID', null);
+    Promise.all([
+      PGCRequest(PGCRequestList.PROJECT_DELETE, [projectID])
+    ]).then((result) => {
+        if (result[0].ok) {
+          this.props.navigation.navigate('AuthLoading');
+        }
+    });
   }
 
   render() {
@@ -22,7 +29,7 @@ export default class ProjectGuideScreen extends Component {
     let settings = navigation.getParam('projectSettings', null);
     let testData = navigation.getParam('data');
     let chapter = navigation.getParam('chapter', 1);
-    console.log(chapter);
+    console.log(testData);
 
     return (
       <GuidePage

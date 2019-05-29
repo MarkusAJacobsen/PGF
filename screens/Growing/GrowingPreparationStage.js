@@ -26,7 +26,7 @@ export default class GrowingPreparationStage extends Component {
         <View style={styles.row}>
         <Touchable  
         onPress={() => { 
-            this.props.navigation.navigate("GrowingPlanting", {data: testData, projectSettings: [this.props.projectSettings] } );   
+            this.props.navigation.navigate("GrowingPlanting", {data: testData, projectSettings: settings } );   
             } 
         }
         onLongPress={null}

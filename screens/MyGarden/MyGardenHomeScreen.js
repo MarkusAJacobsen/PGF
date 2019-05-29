@@ -7,13 +7,12 @@ import {
   Button,
   ScrollView
 } from "react-native";
-import {
-  styles as globalStyles,
-  vars as globalVars
-} from "@utils/global";
+import { styles as globalStyles, vars as globalVars, setUpUserData } from '@utils/global';
 import { Header, TitleBar, MyPlantsRow } from "@components";
 import { getMyPlants } from "@utils/api";
 import Tabs from "react-native-tabs";
+import PGCRequest from "../../network/PGCRequest";
+import {PGCRequestList} from "../../network/PGCRequestList";
 
 export default class MyGardenHomeScreen extends Component {
   constructor(props) {
@@ -21,51 +20,31 @@ export default class MyGardenHomeScreen extends Component {
     this.state = {
       myPlants: {}
     };
-    this.categories = ["vegetables", "herbs", "fruits", "flowers"];
-    this.testData = [
-      {
-        id: 1,
-        name: "Test",
-        climate: "Indoor",
-        status: 1,
-        image: "https://i.imgur.com/WpsnGdF.jpg",        
+
+    this.state = {
+      projects: [],
+      userData: {
+        uid: "",
+        name: "",
+        origin: "",
+        area: "",
       },
-      {
-        id: 2,
-        name: "Test",
-        climate: "Indoor",
-        status: 1,
-        image: "https://i.imgur.com/WpsnGdF.jpg",        
-      },
-      {
-        id: 3,
-        name: "Test",
-        climate: "Indoor",
-        status: 1,
-        image: "https://i.imgur.com/WpsnGdF.jpg",        
-      },
-      {
-        id: 4,
-        name: "Test",
-        climate: "Indoor",
-        status: 1,
-        image: "https://i.imgur.com/WpsnGdF.jpg",        
-      },
-      {
-        id: 5,
-        name: "Test",
-        climate: "Indoor",
-        status: 1,
-        image: "https://i.imgur.com/WpsnGdF.jpg",        
-      },
-      {
-        id: 6,
-        name: "Test",
-        climate: "Indoor",
-        status: 1,
-        image: "https://i.imgur.com/WpsnGdF.jpg",        
-      },
-    ]
+    }
+    setUpUserData().then((data) => {
+      console.log(data.uid);
+      Promise.all([
+        PGCRequest(PGCRequestList.PROJECT_GET_ALL, [], [data.uid])
+      ]).then((result) => {
+          console.log(result);
+          this.setState({
+            projects: result[0],
+          });
+      });
+      this.setState({
+      userData: data,
+      });
+      this.props.userData = data;
+    });
   }
 
   componentWillMount() {
@@ -84,8 +63,7 @@ export default class MyGardenHomeScreen extends Component {
     const plants = getMyPlants();
     const { navigation } = this.props;
 
-    const projectList = this.array_chunks(this.testData, 4);
-    console.log(this.array_chunks(this.testData, 4));
+    const projectList = this.array_chunks(this.state.projects, 4);
     return (
       <View style={globalStyles.screenContainer}>
         <TitleBar heading="My Garden" isVisibleSearch={false} />

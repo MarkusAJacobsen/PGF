@@ -1,6 +1,6 @@
 import React, { Component } from 'react' 
 import { View, Text, StyleSheet, Image, ScrollView, Button, TouchableOpacity } from 'react-native';
-import { styles as globalStyles, vars as globalVars } from '@utils/global';
+import { styles as globalStyles, vars as globalVars, setUpUserData } from '@utils/global';
 import { uppercaseFirstLetter } from '@utils/functions';
 import { TitleBar } from "@components";
 import Images from '@assets/plants/index';
@@ -8,6 +8,9 @@ import FastImage from "react-native-fast-image";
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Touchable from 'react-native-platform-touchable';
 import { Dropdown } from 'react-native-material-dropdown';
+import PGCRequest from "../../network/PGCRequest";
+import {PGCRequestList} from "../../network/PGCRequestList";
+import { Icon, SearchInput } from "@components";  
 
 export default class  GrowingItemScreen extends Component { 
 
@@ -15,50 +18,51 @@ export default class  GrowingItemScreen extends Component {
     constructor(props) {
         super(props);
 
-        this.testData = {
-            chapterTitles: ["Preparation", "Planting"],
-            stages: [
-                {
-                    pageNr: 1,
-                    chapterNr: 1,
-                    pageTitle: "Growing pot",
-                    filter: "small",
-                    images: ["https://i.imgur.com/WpsnGdF.jpg"],
-                    text: "This is a small growing pot.",
-                },
-
-                {
-                    pageNr: 3,
-                    chapterNr: 1,
-                    pageTitle: "Growing pot",
-                    filter: "",
-                    images: ["https://i.imgur.com/WpsnGdF.jpg"],
-                    text: "This is a small growing pot.",
-                },
-                {
-                    pageNr: 1,
-                    chapterNr: 2,
-                    pageTitle: "Planting",
-                    filter: "",
-                    images: ["https://i.imgur.com/WpsnGdF.jpg"],
-                    text: "Plant the plant.",
-                },
-                {
-                    pageNr: 2,
-                    chapterNr: 1,
-                    pageTitle: "Test 2",
-                    filter: "medium",
-                    images: ["https://i.imgur.com/qNlPZwb.jpg"],
-                    text: "This is a medium growing pot.",
-                }
-            ]
+        let propsData = this.props.navigation.getParam('screenProps', null);
+        this.state = {
+          guideData: {
+            chapterTitles: [],
+          },
+          plantData: propsData,
+          projectName: propsData.name,
+          userData: {
+            uid: "",
+            name: "",
+            origin: "",
+            area: "",
+          },
         }
-        this.tomatoImage = "https://i.imgur.com/qNlPZwb.jpg";
+        setUpUserData().then((data) => {
+            this.setState({
+            userData: data,
+            });
+            this.props.userData = data;
+        });
+
+        Promise.all([
+          PGCRequest(PGCRequestList.GUIDE_GET, [this.state.plantData.guideID])
+        ]).then((result) => {
+            console.log(result);
+            this.setState({
+              guideData: result[0][0],
+            });
+        });
+
         this.projectSize("Small");
+        this.projectClimate("Indoor");
+        this.searchVal = this.searchVal.bind(this); 
     }
 
     projectSize = (value) => {
         this.size = value.toLowerCase();
+    }
+
+    projectClimate = (value) => {
+        this.climate = value;
+    }
+
+    searchVal(e){
+        if(e && e.nativeEvent) this.setState({ "projectName": e.nativeEvent.text }); 
     }
     
     render() {   
@@ -70,9 +74,15 @@ export default class  GrowingItemScreen extends Component {
         }, {
             value: "Large",
         }];
+        let data2 = [{
+            value: "Indoor",
+        }, {
+            value: "Outdoor",
+        }];
  
         return (
         <ScrollView showsVerticalScrollIndicator={false}  style={styles.container}>
+            <Text style={styles.plantTitleText}>Project parameters</Text>
             <Dropdown
                 label="Project size"
                 data={data}
@@ -80,13 +90,29 @@ export default class  GrowingItemScreen extends Component {
                 containerStyle={styles.dropdownStyle}
                 value="Small"
                 onChangeText={(value) => this.projectSize(value)}
-                
-                
+            />
+            <Dropdown
+                label="Climate"
+                data={data}
+                animationDuration={0}
+                containerStyle={styles.dropdownStyle}
+                value="Indoor"
+                onChangeText={(value) => this.projectClimate(value)}
+            />
+            <Text style={styles.plantTitleText}>Project title</Text>
+            <SearchInput 
+                style={ styles.input }
+                text={ this.state.projectName }
+                value={ this.state.projectName }
+                placeholder={ "Project name".toUpperCase()} 
+                autoFocus={ false }
+                placeholderTextColor={ globalVars.searchText }
+                onChange={ this.searchVal }
             />
             <View style={styles.row}>
                 <Touchable  
                 onPress={() => { 
-                    this.props.navigation.navigate("GrowingPreparation", {data: this.testData, projectSettings: [this.size] } );   
+                    this.props.navigation.navigate("GrowingPreparation", {data: this.state.guideData, projectSettings: [this.size, this.climate, this.state.projectName, this.state.plantData.id, this.state.userData.uid, this.state.plantData.image] } );   
                     } 
                 }
                 onLongPress={null}
@@ -119,7 +145,7 @@ const styles = StyleSheet.create({
     height: 230,
   },
   dropdownStyle: {
-      marginTop: 50,
+      marginTop: 10,
       marginHorizontal: 10,
       backgroundColor: globalVars.white,
   },
@@ -144,5 +170,19 @@ const styles = StyleSheet.create({
     height: 60,
     marginTop: 80,
     marginHorizontal: 10,
+  },
+  input: { 
+    marginTop: 10,
+    marginHorizontal: 10,
+    height: 60,
+    fontFamily: globalVars.bold,
+    backgroundColor: "#fff",
+    color: globalVars.black
+  },
+  plantTitleText: {
+    marginTop: 10,
+    marginHorizontal: 10,
+    color: globalVars.black,
+    fontSize: 24,
   },
 });

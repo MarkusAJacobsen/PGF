@@ -38,7 +38,6 @@ class SelectAreaScreen extends Component {
       Promise.all([
         PGCRequest(PGCRequestList.USER_UPDATE, [this.state.userData.uid, this.state.userData.name, this.state.userData.origin, data.description])
       ]).then((result) => {
-          console.log(result);
           // Once the request goes through, go to main page
           this.props.navigation.navigate('AuthLoading');
       });

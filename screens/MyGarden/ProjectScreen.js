@@ -106,7 +106,7 @@ class MoreHomeScreen extends Component {
                 <View style={styles.row} key={title}>
                   <Touchable  
                     onPress={() => { 
-                        this.props.navigation.navigate("ProjectGuide", {data: this.testData, chapter: (this.testData.chapterTitles.findIndex(x => x == title)+1)} );   
+                        this.props.navigation.navigate("ProjectGuide", {data: this.testData, chapter: (this.testData.chapterTitles.findIndex(x => x == title)+1), projectID: this.state.projectData.id} );   
                       } 
                     }
                     onLongPress={null}

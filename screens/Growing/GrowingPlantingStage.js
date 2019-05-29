@@ -4,6 +4,8 @@ import { prepareGuidePages } from "../../utils/global";
 import Touchable from "react-native-platform-touchable";
 import { View, Text, StyleSheet, Image, ScrollView, Button, TouchableOpacity } from 'react-native';
 import { styles as globalStyles, vars as globalVars } from '@utils/global';
+import PGCRequest from "../../network/PGCRequest";
+import {PGCRequestList} from "../../network/PGCRequestList";
 
 export default class GrowingPlantingStage extends Component {
 
@@ -26,8 +28,25 @@ export default class GrowingPlantingStage extends Component {
         <View style={styles.row}>
         <Touchable  
         onPress={() => { 
-            console.log("Project started (not).");
-            this.props.navigation.popToTop();   
+            console.log(settings);
+            console.log(testData);
+            let project = {
+              name: settings[2],
+              climate: settings[1],
+              status: 1,
+              image: settings[5],
+            };
+            console.log(project);
+
+            Promise.all([
+              PGCRequest(PGCRequestList.PROJECT_ADD, [project, settings[4], settings[3]])
+            ]).then((result) => {
+                // If the user was created/exists in PGC, navigate to Main
+                console.log(result);
+                if (result[0].ok) {
+                  this.props.navigation.navigate('AuthLoading');
+                }
+            });
             } 
         }
         onLongPress={null}

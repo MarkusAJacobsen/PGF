@@ -54,8 +54,7 @@ export const PGCRequestList = {
     ]),
     PROJECT_GET_ALL: new PGCRequestRoute(PGCTypeConsts.GET, ["/user/", "/projects"], null, ["idToken"]),
     PROJECT_ADD: new PGCRequestRoute(PGCTypeConsts.POST, ["/project"], [
-        "projectName",
-        "climate",
+        "project",
         "idToken",
         "pId",
     ], null),
@@ -68,4 +67,7 @@ export const PGCRequestList = {
         PGCTypeConsts.SKIP_KEY, // Plant ID
     ], null),
     PLANT_GET_ALL: new PGCRequestRoute(PGCTypeConsts.GET, ["/plant"], null, null),
+    PLANT_GET_BARCODE: new PGCRequestRoute(PGCTypeConsts.GET, ["/plant/barcode/"], [
+        PGCTypeConsts.SKIP_KEY, // Barcode
+    ], null),
 };
