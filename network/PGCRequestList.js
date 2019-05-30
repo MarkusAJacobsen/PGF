@@ -1,5 +1,6 @@
 
 // File with all available requests that can be done to PGC as constants
+// Written by Maciej Piatkowski, logic partially imported from his summer 2018 project
 
 class PGCRequestRoute {
     constructor(type, address, paramList, addressParams) {

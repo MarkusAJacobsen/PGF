@@ -36,9 +36,11 @@ export default class MyGardenHomeScreen extends Component {
         PGCRequest(PGCRequestList.PROJECT_GET_ALL, [], [data.uid])
       ]).then((result) => {
           console.log(result);
-          this.setState({
-            projects: result[0],
-          });
+          if (result[0] != null) {
+            this.setState({
+              projects: result[0],
+            });
+          }
       });
       this.setState({
       userData: data,

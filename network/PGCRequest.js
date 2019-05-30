@@ -1,7 +1,9 @@
 import { PGCRequestList, PGCTypeConsts } from "./PGCRequestList";
 
-//const PGC_URL = "http://guarded-island-59755.herokuapp.com"; // Heroku deployment
-const PGC_URL = "http://localhost:5555"; // For local testing
+const PGC_URL = "http://guarded-island-59755.herokuapp.com"; // Heroku deployment
+//const PGC_URL = "http://localhost:5555"; // For local testing
+
+// Written by Maciej Piatkowski, partially imported from his summer 2018 project
 
 // Appends parameters to the address field
 function paramToAddress(type, params, address) {
