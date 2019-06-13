@@ -58,3 +58,11 @@ export const setUpUserData = async (props, state) => {
   userData.area = await AsyncStorage.getItem('@PGF_area');
   return userData;
 };
+
+export const prepareGuidePages = (data, chapterPage, filters) => {
+  let newData = data.slice(0);
+  newData = newData.filter(obj => obj.chapterNr == chapterPage);
+  if (filters != null && filters.length > 0) newData = newData.filter(obj => obj.filter == "" || filters.some(x => x == obj.filter));
+  newData = newData.sort((a, b) => a.pageNr - b.pageNr);
+  return newData;
+}

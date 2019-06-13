@@ -25,7 +25,15 @@ import {  NavBarItem,
   // Barcode
   BarcodeSearchScreen,
   // Other
-  MoreHomeScreen, } from "@screens"; 
+  MoreHomeScreen, } from "@screens";
+  import BarcodeSearchScreen from "./screens/Barcode/BarcodeSearchScreen";
+  import GuidesCategoryScreen from "./screens/Guides/GuidesCategoryScreen";
+  import GuidesItemScreen from "./screens/Guides/GuidesItemScreen";
+  import GrowingPreparationStage from "./screens/Growing/GrowingPreparationStage";
+  import GrowingPlantingStage from "./screens/Growing/GrowingPlantingStage";
+  import SelectAreaScreen from "./screens/More/SelectAreaScreen";
+  import ProjectScreen from "./screens/MyGarden/ProjectScreen";
+  import ProjectGuideScreen from "./screens/MyGarden/ProjectGuideScreen";
   import FontAwesome5  from 'react-native-vector-icons/FontAwesome5';
 
 import { HeaderBackButton } from 'react-navigation';
@@ -59,8 +67,10 @@ const navigationOptions = ({ navigation }) => ({
  
  
 const MyGardenNavigator = createStackNavigator({
-  MyGardenHome: { screen: MyGardenHomeScreen, navigationOptions, params: { "name": fetchUsername() } },
-  MyPlants: { screen: MyPlantsScreen, navigationOptions }
+  MyGardenHome: { screen: MyGardenHomeScreen, navigationOptions },
+  MyPlants: { screen: MyPlantsScreen, navigationOptions },
+  ProjectScreen: { screen: ProjectScreen, navigationOptions },
+  ProjectGuide: { screen: ProjectGuideScreen, navigationOptions },
 });
 
 const GrowingNavigator = createStackNavigator({
@@ -68,15 +78,21 @@ const GrowingNavigator = createStackNavigator({
   GrowingCategory: { screen: GrowingCategoryScreen, navigationOptions },
   GrowingItem: { screen: GrowingItemScreen, navigationOptions },
   BarcodeSearch: { screen: BarcodeSearchScreen, navigationOptions },
+  GrowingPreparation: { screen: GrowingPreparationStage, navigationOptions },
+  GrowingPlanting: { screen: GrowingPlantingStage, navigationOptions },
 });
 
 const GuidesNavigator = createStackNavigator({
   GuidesHome: { screen: GuidesHomeScreen, navigationOptions },
-  GuidesSteps: { screen: GuidesStepsScreen, navigationOptions }
+  GuidesCategory: { screen: GuidesCategoryScreen, navigationOptions },
+  GuidesItem: { screen: GuidesItemScreen, navigationOptions },
+  GuidesSteps: { screen: GuidesStepsScreen, navigationOptions },
+  BarcodeSearch: { screen: BarcodeSearchScreen, navigationOptions },
 });
 
 const MoreNavigator = createStackNavigator({
-  MoreHome: { screen: MoreHomeScreen, navigationOptions }
+  MoreHome: { screen: MoreHomeScreen, navigationOptions },
+  SelectArea: { screen: SelectAreaScreen, navigationOptions },
 });
 
 const RouteConfig = { 
@@ -94,7 +110,7 @@ const RouteConfig = {
     screen: GrowingNavigator,
     navigationOptions: {
       tabBarButtonComponent: props => (
-        <NavBarItem {...props} title="What can I grow" />
+        <NavBarItem {...props} title="New project" />
       )
     }
   },

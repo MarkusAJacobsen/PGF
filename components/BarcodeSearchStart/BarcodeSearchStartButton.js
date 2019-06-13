@@ -7,7 +7,9 @@ class BarcodeSearchStartButton extends Component {
     tryBarcode = () => {
         const { navigation } = this.props;
         navigation.navigate(
-          'BarcodeSearch',
+          'BarcodeSearch', {
+              nextScreen: this.props.nextScreen,
+          }
         );
     }
 
@@ -32,14 +34,13 @@ class BarcodeSearchStartButton extends Component {
     render() {
 
         return (
-            <View style={[globalStyles.contentContainer, styles.barcodeBox]}>
-                <Touchable
-                    onPress={() => this.requestCameraPermission()}
-                    onLongPress={null}
-                >
+            <Touchable 
+                style={[styles.barcodeBox]}
+                onPress={() => this.requestCameraPermission()}
+                onLongPress={null}
+            >
                     <Text style={styles.barcodeBoxText}>Try with barcode</Text>
-                </Touchable>
-            </View>
+            </Touchable>
             
         )
     }

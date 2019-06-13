@@ -2,12 +2,20 @@ import React, { Component } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { RNCamera } from "react-native-camera";
 import { getAllPlants } from "../../utils/api";
+import PGCRequest from "../../network/PGCRequest";
+import {PGCRequestList} from "../../network/PGCRequestList";
 
 
 class BarcodeSearchScreen extends Component {
     constructor(props) {
         super(props);
         this.stopRequest = false;
+
+        let nextScreen = this.props.navigation.getParam('nextScreen', null);
+        this.state = {
+            nextScreen: nextScreen
+        }
+        console.log(nextScreen);
     }
 
     readBarcode = (event) => {
@@ -15,14 +23,13 @@ class BarcodeSearchScreen extends Component {
             this.stopRequest = true;
 
             // Contact PGC for info which product category this matches
-            // For now open tomato
-
-            let data = getAllPlants();
-            this.props.navigation.navigate('GrowingItem', {screenProps: data.vegetables[1]} );   
-
-            // Change the stop request after navigate so once the user presses the back button
-            // The user can scan another product
-            this.stopRequest = false;
+            Promise.all([
+                PGCRequest(PGCRequestList.PLANT_GET_BARCODE, [event.data])
+            ]).then((result) => {
+                console.log(result[0][0]);
+                this.stopRequest = false;
+                this.props.navigation.navigate(this.state.nextScreen, {screenProps: result[0][0]} );   
+            });
         }
     }
 
@@ -36,7 +43,7 @@ class BarcodeSearchScreen extends Component {
                     }}
                     style={styles.preview}
                     onBarCodeRead={(event) => this.readBarcode(event)}
-                    barCodeTypes={[RNCamera.Constants.BarCodeType.ean13]}
+                    /*barCodeTypes={[RNCamera.Constants.BarCodeType.ean13]}*/
                     captureAudio={false}
                 />
             </View>

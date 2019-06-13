@@ -7,13 +7,12 @@ import {
   Button,
   ScrollView
 } from "react-native";
-import {
-  styles as globalStyles,
-  vars as globalVars
-} from "@utils/global";
+import { styles as globalStyles, vars as globalVars, setUpUserData } from '@utils/global';
 import { Header, TitleBar, MyPlantsRow } from "@components";
-import { getMyPlants } from "@utils/api";  
-import { searchStringInArray, comparedPlants, fetchUsername } from '@utils/functions';
+import { getMyPlants } from "@utils/api";
+import Tabs from "react-native-tabs";
+import PGCRequest from "../../network/PGCRequest";
+import {PGCRequestList} from "../../network/PGCRequestList";
 
 // @flow
 export default class MyGardenHomeScreen extends Component {
@@ -23,8 +22,33 @@ export default class MyGardenHomeScreen extends Component {
       myPlants: {},
       title: ""
     };
-    this.categories = ["vegetables", "herbs", "fruits", "flowers"];
-    this.handleResult = this.handleResult.bind(this); 
+
+    this.state = {
+      projects: [],
+      userData: {
+        uid: "",
+        name: "",
+        origin: "",
+        area: "",
+      },
+    }
+    setUpUserData().then((data) => {
+      console.log(data.uid);
+      Promise.all([
+        PGCRequest(PGCRequestList.PROJECT_GET_ALL, [], [data.uid])
+      ]).then((result) => {
+          console.log(result);
+          if (result[0] != null) {
+            this.setState({
+              projects: result[0],
+            });
+          }
+      });
+      this.setState({
+      userData: data,
+      });
+      this.props.userData = data;
+    });
   }
    
   componentWillMount() {
@@ -34,28 +58,27 @@ export default class MyGardenHomeScreen extends Component {
       myPlants: myPlants,
       search: "",
     });
-  } 
-
-  handleResult(search){ 
-    this.setState({
-      search: search
-    });   
   }
+
+  // https://stackoverflow.com/questions/8495687/split-array-into-chunks
+  array_chunks = (array, chunk_size) => {
+    return Array(Math.ceil(array.length / chunk_size)).fill().map((_, index) => index * chunk_size).map(begin => array.slice(begin, begin + chunk_size))
+  };
   
   render() {
-    const { search, myPlants } = this.state; 
-    const { navigation } = this.props; 
+    const plants = getMyPlants();
+    const { navigation } = this.props;
 
+    const projectList = this.array_chunks(this.state.projects, 4);
     return (
       <View style={globalStyles.screenContainer}>
-        <TitleBar heading="My Garden" handleResult={this.handleResult} isVisibleSearch={true} />
+        <TitleBar heading="My Garden" isVisibleSearch={false} />
         <View style={globalStyles.contentContainer}>
           <ScrollView showsVerticalScrollIndicator={false}>
-            {this.categories.map(c => (
+            {projectList.map(c => (
               <MyPlantsRow
                 navigation={navigation}
-                category={c}
-                plants={ (search.length > 0) ? searchStringInArray(search, myPlants[c]) : myPlants[c] }
+                projects={c}
                 key={c}
               />
             ))}

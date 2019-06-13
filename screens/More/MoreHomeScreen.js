@@ -36,10 +36,19 @@ class MoreHomeScreen extends Component {
     this.props.navigation.navigate('Auth');
   }
 
+  selectArea = () => {
+    this.props.navigation.navigate('SelectArea');
+  }
+
   render() {
+    console.log(this.state.userData);
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>You are logged in as {this.state.userData.name} using auth method {this.state.userData.origin}.</Text>
+        <Button
+          title="Select area"
+          onPress={this.selectArea}
+        />
         <Button
           title="Log out"
           onPress={this.signOut}
