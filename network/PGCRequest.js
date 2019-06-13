@@ -1,6 +1,6 @@
-import { PGCRequestList, PGCTypeConsts } from "./PGCRequestList";
+import { PGCRequestList, PGCTypeConsts } from "./";
 
-const PGC_URL = "http://guarded-island-59755.herokuapp.com"; // Heroku deployment
+const PGC_URL = "https://guarded-island-59755.herokuapp.com"; // Heroku deployment
 //const PGC_URL = "http://localhost:5555"; // For local testing
 
 // Written by Maciej Piatkowski, partially imported from his summer 2018 project

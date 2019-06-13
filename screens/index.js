@@ -19,6 +19,15 @@ import MoreHomeScreen from "./More/MoreHomeScreen";
 // Barcode
 import BarcodeSearchScreen from "./Barcode/BarcodeSearchScreen";
 
+// Extra
+import GuidesCategoryScreen from "./Guides/GuidesCategoryScreen";
+import GuidesItemScreen from "./Guides/GuidesItemScreen";
+import GrowingPreparationStage from "./Growing/GrowingPreparationStage";
+import GrowingPlantingStage from "./Growing/GrowingPlantingStage";
+import SelectAreaScreen from "./More/SelectAreaScreen";
+import ProjectScreen from "./MyGarden/ProjectScreen";
+import ProjectGuideScreen from "./MyGarden/ProjectGuideScreen";
+
 export {
   NavBarItem,
   // Login
@@ -35,10 +44,18 @@ export {
   // Guides
   GuidesHomeScreen,
   GuidesStepsScreen,
-  // More
-  MoreHomeScreen,
   // Barcode
   BarcodeSearchScreen,
+  // More
+  MoreHomeScreen,
+  // Extra
+  GuidesCategoryScreen,
+  GuidesItemScreen,
+  GrowingPreparationStage,
+  GrowingPlantingStage,
+  SelectAreaScreen,
+  ProjectScreen,
+  ProjectGuideScreen,
 };
 
 

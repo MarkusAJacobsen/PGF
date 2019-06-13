@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, ScrollView, Button, TouchableOpacity } f
 import { styles as globalStyles, vars as globalVars, prepareGuidePages } from '@utils/global';
 import { uppercaseFirstLetter } from '@utils/functions';
 import { TitleBar } from "@components";
-import Images from '@assets/plants/index';
+import Images from '@assets/plants';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'; 
 import FastImage from 'react-native-fast-image';
 import GestureRecognizer, {swipeDirections} from "react-native-swipe-gestures";

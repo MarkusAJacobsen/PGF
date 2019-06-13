@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import GuidePage from "../../components/Guides/GuidePage";
-import { prepareGuidePages } from "../../utils/global";
+import { GuidePage } from "@components";
+import { prepareGuidePages } from "@utils/global";
 import Touchable from "react-native-platform-touchable";
 import { View, Text, StyleSheet, Image, ScrollView, Button, TouchableOpacity } from 'react-native';
 import { styles as globalStyles, vars as globalVars } from '@utils/global';

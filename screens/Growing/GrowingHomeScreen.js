@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SelectCategory from "../../components/Growing/SelectCategory";
+import { SelectCategory } from "@components";
 
 // @flow 
 export default class GrowingHomeScreen extends Component {

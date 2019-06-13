@@ -7,12 +7,15 @@ import {
   Button,
   ScrollView
 } from "react-native";
-import { styles as globalStyles, vars as globalVars, setUpUserData } from '@utils/global';
+import {
+  styles as globalStyles,
+  vars as globalVars,
+  setUpUserData
+} from "@utils/global";
 import { Header, TitleBar, MyPlantsRow } from "@components";
 import { getMyPlants } from "@utils/api";
 import Tabs from "react-native-tabs";
-import PGCRequest from "../../network/PGCRequest";
-import {PGCRequestList} from "../../network/PGCRequestList";
+import { PGCRequestList, PGCRequest } from "@network";
 
 // @flow
 export default class MyGardenHomeScreen extends Component {
@@ -29,42 +32,46 @@ export default class MyGardenHomeScreen extends Component {
         uid: "",
         name: "",
         origin: "",
-        area: "",
-      },
-    }
-    setUpUserData().then((data) => {
+        area: ""
+      }
+    };
+    setUpUserData().then(data => {
       console.log(data.uid);
-      Promise.all([
-        PGCRequest(PGCRequestList.PROJECT_GET_ALL, [], [data.uid])
-      ]).then((result) => {
-          console.log(result);
+      Promise.all([PGCRequest(PGCRequestList.PROJECT_GET_ALL, [], [data.uid])])
+        .then(result => {
+          // console.log(result);
           if (result[0] != null) {
             this.setState({
-              projects: result[0],
+              projects: result[0]
             });
           }
-      });
+        })
+        .catch(() => {});
+
       this.setState({
-      userData: data,
+        userData: data
       });
       this.props.userData = data;
     });
   }
-   
+
   componentWillMount() {
     const myPlants = getMyPlants();
-    
+
     this.setState({
       myPlants: myPlants,
-      search: "",
+      search: ""
     });
   }
 
   // https://stackoverflow.com/questions/8495687/split-array-into-chunks
   array_chunks = (array, chunk_size) => {
-    return Array(Math.ceil(array.length / chunk_size)).fill().map((_, index) => index * chunk_size).map(begin => array.slice(begin, begin + chunk_size))
+    return Array(Math.ceil(array.length / chunk_size))
+      .fill()
+      .map((_, index) => index * chunk_size)
+      .map(begin => array.slice(begin, begin + chunk_size));
   };
-  
+
   render() {
     const plants = getMyPlants();
     const { navigation } = this.props;
@@ -76,14 +83,10 @@ export default class MyGardenHomeScreen extends Component {
         <View style={globalStyles.contentContainer}>
           <ScrollView showsVerticalScrollIndicator={false}>
             {projectList.map(c => (
-              <MyPlantsRow
-                navigation={navigation}
-                projects={c}
-                key={c}
-              />
+              <MyPlantsRow navigation={navigation} projects={c} key={c} />
             ))}
           </ScrollView>
-        </View> 
+        </View>
       </View>
     );
   }

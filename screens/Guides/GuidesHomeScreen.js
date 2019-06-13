@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SelectCategory from "../../components/Growing/SelectCategory";
+import { SelectCategory } from "@components";
 
 export default class GuidesHomeScreen extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ export default class GuidesHomeScreen extends Component {
   }
 
   render() {
-    let { search, plants } = this.state;
+    // let { search, plants } = this.state;
     let { navigation } = this.props;
 
     return (

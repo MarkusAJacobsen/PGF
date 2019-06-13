@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import SelectItem from "../../components/Growing/SelectItem";
+import { SelectItem } from "@components";
 import { uppercaseFirstLetter } from '@utils/functions';
 
 // @flow 

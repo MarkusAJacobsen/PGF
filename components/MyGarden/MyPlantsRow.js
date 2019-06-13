@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { vars as globalVars } from '@utils/global';
-import { AddItem, PlantsItem } from '@components'; 
+import { AddItem, MyPlantsItem } from '@components'; 
 
 export default class MyPlantsRow extends Component {
 
   render() {
+    console.log(this.props.projects);
     return (
       <View style={styles.container}>
           {this.props.projects.map((p) => (

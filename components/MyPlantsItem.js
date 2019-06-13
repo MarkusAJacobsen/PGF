@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { vars as globalVars } from '@utils/global';
-import Images from '../../assets/plants/index';
+import Images from '@assets/plants';
 import Touchable from "react-native-platform-touchable";
 import FastImage from "react-native-fast-image";
 

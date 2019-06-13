@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
 import { styles as globalStyles, vars as globalVars } from '@utils/global';
-import { TitleBar, PlantCategoryCard } from '@components';
-import BarcodeSearchStartButton from '../../components/BarcodeSearchStart/BarcodeSearchStartButton';
+import { TitleBar, PlantCategoryCard, BarcodeSearchStartButton } from '@components'; 
 
 export default class GrowingHomeScreen extends Component {
     constructor(props) {
